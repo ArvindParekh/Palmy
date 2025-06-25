@@ -47,12 +47,12 @@ export function AppSidebar({ currentView, onNavigate }: AppSidebarProps) {
       >
          <SidebarHeader className='p-6 border-b border-neutral-200 dark:border-neutral-800'>
             <div className='flex items-center gap-3'>
-               <div className='w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center'>
+               <div className='w-8 h-8 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-lg flex items-center justify-center'>
                   <Sparkles className='w-4 h-4 text-white' />
                </div>
                <div>
                   <h1 className='font-semibold text-neutral-900 dark:text-white'>
-                     Templates
+                     Palmly
                   </h1>
                   <p className='text-xs text-neutral-500'>
                      Job application toolkit
