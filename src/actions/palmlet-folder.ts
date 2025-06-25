@@ -1,8 +1,10 @@
 "use server";
 
 import { prisma } from "@/lib/db";
+import { revalidatePath } from "next/cache";
 
 export async function createPalmletFolder(data: { userId: string, folderName: string, folderDescription: string}) {
+    console.log(data);
     const { userId, folderName, folderDescription } = data;
 
     try {
@@ -14,6 +16,9 @@ export async function createPalmletFolder(data: { userId: string, folderName: st
             }
         })
 
+        // Revalidate the palmlets page to show the new folder
+        revalidatePath('/palmlets');
+
         return {
             message: "Folder created successfully",
             success: true,
@@ -21,7 +26,8 @@ export async function createPalmletFolder(data: { userId: string, folderName: st
         }
     } catch (error) {
         return {
-            message: "Failed to create folder",
+            message: error instanceof Error ? error.message : "Failed to create folder",
+            success: false
         }
     }
 }
@@ -47,6 +53,7 @@ export async function deletePalmletFolder(data: { userId: string, folderName: st
     } catch (error) {
         return {
             message: "Failed to delete folder",
+            success: false
         }
     }
 }
@@ -76,6 +83,7 @@ export async function updatePalmletFolder(data: { userId: string, folderName: st
     } catch (error) {
         return {
             message: "Failed to update folder",
+            success: false
         }
     }
 }
@@ -85,6 +93,9 @@ export async function getPalmletFolders(userId: string) {
         const folders = await prisma.palmlet_Folder.findMany({
             where: {
                 userId
+            },
+            include: {
+                palmlets: true
             }
         })
 
@@ -96,6 +107,7 @@ export async function getPalmletFolders(userId: string) {
     } catch (error) {
         return {
             message: "Failed to fetch folders",
+            success: false
         }
     }
 }

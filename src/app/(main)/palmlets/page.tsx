@@ -1,15 +1,26 @@
-import { DashboardCard } from "@/components/dashboard/dashboard-card-variants";
 import { PalmletFolderCard } from "@/components/palmlet/palmlet-folder-card";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { FolderPlus } from "lucide-react";
-import { Label } from "@/components/ui/label";
-import { DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { DialogDescription, DialogHeader } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import { NewFolderDialog } from "@/components/palmlet/new-folder-dialog";
+import { getPalmletFolders } from "@/actions/palmlet-folder";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-export default function PalmletPage() {
+export default async function PalmletPage() {
+   const session = await auth.api.getSession({
+      headers: await headers()
+   });
+   
+   if (!session?.user?.id) {
+      return <div>Please log in to view your folders.</div>;
+   }
+
+   const foldersResult = await getPalmletFolders(session.user.id);
+   const folders = foldersResult.success ? foldersResult.data : [];
+
+   const colorThemes = ['sage', 'lavender', 'cream', 'pearl', 'stone', 'mist'] as const;
+
    return (
       <div className='w-full h-full p-16'>
          <h1 className='text-5xl font-bold text-yellow-300'>Palmlets</h1>
@@ -21,73 +32,10 @@ export default function PalmletPage() {
          <div className='flex items-center justify-between'>
             <div>
                <p className='text-sm text-muted-foreground font-medium mt-1'>
-                  10 folders • 100 templates • 1000 total uses
+                  {folders?.length || 0} folders • {folders?.reduce((sum, f) => sum + (f.palmlets?.length || 0), 0) || 0} templates
                </p>
             </div>
-            <Dialog>
-               <DialogTrigger asChild>
-                  <Button className='bg-primary hover:bg-primary/90 dark:bg-primary dark:hover:bg-primary/90'>
-                     <FolderPlus className='w-4 h-4 mr-2 text-primary-foreground' />
-                     New Folder
-                  </Button>
-               </DialogTrigger>
-               <DialogContent>
-                  <DialogHeader>
-                     <DialogTitle>Create New Folder</DialogTitle>
-                     <DialogDescription>
-                        Organize your templates by creating folders for
-                        different job types or industries.
-                     </DialogDescription>
-                  </DialogHeader>
-                  <div className='space-y-4'>
-                     <div className='space-y-2'>
-                        <Label htmlFor='folder-name'>Folder Name</Label>
-                        <Input
-                           id='folder-name'
-                           placeholder='e.g., Software Engineering'
-                        //    value={newFolderName}
-                        //    onChange={(e) => setNewFolderName(e.target.value)}
-                        />
-                     </div>
-                     <div className='space-y-2'>
-                        <Label htmlFor='folder-icon'>Icon</Label>
-                        <div className='flex gap-2'>
-                           {[
-                              "💻",
-                              "📊",
-                              "🤝",
-                              "🎯",
-                              "📝",
-                              "🚀",
-                              "💼",
-                              "🔬",
-                           ].map((icon) => (
-                              <Button
-                                 key={icon}
-                                 variant={
-                                    // newFolderIcon === icon
-                                    //    ? "default"
-                                    //    : "outline"
-                                    "default"
-                                 }
-                                 size='sm'
-                                //  onClick={() => setNewFolderIcon(icon)}
-                                 className='text-lg bg-primary/10 hover:bg-primary/20'
-                              >
-                                 {icon}
-                              </Button>
-                           ))}
-                        </div>
-                     </div>
-                     <Button
-                        // onClick={createFolder}
-                        className='w-full bg-primary hover:bg-primary/90 dark:bg-primary dark:hover:bg-primary/90'
-                     >
-                        Create Folder
-                     </Button>
-                  </div>
-               </DialogContent>
-            </Dialog>
+            <NewFolderDialog />
          </div>
 
          {/* Search */}
@@ -102,42 +50,21 @@ export default function PalmletPage() {
          </div>
 
          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-20'>
-            <PalmletFolderCard
-               title='Templates'
-               description='See your templates here'
-               palmletCount={10}
-               colorTheme='sage'
-            />
-            <PalmletFolderCard
-               title='Templates'
-               description='See your templates here'
-               palmletCount={10}
-               colorTheme='lavender'
-            />
-            <PalmletFolderCard
-               title='Templates'
-               description='See your templates here'
-               palmletCount={10}
-               colorTheme='cream'
-            />
-            <PalmletFolderCard
-               title='Templates'
-               description='See your templates here'
-               palmletCount={10}
-               colorTheme='pearl'
-            />
-            <PalmletFolderCard
-               title='Templates'
-               description='See your templates here'
-               palmletCount={10}
-               colorTheme='stone'
-            />
-            <PalmletFolderCard
-               title='Templates'
-               description='See your templates here'
-               palmletCount={10}
-               colorTheme='mist'
-            />
+            {folders && folders.length > 0 ? (
+               folders.map((folder, index) => (
+                  <PalmletFolderCard
+                     key={folder.id}
+                     title={folder.folderName}
+                     description={folder.folderDescription || 'No description'}
+                     palmletCount={folder.palmlets?.length || 0}
+                     colorTheme={colorThemes[index % colorThemes.length]}
+                  />
+               ))
+            ) : (
+               <div className="col-span-full text-center py-20">
+                  <p className="text-muted-foreground">No folders yet. Create your first folder to get started!</p>
+               </div>
+            )}
          </div>
       </div>
    );
