@@ -1,0 +1,391 @@
+"use client";
+
+import { useState } from "react";
+import {
+  User,
+  Shield,
+  Palette,
+  Bell,
+  CreditCard,
+  Save,
+  Key,
+  Trash2,
+  Moon,
+  Sun,
+  Laptop,
+  UploadCloud,
+  Mail,
+  Building,
+} from "lucide-react";
+import { useTheme } from "next-themes";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+// This is a placeholder for a real Switch component.
+// You can install the shadcn/ui Switch component with:
+// pnpm dlx shadcn-ui@latest add switch
+const Switch = ({
+  checked,
+  onCheckedChange,
+}: {
+  checked: boolean;
+  onCheckedChange: (checked: boolean) => void;
+}) => (
+  <button
+    type="button"
+    role="switch"
+    aria-checked={checked}
+    onClick={() => onCheckedChange(!checked)}
+    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:ring-offset-neutral-900 ${
+      checked ? "bg-blue-600" : "bg-neutral-200 dark:bg-neutral-700"
+    }`}
+  >
+    <span
+      aria-hidden="true"
+      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+        checked ? "translate-x-5" : "translate-x-0"
+      }`}
+    />
+  </button>
+);
+
+const settingsTabs = [
+  { id: "profile", title: "Public Profile", icon: User },
+  { id: "account", title: "Account", icon: Shield },
+  { id: "appearance", title: "Appearance", icon: Palette },
+  { id: "notifications", title: "Notifications", icon: Bell },
+  { id: "billing", title: "Subscription", icon: CreditCard },
+];
+
+export default function SettingsPage() {
+  const [activeTab, setActiveTab] = useState("profile");
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "profile":
+        return <ProfileSettings />;
+      case "account":
+        return <AccountSettings />;
+      case "appearance":
+        return <AppearanceSettings />;
+      case "notifications":
+        return <NotificationSettings />;
+      case "billing":
+        return <BillingSettings />;
+      default:
+        return <ProfileSettings />;
+    }
+  };
+
+  return (
+    <div className="w-full min-h-screen p-6 space-y-8">
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold text-neutral-900 dark:text-white">Settings</h1>
+        <p className="text-neutral-600 dark:text-neutral-400">
+          Manage your account settings and preferences.
+        </p>
+      </div>
+
+      <div className="flex flex-col lg:flex-row gap-10">
+        <nav className="flex flex-row overflow-x-auto lg:flex-col gap-2 lg:w-48">
+          {settingsTabs.map((tab) => (
+            <Button
+              key={tab.id}
+              variant={activeTab === tab.id ? "secondary" : "ghost"}
+              className="justify-start gap-3 w-full"
+              onClick={() => setActiveTab(tab.id)}
+            >
+              <tab.icon className="w-4 h-4" />
+              <span className="truncate">{tab.title}</span>
+            </Button>
+          ))}
+        </nav>
+
+        <div className="flex-1">{renderContent()}</div>
+      </div>
+    </div>
+  );
+}
+
+function ProfileSettings() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Public Profile</CardTitle>
+        <CardDescription>
+          This information will be displayed publicly on your profile page.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="flex items-center gap-6">
+          <Avatar className="w-20 h-20">
+            <AvatarImage src="/placeholder.svg?height=80&width=80" />
+            <AvatarFallback className="text-2xl">AK</AvatarFallback>
+          </Avatar>
+          <div className="space-y-2">
+            <Button variant="outline">
+              <UploadCloud className="w-4 h-4 mr-2" />
+              Upload new picture
+            </Button>
+            <p className="text-xs text-neutral-500">
+              PNG, JPG, GIF up to 10MB.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="name">Full Name</Label>
+            <Input id="name" defaultValue="Arvind Kumar" />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="username">Username</Label>
+            <Input id="username" defaultValue="arvind_dev" />
+          </div>
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="bio">Bio</Label>
+          <textarea
+            id="bio"
+            rows={3}
+            className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            defaultValue="Software engineer passionate about crafting compelling job applications."
+          />
+        </div>
+      </CardContent>
+      <CardFooter className="border-t pt-6">
+        <Button>
+          <Save className="w-4 h-4 mr-2" />
+          Save Changes
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}
+
+function AccountSettings() {
+  return (
+    <div className="space-y-8">
+      <Card>
+        <CardHeader>
+          <CardTitle>Email Address</CardTitle>
+          <CardDescription>
+            Used for login and notifications.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          <Label htmlFor="email">Email</Label>
+          <Input id="email" type="email" defaultValue="arvind@example.com" />
+        </CardContent>
+        <CardFooter className="border-t pt-6">
+          <Button>
+            <Save className="w-4 h-4 mr-2" />
+            Update Email
+          </Button>
+        </CardFooter>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>Password</CardTitle>
+          <CardDescription>
+            Manage your account password.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="current-password">Current Password</Label>
+            <Input id="current-password" type="password" />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="new-password">New Password</Label>
+            <Input id="new-password" type="password" />
+          </div>
+        </CardContent>
+        <CardFooter className="border-t pt-6">
+          <Button>
+            <Key className="w-4 h-4 mr-2" />
+            Change Password
+          </Button>
+        </CardFooter>
+      </Card>
+      <Card className="border-destructive">
+        <CardHeader>
+          <CardTitle className="text-destructive">Danger Zone</CardTitle>
+          <CardDescription>
+            Permanently delete your account and all of your content.
+          </CardDescription>
+        </CardHeader>
+        <CardFooter>
+          <Button variant="destructive">
+            <Trash2 className="w-4 h-4 mr-2" />
+            Delete Account
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}
+
+function AppearanceSettings() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Appearance</CardTitle>
+        <CardDescription>
+          Customize the look and feel of the app.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <h3 className="font-medium text-sm">Theme</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <ThemeButton
+            themeName="Light"
+            icon={Sun}
+            currentTheme={theme}
+            setTheme={setTheme}
+            value="light"
+          />
+          <ThemeButton
+            themeName="Dark"
+            icon={Moon}
+            currentTheme={theme}
+            setTheme={setTheme}
+            value="dark"
+          />
+          <ThemeButton
+            themeName="System"
+            icon={Laptop}
+            currentTheme={theme}
+            setTheme={setTheme}
+            value="system"
+          />
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function ThemeButton({
+  themeName,
+  icon: Icon,
+  currentTheme,
+  setTheme,
+  value,
+}: any) {
+  return (
+    <button
+      onClick={() => setTheme(value)}
+      className={`p-4 rounded-lg border-2 flex flex-col items-center gap-2 transition-colors ${
+        currentTheme === value
+          ? "border-blue-500 bg-blue-50 dark:bg-blue-950/20"
+          : "border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50"
+      }`}
+    >
+      <Icon className="w-6 h-6" />
+      <span className="text-sm font-medium">{themeName}</span>
+    </button>
+  );
+}
+
+function NotificationSettings() {
+  const [notifications, setNotifications] = useState({
+    community: true,
+    product: true,
+    weekly: false,
+    mentions: true,
+  });
+
+  const toggleNotification = (key: keyof typeof notifications) => {
+    setNotifications((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+  
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Notifications</CardTitle>
+        <CardDescription>
+          Choose how you want to be notified.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="divide-y divide-neutral-200 dark:divide-neutral-800">
+        <NotificationItem
+          title="Community Activity"
+          description="Get notified about forks, ratings, and comments."
+          checked={notifications.community}
+          onToggle={() => toggleNotification("community")}
+        />
+        <NotificationItem
+          title="Product Updates"
+          description="Receive updates about new features and improvements."
+          checked={notifications.product}
+          onToggle={() => toggleNotification("product")}
+        />
+        <NotificationItem
+          title="Weekly Digest"
+          description="A summary of your template performance."
+          checked={notifications.weekly}
+          onToggle={() => toggleNotification("weekly")}
+        />
+        <NotificationItem
+          title="Mentions"
+          description="Get notified when someone mentions you in a comment."
+          checked={notifications.mentions}
+          onToggle={() => toggleNotification("mentions")}
+        />
+      </CardContent>
+    </Card>
+  );
+}
+
+function NotificationItem({ title, description, checked, onToggle }: any) {
+  return (
+    <div className="py-4 flex items-center justify-between">
+      <div className="max-w-prose">
+        <h4 className="font-medium text-neutral-900 dark:text-white">{title}</h4>
+        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+          {description}
+        </p>
+      </div>
+      <Switch checked={checked} onCheckedChange={onToggle} />
+    </div>
+  );
+}
+
+function BillingSettings() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Subscription</CardTitle>
+        <CardDescription>
+          You are currently on the <span className="font-semibold text-primary">Pro</span> plan.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <Button>Manage Subscription</Button>
+        <Separator/>
+        <div className="space-y-2">
+          <h4 className="font-medium">Billing History</h4>
+           <p className="text-sm text-neutral-500">No invoices yet.</p>
+        </div>
+      </CardContent>
+       <CardFooter className="border-t pt-6 flex justify-between items-center">
+        <p className="text-sm text-neutral-500">Next invoice on July 1, 2024</p>
+        <Button variant="outline">Update Payment Method</Button>
+      </CardFooter>
+    </Card>
+  )
+}
