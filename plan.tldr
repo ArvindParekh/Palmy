@@ -36,9 +36,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": 835,
-			"y": 733,
-			"lastActivityTimestamp": 1750799638298,
+			"x": 686.5,
+			"y": 1665.5,
+			"lastActivityTimestamp": 1750885255967,
 			"meta": {}
 		},
 		{
@@ -173,8 +173,8 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 0,
-			"y": -262,
+			"x": 42.5,
+			"y": -1458.5,
 			"z": 1,
 			"meta": {},
 			"id": "camera:page:page",
@@ -332,12 +332,12 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": "shape:yBVJbfS0m2-PTwJajsOc3",
+			"editingShapeId": "shape:s68ov4FzlwmddXxch-nSf",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:yBVJbfS0m2-PTwJajsOc3"
+				"shape:s68ov4FzlwmddXxch-nSf"
 			],
-			"hoveredShapeId": "shape:yBVJbfS0m2-PTwJajsOc3",
+			"hoveredShapeId": "shape:s68ov4FzlwmddXxch-nSf",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -457,6 +457,178 @@
 			"typeName": "shape"
 		},
 		{
+			"x": 278.5,
+			"y": 1673.5,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:s68ov4FzlwmddXxch-nSf",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 701.859375,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "highlight"
+										}
+									],
+									"text": "dashboard"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "highlight"
+										}
+									],
+									"text": "community"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "highlight"
+										}
+									],
+									"text": "leaderboard"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "highlight"
+										}
+									],
+									"text": "settings"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "highlight"
+										}
+									],
+									"text": "profile"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "labs"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "palmlets (folders)"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "\tpalmlets/200 page - all palmlets"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "\t\tpalmlets/[folder]/[palmlet]/editor - edit view"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "\t\tpalmlets/[folder]/new"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aBB81",
+			"typeName": "shape"
+		},
+		{
 			"x": 727,
 			"y": 820,
 			"rotation": 0,
@@ -512,9 +684,7 @@
 		{
 			"followingUserId": null,
 			"opacityForNextShape": 1,
-			"stylesForNextShape": {
-				"tldraw:geo": "rectangle"
-			},
+			"stylesForNextShape": {},
 			"brush": null,
 			"scribbles": [],
 			"cursor": {
@@ -528,7 +698,7 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1682,
+				"w": 1709,
 				"h": 939
 			},
 			"insets": [
@@ -546,7 +716,7 @@
 			"isFocused": true,
 			"devicePixelRatio": 1,
 			"isCoarsePointer": false,
-			"isHoveringCanvas": true,
+			"isHoveringCanvas": false,
 			"openMenus": [],
 			"isChangingStyle": false,
 			"isReadonly": false,

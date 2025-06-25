@@ -91,10 +91,17 @@ export default function FolderPage({
     try {
       setLoading(true);
       // In real app, filter by folder
-      const result = await getUserPalmlets(mockUserId);
-      if (result.success) {
-        setTemplates(result.data || []);
-      }
+      // const result = await getUserPalmlets(mockUserId);
+      // if (result.success) {
+        setTemplates([{
+          id: "1",
+          title: "Template 1",
+          tags: [{ tagName: "Tag 1" }],
+          variables: [{ variableName: "Variable 1" }],
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        }]);
+      // }
     } catch (error) {
       console.error('Failed to fetch templates:', error);
     } finally {

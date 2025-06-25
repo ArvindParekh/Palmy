@@ -15,6 +15,7 @@ import {
   BarChart3,
   Star,
 } from "lucide-react"
+import { HeroShowcase } from "./landing/hero-showcase"
 
 interface LandingPageProps {
   onLogin: () => void
@@ -166,22 +167,18 @@ export function LandingPage({ onLogin }: LandingPageProps) {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-6 py-24">
-        <div className="text-center space-y-8 max-w-4xl mx-auto">
-          <div className="space-y-4">
-            <Badge variant="secondary" className="text-sm px-4 py-2">
-              🚀 Join 10,000+ job seekers who landed their dream roles
-            </Badge>
+      <section className="container mx-auto px-6 py-24 text-center">
+        <div className="space-y-8 max-w-4xl mx-auto">
+          <div className="space-y-6">
             <h1 className="text-5xl md:text-7xl font-bold text-neutral-900 dark:text-white leading-tight">
-              Job applications that
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Create job applications
+              <span className="from-blue-600 to-purple-600 bg-clip-text text-transparent bg-gradient-to-r">
                 {" "}
-                actually work
+                10x faster
               </span>
             </h1>
             <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
-              Create, test, and optimize job application templates with AI-powered insights. Increase your interview
-              rate by up to 340%.
+              Stop writing the same applications over and over. Build, test, and ship winning templates with AI.
             </p>
           </div>
 
@@ -191,28 +188,17 @@ export function LandingPage({ onLogin }: LandingPageProps) {
               size="lg"
               className="bg-black hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 dark:text-black text-lg px-8 py-6"
             >
-              Start Building Templates
+              Start Building
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
             <Button variant="outline" size="lg" className="text-lg px-8 py-6">
               Watch Demo
             </Button>
           </div>
+        </div>
 
-          <div className="flex items-center justify-center gap-8 text-sm text-neutral-500 dark:text-neutral-400">
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-green-500" />
-              <span>Free to start</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-green-500" />
-              <span>No credit card required</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-green-500" />
-              <span>Setup in 2 minutes</span>
-            </div>
-          </div>
+        <div className="mt-20">
+          <HeroShowcase />
         </div>
       </section>
 

@@ -16,6 +16,7 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next/navigation";
 import { createPalmlet } from "@/actions/palmlet";
+import { QuickStart } from "@/components/dashboard/quick-start";
 
 const folders: PalmletFolderCardProps[] = [
   {
@@ -74,13 +75,12 @@ const recentTemplates: TemplateCardProps[] = [
     }
 ];
 
-
 export default function DashboardPage() {
   const router = useRouter();
 
   const handleNewTemplate = async () => {
     // In a real app, get userId from session/auth
-    const result = await createPalmlet("user-123"); 
+    const result = await createPalmlet("user-123");
     if (result.success && result.data) {
       router.push(`/palmlets/editor/${result.data.id}`);
     } else {
@@ -95,80 +95,37 @@ export default function DashboardPage() {
       <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div className="space-y-1">
           <h1 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white tracking-tighter">
-            Workspace
+            Dashboard
           </h1>
-          <p className="text-neutral-600 dark:text-neutral-400">
-            Organize your templates into folders and get started quickly.
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-        <Button size="lg" className="group">
-          <Feather className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
-          Create New Folder
-        </Button>
-            <Button variant="outline" onClick={handleNewTemplate}>
-                <FilePlus className="w-4 h-4 mr-2" />
-                New Template
-            </Button>
+          <p className="text-neutral-600 dark:text-neutral-400">Welcome back, let's get you started.</p>
         </div>
       </header>
 
       <main className="space-y-12">
-        {/* Folders Section */}
+        {/* Quick Start Section */}
         <section>
-          <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-6 flex items-center gap-3">
-            <Folder className="w-6 h-6 text-neutral-500" />
-            My Folders
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {folders.map((folder) => (
-              <Link href="/palmlets/1" key={folder.title}>
-                 <PalmletFolderCard {...folder} />
-              </Link>
-            ))}
-          </div>
+          <QuickStart />
         </section>
 
         <Separator />
 
         {/* Recent Templates Section */}
         <section>
-          <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-6 flex items-center gap-3">
-            <FilePlus className="w-6 h-6 text-neutral-500" />
-            Recently Edited
-          </h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white flex items-center gap-3">
+              <FilePlus className="w-6 h-6 text-neutral-500" />
+              Recently Edited
+            </h2>
+            <Button variant="outline" onClick={() => router.push("/palmlets")}>
+              View all
+            </Button>
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {recentTemplates.map((template) => (
               <TemplateCard {...template} key={template.id} />
             ))}
           </div>
         </section>
-
-        <Separator />
-
-        {/* Community Spotlight Section */}
-        <section>
-            <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-6 flex items-center gap-3">
-                <Star className="w-6 h-6 text-neutral-500" />
-                Community Spotlight
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-               <CommunityCard 
-                title="Top Cover Letters"
-                description="Browse the most successful cover letters from the community."
-                icon={Users}
-                href="/community/cover-letters"
-               />
-               <CommunityCard 
-                title="Template Writing Guide"
-                description="Learn how to write effective templates."
-                icon={Book}
-                href="/guides/writing"
-               />
-                {/* Placeholder for more cards */}
-            </div>
-        </section>
-
       </main>
     </div>
   );
