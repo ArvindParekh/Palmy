@@ -15,6 +15,7 @@ import {
   BarChart3,
   Star,
 } from "lucide-react"
+import { motion } from "framer-motion"
 import { HeroShowcase } from "./landing/hero-showcase"
 
 interface LandingPageProps {
@@ -215,24 +216,31 @@ export function LandingPage({ onLogin }: LandingPageProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <Card
+            <motion.div
               key={index}
-              className="border-neutral-200 dark:border-neutral-800 hover:shadow-lg transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              viewport={{ once: true }}
             >
-              <CardContent className="p-8">
-                <div className="space-y-4">
-                  <div
-                    className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-lg flex items-center justify-center`}
-                  >
-                    <feature.icon className="w-6 h-6 text-white" />
+              <Card
+                className="border-neutral-200 dark:border-neutral-800 hover:shadow-lg transition-all duration-300 h-full"
+              >
+                <CardContent className="p-8">
+                  <div className="space-y-4">
+                    <div
+                      className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-lg flex items-center justify-center`}
+                    >
+                      <feature.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">{feature.title}</h3>
+                      <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">{feature.description}</p>
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">{feature.title}</h3>
-                    <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">{feature.description}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -249,12 +257,12 @@ export function LandingPage({ onLogin }: LandingPageProps) {
             <div className="text-neutral-600 dark:text-neutral-400">Job seekers using Templates</div>
           </div>
           <div className="text-center space-y-2">
-            <div className="text-4xl font-bold text-neutral-900 dark:text-white">50,000+</div>
-            <div className="text-neutral-600 dark:text-neutral-400">Templates created</div>
+            <div className="text-4xl font-bold text-neutral-900 dark:text-white">3 weeks</div>
+            <div className="text-neutral-600 dark:text-neutral-400">Average time to get hired</div>
           </div>
           <div className="text-center space-y-2">
-            <div className="text-4xl font-bold text-neutral-900 dark:text-white">87%</div>
-            <div className="text-neutral-600 dark:text-neutral-400">Success rate improvement</div>
+            <div className="text-4xl font-bold text-neutral-900 dark:text-white">4.9/5</div>
+            <div className="text-neutral-600 dark:text-neutral-400">User rating on ProductHunt</div>
           </div>
         </div>
       </section>
@@ -262,130 +270,137 @@ export function LandingPage({ onLogin }: LandingPageProps) {
       {/* Testimonials Section */}
       <section id="testimonials" className="container mx-auto px-6 py-24">
         <div className="text-center space-y-4 mb-16">
-          <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">Loved by job seekers everywhere</h2>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400">
-            See how Templates helped others land their dream jobs
+          <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">Loved by top performers</h2>
+          <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+            Our users have landed jobs at some of the best companies in the world.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="border-neutral-200 dark:border-neutral-800">
-              <CardContent className="p-8">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-1">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    ))}
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <Card
+                className="border-neutral-200 dark:border-neutral-800 h-full flex flex-col"
+              >
+                <CardContent className="p-8 flex-grow flex flex-col">
+                  <div className="flex-grow space-y-4">
+                    <div className="flex items-center gap-1">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5 text-yellow-500 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-lg text-neutral-800 dark:text-neutral-200 leading-relaxed">
+                      "{testimonial.content}"
+                    </p>
                   </div>
-                  <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">"{testimonial.content}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                      <span className="text-white text-sm font-medium">{testimonial.avatar}</span>
+                  <div className="flex items-center gap-3 pt-6 mt-6 border-t border-neutral-200 dark:border-neutral-800">
+                    <div className="w-12 h-12 bg-neutral-200 dark:bg-neutral-800 rounded-full flex items-center justify-center">
+                      <span className="font-bold text-neutral-600 dark:text-neutral-400">{testimonial.avatar}</span>
                     </div>
                     <div>
-                      <div className="font-medium text-neutral-900 dark:text-white">{testimonial.name}</div>
+                      <div className="font-semibold text-neutral-900 dark:text-white">{testimonial.name}</div>
                       <div className="text-sm text-neutral-600 dark:text-neutral-400">{testimonial.role}</div>
                     </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="container mx-auto px-6 py-24">
-        <div className="text-center space-y-4 mb-16">
-          <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">Simple, transparent pricing</h2>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400">
-            Choose the plan that's right for your job search
-          </p>
-        </div>
+      <section id="pricing" className="bg-neutral-50 dark:bg-neutral-900/50 py-24">
+        <div className="container mx-auto px-6">
+          <div className="text-center space-y-4 mb-16">
+            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">Choose your plan</h2>
+            <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+              Simple, transparent pricing. No hidden fees.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {pricingPlans.map((plan, index) => (
-            <Card
-              key={index}
-              className={`border-neutral-200 dark:border-neutral-800 relative ${
-                plan.popular ? "ring-2 ring-blue-500 scale-105" : ""
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <Badge className="bg-blue-500 hover:bg-blue-500 text-white">Most Popular</Badge>
-                </div>
-              )}
-              <CardContent className="p-8">
-                <div className="space-y-6">
-                  <div className="space-y-2">
-                    <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">{plan.name}</h3>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+            {pricingPlans.map((plan, index) => (
+              <Card
+                key={index}
+                className={`border-2 ${
+                  plan.popular ? "border-blue-500" : "border-neutral-200 dark:border-neutral-800"
+                } flex flex-col`}
+              >
+                {plan.popular && (
+                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-500 text-white">
+                    Most Popular
+                  </Badge>
+                )}
+                <CardContent className="p-8 flex-grow flex flex-col">
+                  <div className="space-y-4 flex-grow">
+                    <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white">{plan.name}</h3>
+                    <p className="text-4xl font-bold text-neutral-900 dark:text-white">{plan.price}</p>
                     <p className="text-neutral-600 dark:text-neutral-400">{plan.description}</p>
                   </div>
-
-                  <div className="space-y-1">
-                    <div className="text-4xl font-bold text-neutral-900 dark:text-white">{plan.price}</div>
-                    {plan.price !== "Free" && (
-                      <div className="text-sm text-neutral-600 dark:text-neutral-400">per month, billed annually</div>
-                    )}
-                  </div>
-
-                  <ul className="space-y-3">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center gap-3">
-                        <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
-                        <span className="text-neutral-600 dark:text-neutral-400">{feature}</span>
+                  <ul className="space-y-4 mt-8 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-3">
+                        <Check className="w-5 h-5 text-green-500" />
+                        <span className="text-neutral-800 dark:text-neutral-200">{feature}</span>
                       </li>
                     ))}
                   </ul>
-
+                </CardContent>
+                <div className="p-8 pt-0">
                   <Button
-                    onClick={onLogin}
+                    size="lg"
                     className={`w-full ${
                       plan.popular
                         ? "bg-blue-600 hover:bg-blue-700 text-white"
-                        : "bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-900 dark:text-white"
+                        : "bg-black hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 dark:text-black"
                     }`}
                   >
                     {plan.cta}
                   </Button>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="container mx-auto px-6 py-24">
-        <div className="text-center space-y-8 max-w-3xl mx-auto">
-          <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">Ready to land your dream job?</h2>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400">
-            Join thousands of job seekers who've already transformed their application process with Templates.
-          </p>
-          <Button
-            onClick={onLogin}
-            size="lg"
-            className="bg-black hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 dark:text-black text-lg px-8 py-6"
-          >
-            Start Building Templates
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-16 text-center">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-4">Ready to get started?</h2>
+            <p className="text-xl text-blue-100 mb-8">
+              Create an account and start building better job applications today.
+            </p>
+            <Button
+              onClick={onLogin}
+              size="lg"
+              className="bg-white hover:bg-neutral-200 text-black text-lg px-8 py-6"
+            >
+              Sign Up for Free
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="border-t border-neutral-200 dark:border-neutral-800">
-        <div className="container mx-auto px-6 py-12">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-white" />
-              </div>
-              <span className="text-xl font-bold text-neutral-900 dark:text-white">Templates</span>
+        <div className="container mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <Sparkles className="w-4 h-4 text-white" />
             </div>
-            <div className="text-sm text-neutral-600 dark:text-neutral-400">© 2024 Templates. All rights reserved.</div>
+            <span className="text-lg font-bold text-neutral-900 dark:text-white">Templates</span>
+          </div>
+          <div className="text-sm text-neutral-600 dark:text-neutral-400 mt-4 md:mt-0">
+            &copy; {new Date().getFullYear()} Templates, Inc. All rights reserved.
           </div>
         </div>
       </footer>
