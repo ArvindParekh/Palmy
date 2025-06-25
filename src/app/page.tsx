@@ -29,7 +29,7 @@ export default function Home() {
 
    return (
       <div>
-         <h1>Hello World</h1>
+         <h1 className="text-2xl font-bold text-primary">Hello World</h1>
          <input
             type='text'
             placeholder='Name'
