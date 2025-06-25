@@ -23,3 +23,32 @@ export const getPalmlet = async (palmletId: string) => {
         }
     }
 }
+
+export const getUserPalmlets = async (userId: string) => {
+    try {
+        const palmlets = await prisma.palmlet.findMany({
+            where: {
+                userId: userId,
+            },
+            include: {
+                tags: true,
+                variables: true,
+            },
+            orderBy: {
+                updatedAt: 'desc',
+            },
+        });
+
+        return {
+            message: "Palmlets fetched successfully",
+            success: true,
+            data: palmlets,
+        };
+    } catch (error) {
+        return {
+            message: "Failed to fetch palmlets",
+            success: false,
+            data: [],
+        }
+    }
+}
