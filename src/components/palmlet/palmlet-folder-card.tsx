@@ -1,6 +1,6 @@
 import { Folder, FolderOpen, FileText, ChevronRight, ArrowRight, MoreHorizontal, Sparkles } from "lucide-react";
 
-interface PalmletFolderCardProps {
+export interface PalmletFolderCardProps {
   title: string;
   description: string;
   palmletCount: number;

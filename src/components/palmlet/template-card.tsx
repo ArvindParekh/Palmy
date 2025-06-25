@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
-interface TemplateCardProps {
+export interface TemplateCardProps {
   id: string;
   title: string;
   content?: string | null;
