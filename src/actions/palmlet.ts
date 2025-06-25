@@ -5,62 +5,101 @@ import { prisma } from "@/lib/db";
 import { createPalmletSchema, updatePalmletSchema } from "@/zod/palmlet";
 
 export async function createPalmlet(userId: string, folderName: string) {
-    const parsedFields = createPalmletSchema.safeParse(userId);
+   const parsedFields = createPalmletSchema.safeParse(userId);
 
-    if (!parsedFields.success) return { message: "Invalid fields", success: false };
+   if (!parsedFields.success)
+      return { message: "Invalid fields", success: false };
 
-    try {
-        const newPalmlet = await prisma.palmlet.create({
-            data: {
-                title: "Untitled",
-                folder: {
-                    connect: {
-                        userId_folderName: {
-                            userId: userId,
-                            folderName: folderName
-                        }
-                    },
-                },
+   try {
+      const newPalmlet = await prisma.palmlet.create({
+         data: {
+            title: "Untitled",
+            folder: {
+               connect: {
+                  userId_folderName: {
+                     userId: userId,
+                     folderName: folderName,
+                  },
+               },
             },
-        });
+         },
+      });
 
-        return { message: "Palmlet created successfully", success: true, data: newPalmlet };
-    } catch (error) {
-        return { message: "Failed to create palmlet", success: false };
-    }
+      return {
+         message: "Palmlet created successfully",
+         success: true,
+         data: newPalmlet,
+      };
+   } catch (error) {
+      return { message: "Failed to create palmlet", success: false };
+   }
 }
 
 export async function updatePalmlet(prevState: any, formData: FormData) {
-    const data = Object.fromEntries(formData);
-    const parsedFields = updatePalmletSchema.safeParse(data);
+   const data = Object.fromEntries(formData);
+   const parsedFields = updatePalmletSchema.safeParse(data);
 
-    if (!parsedFields.success) return { message: "Invalid fields", success: false };
+   if (!parsedFields.success)
+      return { message: "Invalid fields", success: false };
 
-    try {
-        const updatedPalmlet = await prisma.palmlet.update({
-            where: {
-                id: parsedFields.data.id,
+   try {
+      const updatedPalmlet = await prisma.palmlet.update({
+         where: {
+            id: parsedFields.data.id,
+         },
+         data: {
+            title: parsedFields.data.title,
+            content: parsedFields.data.content,
+            tags: {
+               connectOrCreate: parsedFields.data.tags?.map((tag) => ({
+                  where: { tagName: tag },
+                  create: { tagName: tag },
+               })),
             },
-            data: {
-                title: parsedFields.data.title,
-                content: parsedFields.data.content,
-                tags: {
-                    connectOrCreate: parsedFields.data.tags?.map((tag) => ({
-                        where: { tagName: tag },
-                        create: { tagName: tag },
-                    })),
-                },
-                variables: {
-                    connectOrCreate: parsedFields.data.variables?.map((variable) => ({
-                        where: { variableName: variable },
-                        create: { variableName: variable },
-                    })),
-                },
+            variables: {
+               connectOrCreate: parsedFields.data.variables?.map(
+                  (variable) => ({
+                     where: { variableName: variable },
+                     create: { variableName: variable },
+                  })
+               ),
             },
-        });
+         },
+      });
 
-        return { message: "Palmlet updated successfully", success: true, data: updatedPalmlet };
-    } catch (error) {
-        return { message: "Failed to update palmlet", success: false };
-    }
+      return {
+         message: "Palmlet updated successfully",
+         success: true,
+         data: updatedPalmlet,
+      };
+   } catch (error) {
+      return { message: "Failed to update palmlet", success: false };
+   }
+}
+
+export async function getRecentlyEditedPalmlets(userId: string) {
+   try {
+      const recentlyEditedPalmlets = await prisma.palmlet.findMany({
+         where: {
+            folder: {
+               userId,
+            },
+         },
+         orderBy: {
+            updatedAt: "desc",
+         },
+         take: 3,
+      });
+
+      return {
+         message: "Recently edited palmlets fetched successfully",
+         success: true,
+         data: recentlyEditedPalmlets,
+      };
+   } catch (error) {
+      return {
+         message: "Failed to fetch recently edited palmlets",
+         success: false,
+      };
+   }
 }
