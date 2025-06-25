@@ -18,17 +18,17 @@ export default function MainLayout({
 
    return (
       <SidebarProvider defaultOpen={true}>
-         <div className='flex min-h-screen bg-white dark:bg-black'>
+         <div className='flex min-h-screen min-w-screen bg-white dark:bg-black'>
             <AppSidebar currentView={currentView} onNavigate={setCurrentView} />
             <SidebarInset className='flex-1'>
                <Header />
-               <main className="flex-1 p-8 max-w-7xl mx-auto w-full">{children}</main>
+               <main className="flex-1 p-8 w-full">{children}</main>
             </SidebarInset>
 
-            <PersonalizationModal
+            {/* <PersonalizationModal
                template={selectedTemplate}
                onClose={() => setSelectedTemplate(null)}
-            />
+            /> */}
          </div>
       </SidebarProvider>
    );
