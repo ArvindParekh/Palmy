@@ -34,6 +34,8 @@ import { getUserPalmlets } from "@/lib/data/palmlet";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { createPalmlet } from "@/actions/palmlet";
 
 interface Palmlet {
   id: string;
@@ -64,6 +66,7 @@ export default function FolderPage({
   const [sortBy, setSortBy] = useState<SortBy>('updated');
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const router = useRouter();
 
   // Simulated folder data - in real app, this would come from params or API
   const folderData = {
@@ -152,13 +155,23 @@ export default function FolderPage({
   };
 
   const handleEditTemplate = (id: string) => {
-    // Navigate to template editor
-    console.log('Edit template:', id);
+    router.push(`/palmlets/editor/${id}`);
   };
 
   const handleCopyTemplate = (id: string) => {
     // Duplicate template
     console.log('Copy template:', id);
+  };
+
+  const handleNewTemplate = async () => {
+    // In a real app, get userId from session/auth
+    const result = await createPalmlet("user-123"); 
+    if (result.success && result.data) {
+      router.push(`/palmlets/editor/${result.data.id}`);
+    } else {
+      // Handle error, maybe with a toast notification
+      console.error(result.message);
+    }
   };
 
   if (loading) {
@@ -355,7 +368,7 @@ export default function FolderPage({
             </div>
 
             {/* New Template */}
-            <Button>
+            <Button onClick={handleNewTemplate}>
               <Plus className="w-4 h-4 mr-2" />
               New Template
             </Button>
@@ -383,7 +396,7 @@ export default function FolderPage({
       {/* Templates Grid/List */}
       <div className="p-8">
         {filteredTemplates.length === 0 ? (
-          <EmptyState searchQuery={searchQuery} />
+          <EmptyState searchQuery={searchQuery} onNewTemplateClick={handleNewTemplate} />
         ) : (
           <div className={cn(
             "grid gap-6",
@@ -459,7 +472,7 @@ function TemplatesLoadingSkeleton() {
   );
 }
 
-function EmptyState({ searchQuery }: { searchQuery: string }) {
+function EmptyState({ searchQuery, onNewTemplateClick }: { searchQuery: string; onNewTemplateClick: () => void; }) {
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center">
       <div className="p-6 rounded-full bg-gray-100 dark:bg-gray-800 mb-6">
@@ -474,7 +487,7 @@ function EmptyState({ searchQuery }: { searchQuery: string }) {
           : 'Start building your template library by creating your first template.'
         }
       </p>
-      <Button>
+      <Button onClick={onNewTemplateClick}>
         <Plus className="w-4 h-4 mr-2" />
         Create Template
       </Button>

@@ -14,6 +14,8 @@ import { PalmletFolderCard, PalmletFolderCardProps } from "@/components/palmlet/
 import { TemplateCard, TemplateCardProps } from "@/components/palmlet/template-card";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import { useRouter } from "next/navigation";
+import { createPalmlet } from "@/actions/palmlet";
 
 const folders: PalmletFolderCardProps[] = [
   {
@@ -74,6 +76,19 @@ const recentTemplates: TemplateCardProps[] = [
 
 
 export default function DashboardPage() {
+  const router = useRouter();
+
+  const handleNewTemplate = async () => {
+    // In a real app, get userId from session/auth
+    const result = await createPalmlet("user-123"); 
+    if (result.success && result.data) {
+      router.push(`/palmlets/editor/${result.data.id}`);
+    } else {
+      // Handle error, maybe with a toast notification
+      console.error(result.message);
+    }
+  };
+
   return (
     <div className="w-full min-h-screen p-4 md:p-8 space-y-12">
       {/* Header */}
@@ -91,7 +106,7 @@ export default function DashboardPage() {
           <Feather className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
           Create New Folder
         </Button>
-            <Button variant="outline">
+            <Button variant="outline" onClick={handleNewTemplate}>
                 <FilePlus className="w-4 h-4 mr-2" />
                 New Template
             </Button>
