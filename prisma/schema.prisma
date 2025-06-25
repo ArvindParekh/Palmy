@@ -21,23 +21,38 @@ model User {
   name  String
   email String @unique
 
-  palmlets Palmlet[]
-
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   emailVerified Boolean
   image         String?
   sessions      Session[]
   accounts      Account[]
-
+  folders       Palmlet_Folder[]
   @@map("user")
+}
+
+model Palmlet_Folder {
+  id String @id @default(uuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  folderName String
+  folderDescription String?
+
+  palmlets Palmlet[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("palmlet_folder")
 }
 
 model Palmlet {
   id String @id @default(uuid())
 
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  folderId String
+  folder   Palmlet_Folder   @relation(fields: [folderId], references: [id])
 
   title   String
   content String?
@@ -48,7 +63,7 @@ model Palmlet {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([userId, title])
+  @@unique([folderId, title])
 }
 
 model Palmlet_Tag {

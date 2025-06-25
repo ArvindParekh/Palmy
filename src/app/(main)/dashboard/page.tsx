@@ -1,49 +1,10 @@
-"use client";
-
-import {
-  Folder,
-  FilePlus,
-  FolderPlus,
-  Users,
-  Star,
-  Book,
-  Feather,
-} from "lucide-react";
+import { FilePlus, Link } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PalmletFolderCard, PalmletFolderCardProps } from "@/components/palmlet/palmlet-folder-card";
 import { TemplateCard, TemplateCardProps } from "@/components/palmlet/template-card";
-import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { createPalmlet } from "@/actions/palmlet";
 import { QuickStart } from "@/components/dashboard/quick-start";
-
-const folders: PalmletFolderCardProps[] = [
-  {
-    title: "Cover Letters",
-    description: "Tailored letters for software engineering roles.",
-    palmletCount: 8,
-    colorTheme: "mist",
-  },
-  {
-    title: "Cold Outreach",
-    description: "Templates for networking and reaching out to recruiters.",
-    palmletCount: 12,
-    colorTheme: "lavender",
-  },
-  {
-    title: "Follow-ups",
-    description: "Polite and professional follow-up messages.",
-    palmletCount: 4,
-    colorTheme: "sage",
-  },
-  {
-    title: "Personal Projects",
-    description: "Descriptions and pitches for side projects.",
-    palmletCount: 2,
-    colorTheme: "stone",
-  },
-];
 
 const recentTemplates: TemplateCardProps[] = [
     {
@@ -76,21 +37,21 @@ const recentTemplates: TemplateCardProps[] = [
 ];
 
 export default function DashboardPage() {
-  const router = useRouter();
-
   const handleNewTemplate = async () => {
     // In a real app, get userId from session/auth
     const result = await createPalmlet("user-123");
     if (result.success && result.data) {
-      router.push(`/palmlets/editor/${result.data.id}`);
+      redirect(`/palmlets/editor/${result.data.id}`);
     } else {
       // Handle error, maybe with a toast notification
       console.error(result.message);
     }
   };
 
+  
+
   return (
-    <div className="w-full min-h-screen p-4 md:p-8 space-y-12">
+    <div className="w-full min-h-screen p-4 md:p-12 space-y-12">
       {/* Header */}
       <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div className="space-y-1">
@@ -116,9 +77,11 @@ export default function DashboardPage() {
               <FilePlus className="w-6 h-6 text-neutral-500" />
               Recently Edited
             </h2>
-            <Button variant="outline" onClick={() => router.push("/palmlets")}>
-              View all
-            </Button>
+            <Link href="/palmlets">
+              <Button variant="outline">
+                View all
+              </Button>
+            </Link>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {recentTemplates.map((template) => (
@@ -130,17 +93,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-
-const CommunityCard = ({ title, description, icon: Icon, href }: { title: string, description: string, icon: React.ElementType, href: string }) => (
-    <Link href={href}>
-        <div className="h-full group relative rounded-2xl bg-white/70 dark:bg-slate-900/80 backdrop-blur-lg border border-white/40 dark:border-slate-700/50 p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-start gap-4">
-            <div className="p-3 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
-                <Icon className="w-6 h-6 text-neutral-600 dark:text-neutral-300" />
-            </div>
-            <div>
-                <h3 className="font-semibold text-neutral-900 dark:text-white">{title}</h3>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{description}</p>
-            </div>
-        </div>
-    </Link>
-)
