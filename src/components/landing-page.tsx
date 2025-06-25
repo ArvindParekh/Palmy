@@ -17,10 +17,7 @@ import {
 } from "lucide-react"
 import { motion } from "framer-motion"
 import { HeroShowcase } from "./landing/hero-showcase"
-
-interface LandingPageProps {
-  onLogin: () => void
-}
+import Link from "next/link"
 
 const features = [
   {
@@ -119,7 +116,7 @@ const pricingPlans = [
   },
 ]
 
-export function LandingPage({ onLogin }: LandingPageProps) {
+export function LandingPage({ loggedIn }: { loggedIn: boolean }) {
   return (
     <div className="min-h-screen bg-white dark:bg-black">
       {/* Header */}
@@ -154,15 +151,36 @@ export function LandingPage({ onLogin }: LandingPageProps) {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm">
-              Sign In
-            </Button>
-            <Button
-              onClick={onLogin}
-              className="bg-black hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 dark:text-black"
-            >
-              Get Started
-            </Button>
+            {loggedIn ? (
+              <Link href="/dashboard" >
+                <Button
+                  variant="default"
+                  size="sm"
+                >
+                  Dashboard
+                </Button>
+              </Link>
+            ) : (
+              <>
+              <Link href="/auth/sign-in" >
+                <Button
+                  variant="outline"
+                  size="sm"
+                >
+                Log In
+                </Button>
+              </Link>
+              <Link href="/auth/sign-up" >
+              <Button
+                variant="default"
+                size="sm"
+              >
+                Sign Up
+              </Button>
+            </Link>
+            </>
+            )}
+            
           </div>
         </div>
       </header>
@@ -185,11 +203,11 @@ export function LandingPage({ onLogin }: LandingPageProps) {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
-              onClick={onLogin}
+              onClick={() => {}}
               size="lg"
               className="bg-black hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 dark:text-black text-lg px-8 py-6"
             >
-              Start Building
+              {loggedIn ? "Go to App" : "Start Building"}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
             <Button variant="outline" size="lg" className="text-lg px-8 py-6">
@@ -377,14 +395,14 @@ export function LandingPage({ onLogin }: LandingPageProps) {
           <div className="max-w-2xl mx-auto">
             <h2 className="text-4xl font-bold text-white mb-4">Ready to get started?</h2>
             <p className="text-xl text-blue-100 mb-8">
-              Create an account and start building better job applications today.
+              {loggedIn ? "Go to your dashboard and start building better job applications today." : "Create an account and start building better job applications today."}
             </p>
             <Button
-              onClick={onLogin}
+                onClick={() => {}}
               size="lg"
               className="bg-white hover:bg-neutral-200 text-black text-lg px-8 py-6"
             >
-              Sign Up for Free
+              {loggedIn ? "Go to App" : "Sign Up for Free"}
             </Button>
           </div>
         </div>
