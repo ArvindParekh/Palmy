@@ -115,16 +115,16 @@ export function TemplateList({ palmlets, filters, folderId }: TemplateListProps)
     }
   };
 
-  const handleAddTagsToTemplate = async (templateId: string, newTags: string[]) => {
+  const handleUpdateTemplateTags = async (templateId: string, allTags: string[]) => {
     try {
-      const result = await addTagsToPalmlet(templateId, newTags, folderId);
+      const result = await addTagsToPalmlet(templateId, allTags, folderId);
       if (result.success) {
         toast.success(result.message);
       } else {
         toast.error(result.message);
       }
     } catch (error) {
-      toast.error("Failed to add tags");
+      toast.error("Failed to update tags");
     }
   };
 
@@ -187,7 +187,7 @@ export function TemplateList({ palmlets, filters, folderId }: TemplateListProps)
         templateId={selectedTemplate?.id || ""}
         templateTitle={selectedTemplate?.title || ""}
         existingTags={selectedTemplate?.tags || []}
-        onSave={handleAddTagsToTemplate}
+        onSave={handleUpdateTemplateTags}
       />
 
       {/* Use Template Dialog */}

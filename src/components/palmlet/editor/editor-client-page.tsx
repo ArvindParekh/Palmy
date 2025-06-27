@@ -54,8 +54,8 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
   const [toolbarPosition, setToolbarPosition] = useState({ top: 0, left: 0 });
   const editorRef = useRef<HTMLTextAreaElement>(null);
 
-  // concat the current variables with the template variables
-  const variables = [...new Set([...(content?.match(/{{(.*?)}}/g)?.map((v) => v.slice(2, -2)) || []), ...templateData.variables.map((v) => v.variableName)])];
+  // do not concat the current variables with the template variables
+  const variables = [...new Set([...(content?.match(/{{(.*?)}}/g)?.map((v) => v.slice(2, -2)) || [])])];
 
   const handleGenerate = async (prompt: string) => {
     console.log("Generating with prompt:", prompt);

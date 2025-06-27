@@ -148,7 +148,7 @@ export function TemplateCard({
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => onAddTags?.(id)}>
                 <Tag className="w-4 h-4 mr-2" />
-                Add Tags
+                Manage Tags
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => router.push(`/palmlets/${folderId}/editor/${id}`)}>
                 <Edit className="w-4 h-4 mr-2" />
@@ -203,7 +203,7 @@ export function TemplateCard({
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => onAddTags?.(id)}>
                 <Tag className="w-4 h-4 mr-2" />
-                Add Tags
+                Manage Tags
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => router.push(`/palmlets/${folderId}/editor/${id}`)}>
                 <Edit className="w-4 h-4 mr-2" />

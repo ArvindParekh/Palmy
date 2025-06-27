@@ -63,12 +63,14 @@ export async function updatePalmlet(id: string, title: string, content: string, 
             title: parsedFields.data.title,
             content: parsedFields.data.content,
             tags: {
+               deleteMany: {},
                connectOrCreate: parsedFields.data.tags?.map((tag) => ({
                   where: { tagName: tag },
                   create: { tagName: tag },
                })),
             },
             variables: {
+               deleteMany: {},
                connectOrCreate: parsedFields.data.variables?.map(
                   (variable) => ({
                      where: { variableName: variable },
@@ -124,33 +126,46 @@ export async function getRecentlyEditedPalmlets(userId: string) {
 
 export async function addTagsToPalmlet(id: string, newTags: string[], folderNumber: string) {
    try {
-      const currentPalmlet = await prisma.palmlet.findUnique({
+      // const currentPalmlet = await prisma.palmlet.findUnique({
+      //    where: { id },
+      //    include: { tags: true, variables: true }
+      // });
+
+      // if (!currentPalmlet) {
+      //    return { message: "Palmlet not found", success: false };
+      // }
+
+      // const existingTagNames = currentPalmlet.tags.map(tag => tag.tagName);
+      // const allTags = [...existingTagNames, ...newTags];
+
+      // const result = await updatePalmlet(
+      //    id,
+      //    currentPalmlet.title,
+      //    currentPalmlet.content || "",
+      //    allTags,
+      //    currentPalmlet.variables.map(v => v.variableName),
+      //    folderNumber
+      // );
+
+      const updatedPalmlet = await prisma.palmlet.update({
          where: { id },
-         include: { tags: true, variables: true }
+         data: {
+            tags: {
+               deleteMany: {},
+               connectOrCreate: newTags.map(tag => ({
+                  where: { tagName: tag },
+                  create: { tagName: tag },
+               })),
+            },
+         },
       });
-
-      if (!currentPalmlet) {
-         return { message: "Palmlet not found", success: false };
-      }
-
-      const existingTagNames = currentPalmlet.tags.map(tag => tag.tagName);
-      const allTags = [...existingTagNames, ...newTags];
-
-      const result = await updatePalmlet(
-         id,
-         currentPalmlet.title,
-         currentPalmlet.content || "",
-         allTags,
-         currentPalmlet.variables.map(v => v.variableName),
-         folderNumber
-      );
 
       revalidatePath(`/palmlets/${folderNumber}`);
 
       return {
          message: "Tags added successfully",
-         success: result.success,
-         data: result.data,
+         success: true,
+         data: updatedPalmlet,
       };
    } catch (error) {
       return {
@@ -159,6 +174,34 @@ export async function addTagsToPalmlet(id: string, newTags: string[], folderNumb
       };
    }
 }
+
+// export async function removeTagsFromPalmlet(id: string, tagsToRemove: string[], folderNumber: string) {
+//    try {
+//       const updatedPalmlet = await prisma.palmlet.update({
+//          where: { id },
+//          data: {
+//             tags: {
+//                deleteMany: {
+//                   tagName: { in: tagsToRemove }
+//                }
+//             }
+//          }
+//       })
+
+//       revalidatePath(`/palmlets/${folderNumber}`);
+
+//       return {
+//          message: "Tags removed successfully",
+//          success: true,
+//          data: updatedPalmlet,
+//       };
+//    } catch (error) {
+//       return {
+//          message: "Failed to remove tags",
+//          success: false,
+//       };
+//    }
+// }
 
 export async function deletePalmlet(id: string, folderNumber: string) {
    try {
