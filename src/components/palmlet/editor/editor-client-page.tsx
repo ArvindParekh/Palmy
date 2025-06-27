@@ -38,7 +38,8 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
     variables: true,
   };
 }> }) {
-  const [content, setContent] = useState(templateData.content);
+  const [content, setContent] = useState(templateData.content || "");
+  const [previewContent, setPreviewContent] = useState(templateData.content || "");
   const [title, setTitle] = useState(templateData.title);
   const [isCommandMenuOpen, setIsCommandMenuOpen] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -135,6 +136,11 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
     }
   };
 
+  const handleContentChange = (value: string) => {
+    setContent(value);
+    setPreviewContent(value);
+  };
+
 
   return (
     <TooltipProvider>
@@ -187,7 +193,7 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
               <Textarea
                 ref={editorRef}
                 value={content || ""}
-                onChange={(e) => setContent(e.target.value)}
+                onChange={(e) => handleContentChange(e.target.value)}
                 onMouseUp={handleMouseUp}
                 onKeyUp={handleMouseUp}
                 className="absolute inset-0 w-full h-full text-lg bg-transparent border-0 resize-none focus-visible:ring-0 p-0 font-mono leading-relaxed tracking-wide"
@@ -217,7 +223,14 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
                 </h3>
                 <Card className="flex-1 bg-black border-neutral-800">
                   <CardContent className="p-4 text-base whitespace-pre-wrap text-neutral-300">
-                    {content || (
+                    {/* all variables should be highlighted with a span with the class text-orange-500 */}
+                    {previewContent?.split(/({{.*?}})/).map((part, index) => {
+                      const match = part.match(/{{(.*?)}}/);
+                      if (match) {
+                        return <span key={index} className="bg-orange-500 text-foreground p-0.5 rounded-sm shadow-sm">{match[1]}</span>;
+                      }
+                      return part;
+                    }) || (
                       <span className="text-neutral-500">
                         Preview will appear here.
                       </span>
