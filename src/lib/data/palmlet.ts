@@ -67,6 +67,32 @@ export const getFolderPalmlets = async (folderId: string) : Promise<{
     }
 };
 
+export const getFolderInfo = async (folderId: string)=> {
+    try {
+        const folder = await prisma.palmlet_Folder.findUnique({
+            where: {
+                id: folderId,
+            },
+            include: {
+                palmlets: true,
+                user: true,
+            },
+        });
+
+        return {
+            message: "Folder info fetched successfully",
+            success: true,
+            data: folder,
+        };
+    } catch (error) {
+        return {
+            message: "Failed to fetch folder info",
+            success: false,
+            data: null,
+        };
+    }
+}
+
 export const getUserPalmlets = async (userId: string) => {
     try {
         const palmlets = await prisma.palmlet.findMany({
