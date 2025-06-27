@@ -122,6 +122,44 @@ export async function getRecentlyEditedPalmlets(userId: string) {
    }
 }
 
+export async function addTagsToPalmlet(id: string, newTags: string[], folderNumber: string) {
+   try {
+      const currentPalmlet = await prisma.palmlet.findUnique({
+         where: { id },
+         include: { tags: true, variables: true }
+      });
+
+      if (!currentPalmlet) {
+         return { message: "Palmlet not found", success: false };
+      }
+
+      const existingTagNames = currentPalmlet.tags.map(tag => tag.tagName);
+      const allTags = [...existingTagNames, ...newTags];
+
+      const result = await updatePalmlet(
+         id,
+         currentPalmlet.title,
+         currentPalmlet.content || "",
+         allTags,
+         currentPalmlet.variables.map(v => v.variableName),
+         folderNumber
+      );
+
+      revalidatePath(`/palmlets/${folderNumber}`);
+
+      return {
+         message: "Tags added successfully",
+         success: result.success,
+         data: result.data,
+      };
+   } catch (error) {
+      return {
+         message: "Failed to add tags",
+         success: false,
+      };
+   }
+}
+
 export async function deletePalmlet(id: string, folderNumber: string) {
    try {
       const deletedPalmlet = await prisma.palmlet.delete({

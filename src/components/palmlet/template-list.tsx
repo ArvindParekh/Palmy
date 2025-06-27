@@ -4,8 +4,10 @@ import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { FolderOpen } from "lucide-react";
 import { TemplateCard } from "./template-card";
+import { AddTagsDialog } from "./add-tags-dialog";
+import { UseTemplateDialog } from "./use-template-dialog";
 import { cn } from "@/lib/utils";
-import { deletePalmlet } from "@/actions/palmlet";
+import { deletePalmlet, addTagsToPalmlet } from "@/actions/palmlet";
 import { toast } from "sonner";
 import { Toaster } from "../ui/sonner";
 
@@ -38,6 +40,11 @@ interface TemplateListProps {
 export function TemplateList({ palmlets, filters, folderId }: TemplateListProps) {
   const router = useRouter();
   const colorThemes = ['sage', 'lavender', 'cream', 'pearl', 'stone', 'mist'] as const;
+  
+  // Dialog state
+  const [showAddTagsDialog, setShowAddTagsDialog] = useState(false);
+  const [showUseTemplateDialog, setShowUseTemplateDialog] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState<Palmlet | null>(null);
 
   const filteredAndSortedTemplates = useMemo(() => {
     let filtered = [...palmlets];
@@ -84,8 +91,11 @@ export function TemplateList({ palmlets, filters, folderId }: TemplateListProps)
   }, [palmlets, filters]);
 
   const handleUseTemplate = (id: string) => {
-    // Handle template usage - open personalization modal
-    console.log('Use template:', id);
+    const template = palmlets.find(p => p.id === id);
+    if (template) {
+      setSelectedTemplate(template);
+      setShowUseTemplateDialog(true);
+    }
   };
 
   const handleEditTemplate = (id: string) => {
@@ -98,8 +108,24 @@ export function TemplateList({ palmlets, filters, folderId }: TemplateListProps)
   };
 
   const handleAddTags = (id: string) => {
-    // Add tags
-    console.log('Add tags:', id);
+    const template = palmlets.find(p => p.id === id);
+    if (template) {
+      setSelectedTemplate(template);
+      setShowAddTagsDialog(true);
+    }
+  };
+
+  const handleAddTagsToTemplate = async (templateId: string, newTags: string[]) => {
+    try {
+      const result = await addTagsToPalmlet(templateId, newTags, folderId);
+      if (result.success) {
+        toast.success(result.message);
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      toast.error("Failed to add tags");
+    }
   };
 
   const handleDeleteTemplate = async (id: string, folderNumber: string) => {
@@ -153,6 +179,28 @@ export function TemplateList({ palmlets, filters, folderId }: TemplateListProps)
           />
         ))}
       </div>
+
+      {/* Add Tags Dialog */}
+      <AddTagsDialog
+        open={showAddTagsDialog}
+        onOpenChange={setShowAddTagsDialog}
+        templateId={selectedTemplate?.id || ""}
+        templateTitle={selectedTemplate?.title || ""}
+        existingTags={selectedTemplate?.tags || []}
+        onSave={handleAddTagsToTemplate}
+      />
+
+      {/* Use Template Dialog */}
+      <UseTemplateDialog
+        open={showUseTemplateDialog}
+        onOpenChange={setShowUseTemplateDialog}
+        template={selectedTemplate ? {
+          id: selectedTemplate.id,
+          title: selectedTemplate.title,
+          content: selectedTemplate.content,
+          variables: selectedTemplate.variables
+        } : null}
+      />
     </div>
   );
 }

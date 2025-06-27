@@ -63,6 +63,7 @@ export function TemplateCard({
   folderId
 }: TemplateCardProps) {
   const router = useRouter();
+
   const colorClasses = {
     sage: {
       gradient: 'from-emerald-100/95 via-teal-100/85 to-emerald-200/75 dark:from-emerald-950/40 dark:via-teal-950/30 dark:to-emerald-900/20',
@@ -137,7 +138,7 @@ export function TemplateCard({
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="opacity-60 group-hover:opacity-100">
-                  <MoreHorizontal className="w-4 h-4 text-red-500" />
+                  <MoreHorizontal className="w-4 h-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
@@ -163,11 +164,11 @@ export function TemplateCard({
               </DropdownMenuItem>
             </DropdownMenuContent>
             </DropdownMenu>
-          </div>
-        </div>
+                  </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
   return (
     <div className="group relative w-full rounded-3xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-lg border border-gray-200/50 dark:border-slate-700/50 shadow-xl hover:shadow-2xl hover:shadow-black/5 dark:hover:shadow-black/30 transition-all duration-500 cursor-pointer overflow-hidden">
