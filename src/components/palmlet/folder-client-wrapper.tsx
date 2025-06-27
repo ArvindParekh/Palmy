@@ -21,9 +21,10 @@ interface Palmlet {
 interface FolderClientWrapperProps {
   palmlets: Palmlet[];
   folderName: string;
+  folderNumber: string;
 }
 
-export function FolderClientWrapper({ palmlets, folderName }: FolderClientWrapperProps) {
+export function FolderClientWrapper({ palmlets, folderName, folderNumber }: FolderClientWrapperProps) {
   const [filters, setFilters] = useState({
     searchQuery: "",
     selectedTags: [] as string[],
@@ -52,6 +53,7 @@ export function FolderClientWrapper({ palmlets, folderName }: FolderClientWrappe
       <FolderControls
         allTags={allTags}
         folderName={folderName}
+        folderNumber={folderNumber}
         onFiltersChange={handleFiltersChange}
       />
       <TemplateList

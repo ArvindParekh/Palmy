@@ -82,6 +82,7 @@ export default async function FolderPage({
             <FolderClientWrapper
                palmlets={[]}
                folderName={folderInfo.data?.folderName || ""}
+               folderNumber={folderNumber}
             />
          </div>
       );
@@ -210,6 +211,7 @@ export default async function FolderPage({
          <FolderClientWrapper
             palmlets={palmlets}
             folderName={folderInfo.data?.folderName || ""}
+            folderNumber={folderNumber}
          />
       </div>
    );

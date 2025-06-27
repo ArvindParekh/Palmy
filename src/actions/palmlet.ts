@@ -4,8 +4,8 @@
 import { prisma } from "@/lib/db";
 import { createPalmletSchema, updatePalmletSchema } from "@/zod/palmlet";
 
-export async function createPalmlet(userId: string, folderName: string) {
-   const parsedFields = createPalmletSchema.safeParse(userId);
+export async function createNewPalmlet(userId: string, folderNumber: string, title: string, content: string) {
+   const parsedFields = createPalmletSchema.safeParse({ userId, folderNumber, title, content });
 
    if (!parsedFields.success)
       return { message: "Invalid fields", success: false };
@@ -13,15 +13,13 @@ export async function createPalmlet(userId: string, folderName: string) {
    try {
       const newPalmlet = await prisma.palmlet.create({
          data: {
-            title: "Untitled",
+            title: title,
+            content: content,
             folder: {
                connect: {
-                  userId_folderName: {
-                     userId: userId,
-                     folderName: folderName,
-                  },
+                  id: folderNumber,
                },
-            },
+            }
          },
       });
 

@@ -9,7 +9,7 @@ import {
   List, 
   Plus, 
   SortAsc,
-  SortDesc
+  SortDesc,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { createPalmlet } from "@/actions/palmlet";
+import Link from "next/link";
 
 type ViewMode = 'grid' | 'list';
 type SortBy = 'updated' | 'created' | 'title' | 'variables';
@@ -35,6 +36,7 @@ interface Tag {
 interface FolderControlsProps {
   allTags: Tag[];
   folderName: string;
+  folderNumber: string;
   onFiltersChange: (filters: {
     searchQuery: string;
     selectedTags: string[];
@@ -44,7 +46,7 @@ interface FolderControlsProps {
   }) => void;
 }
 
-export function FolderControls({ allTags, folderName, onFiltersChange }: FolderControlsProps) {
+export function FolderControls({ allTags, folderName, folderNumber, onFiltersChange }: FolderControlsProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<SortBy>('updated');
@@ -259,10 +261,12 @@ export function FolderControls({ allTags, folderName, onFiltersChange }: FolderC
             </div>
 
             {/* New Template */}
-            <Button onClick={handleNewTemplate}>
-              <Plus className="w-4 h-4 mr-2" />
-              New Template
-            </Button>
+            <Link href={`/palmlets/${folderNumber}/editor/new`}>
+              <Button onClick={handleNewTemplate}>
+                <Plus className="w-4 h-4 mr-2" />
+                New Template
+              </Button>
+            </Link>
           </div>
         </div>
 
