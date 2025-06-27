@@ -19,7 +19,7 @@ export default async function DashboardPage() {
       // In a real app, get userId from session/auth
       const result = await createNewPalmlet("user-123", "1", "Untitled", "");
       if (result.success && result.data) {
-         redirect(`/palmlets/${result.data.folderNumber}/editor/${result.data.id}`);
+         redirect(`/palmlets/${result.data.folderId}/editor/${result.data.id}`);
       } else {
          // Handle error, maybe with a toast notification
          console.error(result.message);
@@ -70,7 +70,7 @@ export default async function DashboardPage() {
                      </div>
                      <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6'>
                         {recentTemplates.map((template) => (
-                           <TemplateCard {...template} key={template.id} tags={template.tags} variables={template.variables} />
+                           <TemplateCard {...template} key={template.id} tags={template.tags} variables={template.variables} folderId={template.folderId} />
                         ))}
                      </div>
                   </section>

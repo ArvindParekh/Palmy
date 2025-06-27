@@ -36,9 +36,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": 965.9004700986436,
-			"y": 577.4326448828607,
-			"lastActivityTimestamp": 1750892210376,
+			"x": -673.7916151269085,
+			"y": 848.8780935492655,
+			"lastActivityTimestamp": 1751036844737,
 			"meta": {}
 		},
 		{
@@ -194,6 +194,45 @@
 			"typeName": "shape"
 		},
 		{
+			"x": -673.7916151269085,
+			"y": 848.8780935492655,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:n-MHFx4Wwcm9ODlsKBRiN",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 304.296875,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "palmlets/folder-number/"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aE0Jn",
+			"typeName": "shape"
+		},
+		{
 			"meta": {},
 			"id": "binding:PQmp0B08kpOSELe1pzV_G",
 			"type": "arrow",
@@ -212,9 +251,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": 883.027936189889,
-			"y": 411.7758939580764,
-			"z": 0.4710836812488655,
+			"x": 1216.5964800611337,
+			"y": -577.4756610821529,
+			"z": 0.8400809009979233,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -371,12 +410,12 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": "shape:c5xEd4SOfzfXr-5LTiumv",
+			"editingShapeId": "shape:n-MHFx4Wwcm9ODlsKBRiN",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:c5xEd4SOfzfXr-5LTiumv"
+				"shape:n-MHFx4Wwcm9ODlsKBRiN"
 			],
-			"hoveredShapeId": null,
+			"hoveredShapeId": "shape:n-MHFx4Wwcm9ODlsKBRiN",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -778,9 +817,7 @@
 		{
 			"followingUserId": null,
 			"opacityForNextShape": 1,
-			"stylesForNextShape": {
-				"tldraw:geo": "rectangle"
-			},
+			"stylesForNextShape": {},
 			"brush": null,
 			"scribbles": [],
 			"cursor": {
@@ -794,7 +831,7 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1709,
+				"w": 1683,
 				"h": 939
 			},
 			"insets": [

@@ -24,6 +24,7 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 export interface TemplateCardProps {
   id: string;
@@ -38,6 +39,7 @@ export interface TemplateCardProps {
   onEdit?: (id: string) => void;
   onCopy?: (id: string) => void;
   onUse?: (id: string) => void;
+  folderId: string;
 }
 
 export function TemplateCard({ 
@@ -52,8 +54,10 @@ export function TemplateCard({
   variant = 'default',
   onEdit,
   onCopy,
-  onUse
+  onUse,
+  folderId
 }: TemplateCardProps) {
+  const router = useRouter();
   const colorClasses = {
     sage: {
       gradient: 'from-emerald-50/90 via-teal-50/70 to-emerald-100/60 dark:from-emerald-950/40 dark:via-teal-950/30 dark:to-emerald-900/20',
@@ -136,7 +140,7 @@ export function TemplateCard({
                   <Zap className="w-4 h-4 mr-2" />
                   Use Template
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => onEdit?.(id)}>
+                <DropdownMenuItem onClick={() => router.push(`/palmlets/${folderId}/editor/${id}`)}>
                   <Edit className="w-4 h-4 mr-2" />
                   Edit
                 </DropdownMenuItem>
@@ -183,7 +187,7 @@ export function TemplateCard({
                 <Zap className="w-4 h-4 mr-2" />
                 Use Template
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onEdit?.(id)}>
+              <DropdownMenuItem onClick={() => router.push(`/palmlets/${folderId}/editor/${id}`)}>
                 <Edit className="w-4 h-4 mr-2" />
                 Edit
               </DropdownMenuItem>
