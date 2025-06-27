@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { PalmletFolderCard, PalmletFolderCardProps } from "./palmlet-folder-card";
-import { RenameFolderDialog, EditDescriptionDialog } from "./folder-dialogs";
+import { RenameFolderDialog, EditDescriptionDialog, DeleteFolderDialog } from "./folder-dialogs";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
-import { updatePalmletFolder } from "@/actions/palmlet-folder";
+import { deletePalmletFolder, updatePalmletFolder } from "@/actions/palmlet-folder";
 
 interface FolderCardWrapperProps {
   folderId: string;
@@ -34,13 +34,17 @@ export function FolderCardWrapper({
 }: FolderCardWrapperProps) {
   const [showRenameDialog, setShowRenameDialog] = useState(false);
   const [showEditDescriptionDialog, setShowEditDescriptionDialog] = useState(false);
-
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const handleRename = () => {
     setShowRenameDialog(true);
   };
 
   const handleEditDescription = () => {
     setShowEditDescriptionDialog(true);
+  };
+
+  const handleDelete = () => {
+    setShowDeleteDialog(true);
   };
 
   const handleRenameFolder = async (newName: string) => {
@@ -83,6 +87,15 @@ export function FolderCardWrapper({
     }
   };
 
+  const handleDeleteFolder = async () => {
+    const response = await deletePalmletFolder(folderId);
+    if (response.success) {
+      toast.success("Folder deleted successfully");
+    } else {
+      toast.error("Failed to delete folder");
+    }
+  };
+
   return (
     <>
       <PalmletFolderCard
@@ -94,6 +107,7 @@ export function FolderCardWrapper({
         url={url}
         onRename={handleRename}
         onEditDescription={handleEditDescription}
+        onDelete={handleDelete}
       />
 
       {/* Rename Dialog */}
@@ -110,6 +124,12 @@ export function FolderCardWrapper({
         onOpenChange={setShowEditDescriptionDialog}
         currentDescription={description}
         onSave={handleUpdateDescription}
+      />
+
+      <DeleteFolderDialog
+        open={showDeleteDialog}
+        onOpenChange={setShowDeleteDialog}
+        onDelete={handleDeleteFolder}
       />
     </>
   );

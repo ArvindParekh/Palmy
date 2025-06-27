@@ -29,6 +29,12 @@ interface EditDescriptionDialogProps {
   onSave: (newDescription: string) => Promise<void>;
 }
 
+interface DeleteFolderDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onDelete: () => Promise<void>;
+}
+
 export function RenameFolderDialog({ 
   open, 
   onOpenChange, 
@@ -203,6 +209,54 @@ export function EditDescriptionDialog({
             className="min-w-[80px]"
           >
             {isLoading ? "Saving..." : "Save Changes"}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+} 
+
+export function DeleteFolderDialog({
+  open, 
+  onOpenChange,
+  onDelete
+}: DeleteFolderDialogProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [confirmation, setConfirmation] = useState("");
+  const handleDelete = async () => {
+    setIsLoading(true);
+    await onDelete();
+    onOpenChange(false);
+    setIsLoading(false);
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Delete Folder</DialogTitle>
+          <DialogDescription>
+            Are you sure you want to delete this folder?
+          </DialogDescription>
+          <DialogDescription>
+            This will delete all palmlets in this folder. This action cannot be undone.
+          </DialogDescription>
+          <DialogDescription>
+            Type <span className="font-bold">DELETE</span> to confirm.
+            <Input
+              value={confirmation}
+              onChange={(e) => setConfirmation(e.target.value.toUpperCase())}
+              className="border-border mt-2"
+            />
+          </DialogDescription>
+        </DialogHeader>
+
+        <DialogFooter>
+          <Button variant="outline" onClick={() => onOpenChange(false)}>
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} disabled={isLoading || confirmation !== "DELETE"}>
+            {isLoading ? "Deleting..." : "Delete"}
           </Button>
         </DialogFooter>
       </DialogContent>

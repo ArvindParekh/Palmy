@@ -25,6 +25,7 @@ export interface PalmletFolderCardProps {
    url: string;
    onRename?: () => void;
    onEditDescription?: () => void;
+   onDelete?: () => void;
 }
 
 // Variant 1: Luxurious glass morphism card with perfect dark mode
@@ -37,6 +38,7 @@ export function PalmletFolderCard({
    url,
    onRename,
    onEditDescription,
+   onDelete,
 }: PalmletFolderCardProps) {
    const colorClasses = {
       sage: {
@@ -147,6 +149,13 @@ export function PalmletFolderCard({
                            }}>
                               <Edit className='w-4 h-4 mr-2' />
                               Edit Description
+                           </DropdownMenuItem>
+                           <DropdownMenuItem onClick={(e) => {
+                              e.stopPropagation();
+                              onDelete?.();
+                           }}>
+                              <Trash className='w-4 h-4 mr-2' />
+                              Delete
                            </DropdownMenuItem>
                         </DropdownMenuContent>
                      </DropdownMenu>
