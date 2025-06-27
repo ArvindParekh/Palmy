@@ -1,9 +1,6 @@
 import { z } from "zod";
 
 export const createPalmletSchema = z.object({
-   userId: z.string().min(1, {
-      message: "User ID is required",
-   }),
    folderNumber: z.string().min(1, {
       message: "Folder number is required",
    }),
@@ -11,6 +8,8 @@ export const createPalmletSchema = z.object({
       message: "Title is required",
    }),
    content: z.string().optional().default(""),
+   tags: z.array(z.string()).optional(),
+   variables: z.array(z.string()).optional(),
 });
 
 export const updatePalmletSchema = z.object({

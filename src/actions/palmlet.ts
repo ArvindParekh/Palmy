@@ -5,8 +5,8 @@ import { prisma } from "@/lib/db";
 import { createPalmletSchema, updatePalmletSchema } from "@/zod/palmlet";
 import { revalidatePath } from "next/cache";
 
-export async function createNewPalmlet(userId: string, folderNumber: string, title: string, content: string) {
-   const parsedFields = createPalmletSchema.safeParse({ userId, folderNumber, title, content });
+export async function createNewPalmlet(folderNumber: string, title: string, content: string, tags: string[], variables: string[]) {
+   const parsedFields = createPalmletSchema.safeParse({ folderNumber, title, content, tags, variables });
 
    if (!parsedFields.success)
       return { message: "Invalid fields", success: false };
@@ -14,13 +14,27 @@ export async function createNewPalmlet(userId: string, folderNumber: string, tit
    try {
       const newPalmlet = await prisma.palmlet.create({
          data: {
-            title: title,
-            content: content,
+            title: parsedFields.data.title,
+            content: parsedFields.data.content,
             folder: {
                connect: {
                   id: folderNumber,
                },
-            }
+            },
+            tags: {
+               connectOrCreate: parsedFields.data.tags?.map((tag) => ({
+                  where: { tagName: tag },
+                  create: { tagName: tag },
+               })),
+            },
+            variables: {
+               connectOrCreate: parsedFields.data.variables?.map(
+                  (variable) => ({
+                     where: { variableName: variable },
+                     create: { variableName: variable },
+                  })
+               ),
+            },
          },
       });
 

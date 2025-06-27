@@ -26,10 +26,11 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Prisma } from "@/generated/prisma";
-import { updatePalmlet } from "@/actions/palmlet";
+import { createNewPalmlet, updatePalmlet } from "@/actions/palmlet";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { formatDistanceToNow } from "date-fns";
+import { useRouter } from "next/navigation";
 
 // This will be the main editor page.
 export default function EditorPage({ id, folderNumber, templateData }: { id: string, folderNumber: string, templateData: Prisma.PalmletGetPayload<{
@@ -38,6 +39,8 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
     variables: true,
   };
 }> }) {
+  const router = useRouter();
+
   const [content, setContent] = useState(templateData.content || "");
   const [previewContent, setPreviewContent] = useState(templateData.content || "");
   const [title, setTitle] = useState(templateData.title);
@@ -134,11 +137,21 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
       return;
     }
 
-    const result = await updatePalmlet(id, title, content || "", templateData.tags.map((t) => t.tagName), variables, folderNumber);
-    if (result.success) {
-      toast.success("Template saved successfully");
+    if (id === "") {
+      const result = await createNewPalmlet(folderNumber, title, content || "", templateData.tags.map((t) => t.tagName), variables);
+      if (result.success) {
+        toast.success("Template created successfully");
+        router.push(`/palmlets/${folderNumber}/editor/${result.data?.id}`);
+      } else {
+        toast.error("Failed to save template");
+      }
     } else {
-      toast.error("Failed to save template");
+      const result = await updatePalmlet(id, title, content || "", templateData.tags.map((t) => t.tagName), variables, folderNumber);
+      if (result.success) {
+        toast.success("Template saved successfully");
+      } else {
+        toast.error("Failed to save template");
+      }
     }
   };
 
