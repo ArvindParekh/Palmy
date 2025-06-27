@@ -26,6 +26,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Prisma } from "@/generated/prisma";
+import { updatePalmlet } from "@/actions/palmlet";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
+import { formatDistanceToNow } from "date-fns";
 
 // This will be the main editor page.
 export default function EditorPage({ id, folderNumber, templateData }: { id: string, folderNumber: string, templateData: Prisma.PalmletGetPayload<{
@@ -121,9 +125,20 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
     setSelection(null);
   };
 
+  const handleSave = async () => {
+    console.log("Saving template:", title, content);
+    const result = await updatePalmlet(id, title, content || "", templateData.tags.map((t) => t.tagName), variables, folderNumber);
+    if (result.success) {
+      toast.success("Template saved successfully");
+    } else {
+      toast.error("Failed to save template");
+    }
+  };
+
 
   return (
     <TooltipProvider>
+      <Toaster />
       <div className="flex flex-col h-screen w-full bg-black text-white">
         {selection && (
           <InlineAIToolbar
@@ -153,13 +168,13 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
                 placeholder="My Awesome Template"
               />
               <p className="text-sm text-neutral-400">
-                Last saved 2 minutes ago
+                Last saved {formatDistanceToNow(templateData.updatedAt)} ago
               </p>
             </div>
           </div>
           <div className="flex items-center gap-4">
             <Button variant="outline" className="text-neutral-300 border-neutral-700 hover:bg-neutral-800 hover:text-white">Share</Button>
-            <Button>
+            <Button onClick={handleSave} className="bg-foreground text-background hover:bg-foreground/90 shadow-lg hover:scale-105 transition-all duration-300">
               <Sparkles className="w-4 h-4 mr-2" />
               Save
             </Button>

@@ -14,7 +14,9 @@ export const createPalmletSchema = z.object({
 });
 
 export const updatePalmletSchema = z.object({
-   id: z.string(),
+   id: z.string().min(1, {
+      message: "ID is required",
+   }),
    title: z.string().optional(),
    content: z.string().optional(),
    tags: z.array(z.string()).optional(),

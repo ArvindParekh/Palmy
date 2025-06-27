@@ -7,7 +7,7 @@ export default async function EditorPage({ params }: { params: { id: string, fol
 
   const result = await getPalmlet(id);
 
-  if (!result.success) {
+  if (!result.success || !result.data) {
     return notFound();
   }
 

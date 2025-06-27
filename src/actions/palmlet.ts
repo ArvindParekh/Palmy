@@ -3,6 +3,7 @@
 
 import { prisma } from "@/lib/db";
 import { createPalmletSchema, updatePalmletSchema } from "@/zod/palmlet";
+import { revalidatePath } from "next/cache";
 
 export async function createNewPalmlet(userId: string, folderNumber: string, title: string, content: string) {
    const parsedFields = createPalmletSchema.safeParse({ userId, folderNumber, title, content });
@@ -33,9 +34,8 @@ export async function createNewPalmlet(userId: string, folderNumber: string, tit
    }
 }
 
-export async function updatePalmlet(prevState: any, formData: FormData) {
-   const data = Object.fromEntries(formData);
-   const parsedFields = updatePalmletSchema.safeParse(data);
+export async function updatePalmlet(id: string, title: string, content: string, tags: string[], variables: string[], folderNumber: string) {
+   const parsedFields = updatePalmletSchema.safeParse({ id, title, content, tags, variables });
 
    if (!parsedFields.success)
       return { message: "Invalid fields", success: false };
@@ -64,6 +64,8 @@ export async function updatePalmlet(prevState: any, formData: FormData) {
             },
          },
       });
+
+      revalidatePath(`/palmlets/${folderNumber}/editor/${parsedFields.data.id}`);
 
       return {
          message: "Palmlet updated successfully",
