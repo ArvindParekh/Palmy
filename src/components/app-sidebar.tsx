@@ -68,9 +68,8 @@ export function AppSidebar() {
                   <p className='text-sm font-medium text-foreground truncate'>
                      John Doe
                   </p>
-                  <div className='flex items-center gap-2'>
-                     <div className='w-2 h-2 bg-success rounded-full'></div>
-                     <p className='text-xs text-neutral-500 truncate'>
+                  <div className='flex items-start gap-2'>
+                     <p className='text-xs text-muted-foreground truncate'>
                         Pro Member
                      </p>
                   </div>
