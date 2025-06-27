@@ -121,3 +121,26 @@ export async function getRecentlyEditedPalmlets(userId: string) {
       };
    }
 }
+
+export async function deletePalmlet(id: string, folderNumber: string) {
+   try {
+      const deletedPalmlet = await prisma.palmlet.delete({
+         where: {
+            id: id,
+         },
+      });
+
+      revalidatePath(`/palmlets/${folderNumber}`);
+
+      return {
+         message: "Palmlet deleted successfully",
+         success: true,
+         data: deletedPalmlet,
+      };
+   } catch (error) {
+      return {
+         message: "Failed to delete palmlet",
+         success: false,
+      };
+   }
+}

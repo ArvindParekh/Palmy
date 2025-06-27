@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { FolderOpen } from "lucide-react";
 import { TemplateCard } from "./template-card";
 import { cn } from "@/lib/utils";
+import { deletePalmlet } from "@/actions/palmlet";
+import { toast } from "sonner";
+import { Toaster } from "../ui/sonner";
 
 type ViewMode = 'grid' | 'list';
 type SortBy = 'updated' | 'created' | 'title' | 'variables';
@@ -94,6 +97,22 @@ export function TemplateList({ palmlets, filters, folderId }: TemplateListProps)
     console.log('Copy template:', id);
   };
 
+  const handleAddTags = (id: string) => {
+    // Add tags
+    console.log('Add tags:', id);
+  };
+
+  const handleDeleteTemplate = async (id: string, folderNumber: string) => {
+    // Delete template
+    console.log('Delete template:', id);
+    const result = await deletePalmlet(id, folderNumber); 
+    if (result.success) {
+      toast.success(result.message);
+    } else {
+      toast.error(result.message);
+    }
+  };
+
   if (filteredAndSortedTemplates.length === 0) {
     return (
       <EmptyState 
@@ -104,6 +123,7 @@ export function TemplateList({ palmlets, filters, folderId }: TemplateListProps)
 
   return (
     <div className="p-8">
+      <Toaster />
       <div 
         className={cn(
           "grid gap-6",
@@ -127,6 +147,8 @@ export function TemplateList({ palmlets, filters, folderId }: TemplateListProps)
             onEdit={handleEditTemplate}
             onCopy={handleCopyTemplate}
             onUse={handleUseTemplate}
+            onAddTags={handleAddTags}
+            onDelete={handleDeleteTemplate}
             folderId={folderId}
           />
         ))}

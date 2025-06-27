@@ -12,7 +12,8 @@ import {
   Star,
   Clock,
   Eye,
-  Zap
+  Zap,
+  Trash
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -39,6 +40,8 @@ export interface TemplateCardProps {
   onEdit?: (id: string) => void;
   onCopy?: (id: string) => void;
   onUse?: (id: string) => void;
+  onAddTags?: (id: string) => void;
+  onDelete?: (id: string, folderId: string) => void;
   folderId: string;
 }
 
@@ -55,6 +58,8 @@ export function TemplateCard({
   onEdit,
   onCopy,
   onUse,
+  onAddTags,
+  onDelete,
   folderId
 }: TemplateCardProps) {
   const router = useRouter();
@@ -103,20 +108,20 @@ export function TemplateCard({
 
   if (variant === 'compact') {
     return (
-      <div className="group relative w-full rounded-2xl bg-white/95 dark:bg-slate-900/80 backdrop-blur-md border border-gray-200/60 dark:border-slate-600/40 hover:bg-white dark:hover:bg-slate-900/90 shadow-lg hover:shadow-xl transition-all duration-400 cursor-pointer p-6">
+      <div className="group relative w-full rounded-2xl bg-background backdrop-blur-md border border-border hover:bg-accent hover:text-accent-foreground shadow-lg hover:shadow-xl transition-all duration-400 cursor-pointer p-6">
         <div className="flex items-center space-x-4">
           <div className={cn("p-3 rounded-xl border backdrop-blur-sm group-hover:scale-105 transition-transform duration-300", colors.accent)}>
             <FileText className={cn("w-5 h-5", colors.icon)} />
           </div>
           
           <div className="flex-1 min-w-0 space-y-1">
-            <h3 className="text-base font-semibold text-gray-900 dark:text-white truncate">
+            <h3 className="text-base font-semibold text-foreground truncate">
               {title}
             </h3>
-            <p className="text-xs text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed opacity-90">
+            <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed opacity-90">
               {previewText}
             </p>
-            <div className="flex items-center space-x-3 text-xs text-gray-500 dark:text-gray-400">
+            <div className="flex items-center space-x-3 text-xs text-muted-foreground">
               <span>{variables.length} variables</span>
               <span>•</span>
               <span>{timeAgo}</span>
@@ -136,19 +141,27 @@ export function TemplateCard({
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => onUse?.(id)}>
-                  <Zap className="w-4 h-4 mr-2" />
-                  Use Template
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => router.push(`/palmlets/${folderId}/editor/${id}`)}>
-                  <Edit className="w-4 h-4 mr-2" />
-                  Edit
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => onCopy?.(id)}>
-                  <Copy className="w-4 h-4 mr-2" />
-                  Duplicate
-                </DropdownMenuItem>
-              </DropdownMenuContent>
+              <DropdownMenuItem onClick={() => onUse?.(id)}>
+                <Zap className="w-4 h-4 mr-2" />
+                Use Template
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onAddTags?.(id)}>
+                <Tag className="w-4 h-4 mr-2" />
+                Add Tags
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push(`/palmlets/${folderId}/editor/${id}`)}>
+                <Edit className="w-4 h-4 mr-2" />
+                Edit
+              </DropdownMenuItem>
+              {/* <DropdownMenuItem onClick={() => onCopy?.(id)}>
+                <Copy className="w-4 h-4 mr-2" />
+                Duplicate
+              </DropdownMenuItem> */}
+              <DropdownMenuItem onClick={() => onDelete?.(id, folderId)}>
+                <Trash className="w-4 h-4 mr-2" />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
             </DropdownMenu>
           </div>
         </div>
@@ -177,7 +190,7 @@ export function TemplateCard({
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="opacity-60 group-hover:opacity-100 hover:bg-white/50 dark:hover:bg-slate-800/50"
+                className="opacity-60 group-hover:opacity-100 hover:bg-accent hover:text-accent-foreground"
               >
                 <MoreHorizontal className="w-4 h-4" />
               </Button>
@@ -187,13 +200,21 @@ export function TemplateCard({
                 <Zap className="w-4 h-4 mr-2" />
                 Use Template
               </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onAddTags?.(id)}>
+                <Tag className="w-4 h-4 mr-2" />
+                Add Tags
+              </DropdownMenuItem>
               <DropdownMenuItem onClick={() => router.push(`/palmlets/${folderId}/editor/${id}`)}>
                 <Edit className="w-4 h-4 mr-2" />
                 Edit
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onCopy?.(id)}>
+              {/* <DropdownMenuItem onClick={() => onCopy?.(id)}>
                 <Copy className="w-4 h-4 mr-2" />
                 Duplicate
+              </DropdownMenuItem> */}
+              <DropdownMenuItem onClick={() => onDelete?.(id, folderId)}>
+                <Trash className="w-4 h-4 mr-2" />
+                Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -201,10 +222,10 @@ export function TemplateCard({
 
         {/* Title and Preview */}
         <div className="space-y-4 mb-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white leading-tight">
+          <h3 className="text-xl font-semibold text-foreground leading-tight">
             {title}
           </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-3 opacity-90">
+          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 opacity-90">
             {previewText}
           </p>
         </div>
