@@ -31,7 +31,7 @@ export default function AppSidebarContent() {
                            <SidebarMenuButton asChild className='w-full justify-start gap-3 px-3 py-2.5 text-sm font-medium transition-all hover:bg-accent data-[active=true]:bg-accent data-[active=true]:text-foreground group'>
                               <Link href={item.href}>
                                  <item.icon className='w-4 h-4 group-data-[active=true]:text-yellow-500' />
-                                 <span className={cn('flex-1 font-medium', activePath === item.href ? 'text-yellow-500' : 'text-muted-foreground')}>{item.title}</span>
+                                 <span className={cn('flex-1 font-medium', activePath === item.href || activePath.startsWith(item.href) ? 'text-yellow-500' : 'text-muted-foreground')}>{item.title}</span>
                               </Link>
                            </SidebarMenuButton>
                         </SidebarMenuItem>
