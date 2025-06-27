@@ -33,7 +33,7 @@ const steps = [
 
 export function HeroShowcase() {
   return (
-    <div className="w-full max-w-4xl mx-auto rounded-xl shadow-2xl shadow-blue-500/20 bg-black border border-neutral-800">
+    <div className="w-full max-w-4xl mx-auto rounded-xl shadow-2xl shadow-primary/20 bg-card border border-border">
       <div className="h-10 flex items-center gap-2 px-4 border-b border-neutral-800">
         <div className="w-3 h-3 rounded-full bg-red-500" />
         <div className="w-3 h-3 rounded-full bg-yellow-500" />

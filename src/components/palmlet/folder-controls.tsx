@@ -161,17 +161,17 @@ export function FolderControls({ allTags, folderName, folderNumber, onFiltersCha
   return (
     <>
       {/* Controls Section */}
-      <div className="px-8 py-6 border-b border-gray-200 dark:border-gray-800">
+      <div className="px-8 py-6 border-b border-border">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
           {/* Search and Filter */}
           <div className="flex items-center space-x-4 flex-1 max-w-2xl">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 w-4 h-4 -translate-y-1/2 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 w-4 h-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 placeholder="Search templates, content, or tags..."
                 value={searchQuery}
                 onChange={(e) => handleSearchChange(e.target.value)}
-                className="pl-10 h-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-gray-200 dark:border-gray-700"
+                className="pl-10 h-10 bg-card backdrop-blur-md border-border"
               />
             </div>
             
@@ -241,7 +241,7 @@ export function FolderControls({ allTags, folderName, folderNumber, onFiltersCha
             </DropdownMenu>
 
             {/* View Mode */}
-            <div className="flex border border-gray-200 dark:border-gray-700 rounded-lg p-1 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md">
+            <div className="flex border border-border rounded-lg p-1 bg-card backdrop-blur-md">
               <Button
                 variant={viewMode === 'grid' ? 'default' : 'ghost'}
                 size="sm"
@@ -273,7 +273,7 @@ export function FolderControls({ allTags, folderName, folderNumber, onFiltersCha
         {/* Active Filters */}
         {selectedTags.length > 0 && (
           <div className="flex items-center space-x-2 mt-4">
-            <span className="text-sm text-gray-600 dark:text-gray-400">Filtered by:</span>
+            <span className="text-sm text-muted-foreground">Filtered by:</span>
             {selectedTags.map(tag => (
               <Badge 
                 key={tag} 

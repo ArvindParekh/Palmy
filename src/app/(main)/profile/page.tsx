@@ -84,7 +84,7 @@ export default function ProfilePage() {
   return (
     <div className="w-full max-w-5xl mx-auto min-h-screen p-4 md:p-6 space-y-6">
       <Card className="overflow-hidden">
-        <div className="relative h-32 md:h-40 bg-neutral-50 dark:bg-neutral-900">
+        <div className="relative h-32 md:h-40 bg-muted">
           {/* Abstract background pattern */}
           <svg className="absolute inset-0 w-full h-full opacity-50"
             style={{
@@ -95,7 +95,7 @@ export default function ProfilePage() {
         </div>
         <div className="px-6 pb-6">
           <div className="flex flex-col md:flex-row items-start gap-6 -mt-16 md:-mt-20">
-            <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-white dark:border-black flex-shrink-0">
+            <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-border flex-shrink-0">
               <AvatarImage src={userData.avatar} alt={userData.name} />
               <AvatarFallback className="text-5xl">
                 {userData.name.split(" ").map(n => n[0]).join("")}
@@ -104,11 +104,11 @@ export default function ProfilePage() {
             <div className="flex-1 pt-20 md:pt-24 space-y-4">
               <div className="flex flex-col md:flex-row md:items-start justify-between">
                 <div className="space-y-1">
-                  <h1 className="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-white">
+                  <h1 className="text-2xl md:text-3xl font-bold text-foreground">
                     {userData.name}
                   </h1>
-                  <p className="text-neutral-500 dark:text-neutral-400">@{userData.username}</p>
-                  <p className="text-sm text-neutral-700 dark:text-neutral-300 pt-2 max-w-md">
+                  <p className="text-muted-foreground">@{userData.username}</p>
+                  <p className="text-sm text-muted-foreground pt-2 max-w-md">
                     {userData.bio}
                   </p>
                 </div>
@@ -118,7 +118,7 @@ export default function ProfilePage() {
                 </Button>
               </div>
 
-              <div className="flex flex-wrap gap-6 text-sm text-neutral-600 dark:text-neutral-400">
+              <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
                 <StatItem icon={FileText} value={userData.stats.templates} label="Templates" />
                 <StatItem icon={GitBranch} value={userData.stats.forks} label="Forks" />
                 <StatItem icon={Star} value={userData.stats.rating} label="Avg. Rating" />
@@ -130,7 +130,7 @@ export default function ProfilePage() {
       </Card>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 bg-neutral-100 dark:bg-neutral-800/50">
+        <TabsList className="grid w-full grid-cols-3 bg-muted">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="templates">Templates</TabsTrigger>
           <TabsTrigger value="achievements">Achievements</TabsTrigger>
@@ -154,7 +154,7 @@ export default function ProfilePage() {
                     </CardHeader>
                     <CardContent>
                         {/* Placeholder for activity feed */}
-                        <p className="text-sm text-neutral-500">Activity feed coming soon.</p>
+                        <p className="text-sm text-muted-foreground">Activity feed coming soon.</p>
                     </CardContent>
                 </Card>
             </div>
@@ -183,9 +183,9 @@ export default function ProfilePage() {
 function StatItem({ icon: Icon, value, label }: { icon: React.ElementType, value: string | number, label: string }) {
     return (
         <div className="flex items-center gap-2">
-            <Icon className="w-4 h-4 text-neutral-500" />
-            <span className="font-semibold text-neutral-900 dark:text-white">{value}</span>
-            <span className="text-neutral-500">{label}</span>
+            <Icon className="w-4 h-4 text-muted-foreground" />
+            <span className="font-semibold text-foreground">{value}</span>
+            <span className="text-muted-foreground">{label}</span>
         </div>
     )
 }
@@ -194,8 +194,8 @@ function TemplateItem({ title, category, forks, rating }: (typeof templates)[0])
     return (
         <div className="flex items-center justify-between">
             <div>
-                <p className="font-medium text-neutral-900 dark:text-white">{title}</p>
-                <p className="text-sm text-neutral-500">{category}</p>
+                <p className="font-medium text-foreground">{title}</p>
+                <p className="text-sm text-muted-foreground">{category}</p>
             </div>
             <div className="flex items-center gap-4 text-sm">
                 <StatItem icon={GitBranch} value={forks} label="forks"/>
@@ -227,14 +227,14 @@ function AchievementCard({ name, icon: Icon, description, earned }: (typeof achi
                 <div className="flex items-center gap-4">
                      <div className={`flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center ${
                       earned
-                        ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
-                        : "bg-neutral-200 dark:bg-neutral-700 text-neutral-500"
+                        ? "bg-blue-100 text-blue-600"
+                        : "bg-muted text-muted-foreground"
                     }`}>
                         <Icon className="w-6 h-6" />
                     </div>
                     <div>
-                        <h3 className="font-semibold text-neutral-900 dark:text-white">{name}</h3>
-                        <p className="text-sm text-neutral-600 dark:text-neutral-400">{description}</p>
+                        <h3 className="font-semibold text-foreground">{name}</h3>
+                        <p className="text-sm text-muted-foreground">{description}</p>
                     </div>
                 </div>
             </CardContent>

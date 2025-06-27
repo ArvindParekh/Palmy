@@ -31,10 +31,10 @@ export function AchievementsSection({ achievements }: AchievementsSectionProps) 
 
   const rarityConfig = {
     common: {
-      bg: 'bg-gray-50 dark:bg-gray-800',
-      border: 'border-gray-200 dark:border-gray-700',
-      iconBg: 'bg-gray-100 dark:bg-gray-700',
-      badgeColor: 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+      bg: 'bg-muted',
+      border: 'border-border',
+      iconBg: 'bg-muted',
+      badgeColor: 'bg-muted text-muted-foreground'
     },
     rare: {
       bg: 'bg-blue-50 dark:bg-blue-950/20',
@@ -60,10 +60,10 @@ export function AchievementsSection({ achievements }: AchievementsSectionProps) 
     <div className="px-8 py-16">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3">
+          <h2 className="text-2xl font-semibold text-foreground mb-3">
             Achievement System
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             Unlock milestones as you contribute to the community and help others succeed 
             in their job search journey.
           </p>
@@ -89,15 +89,15 @@ export function AchievementsSection({ achievements }: AchievementsSectionProps) 
                     "mx-auto w-14 h-14 rounded-xl flex items-center justify-center transition-transform duration-200 group-hover:scale-110",
                     config.iconBg
                   )}>
-                    <IconComponent className="w-7 h-7 text-gray-600 dark:text-gray-400" />
+                    <IconComponent className="w-7 h-7 text-muted-foreground" />
                   </div>
                   
                   {/* Content */}
                   <div className="space-y-3">
-                    <h3 className="font-semibold text-gray-900 dark:text-white">
+                    <h3 className="font-semibold text-foreground">
                       {achievement.name}
                     </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                       {achievement.description}
                     </p>
                     <div className="flex items-center justify-center space-x-2">

@@ -51,7 +51,7 @@ function UserCard({ user, rank }: { user: LeaderboardUser; rank: number }) {
         {/* User Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center space-x-3 mb-1">
-            <h3 className="text-base font-semibold text-gray-900 dark:text-white truncate">
+            <h3 className="text-base font-semibold text-foreground truncate">
               {user.name}
             </h3>
           </div>
@@ -63,19 +63,19 @@ function UserCard({ user, rank }: { user: LeaderboardUser; rank: number }) {
         {/* Stats */}
         <div className="hidden md:flex items-center space-x-8 text-sm">
           <div className="text-center">
-            <p className="font-semibold text-gray-900 dark:text-white">
+            <p className="font-semibold text-foreground">
               {user.stats.templates}
             </p>
             <p className="text-gray-500 dark:text-gray-500">Templates</p>
           </div>
           <div className="text-center">
-            <p className="font-semibold text-gray-900 dark:text-white">
+            <p className="font-semibold text-foreground">
               {user.stats.forks}
             </p>
             <p className="text-gray-500 dark:text-gray-500">Forks</p>
           </div>
           <div className="text-center">
-            <p className="font-semibold text-gray-900 dark:text-white">
+            <p className="font-semibold text-foreground">
               {user.stats.successRate}%
             </p>
             <p className="text-gray-500 dark:text-gray-500">Success</p>
@@ -84,7 +84,7 @@ function UserCard({ user, rank }: { user: LeaderboardUser; rank: number }) {
         
         {/* Score */}
         <div className="text-right">
-          <p className="text-lg font-bold text-gray-900 dark:text-white">
+          <p className="text-lg font-bold text-foreground">
             {user.score.toLocaleString()}
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-500">points</p>

@@ -40,12 +40,12 @@ export default async function PalmletPage() {
 
          {/* Search */}
          <div className='relative max-w-md'>
-            <Search className='absolute left-3 top-1/2 w-4 h-4 -translate-y-1/2 text-neutral-400' />
+            <Search className='absolute left-3 top-1/2 w-4 h-4 -translate-y-1/2 text-muted-foreground' />
             <Input
                placeholder='Search folders and templates...'
                // value={searchQuery}
                // onChange={(e) => setSearchQuery(e.target.value)}
-               className='pl-10 border-neutral-200 dark:border-neutral-800'
+               className='pl-10 border-muted'
             />
          </div>
 

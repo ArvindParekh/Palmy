@@ -137,14 +137,14 @@ export default function EditorPage({ params }: { params: { folderNumber: string 
 
    return (
       <TooltipProvider>
-         <div className='flex flex-col h-screen w-full bg-black text-white'>
+         <div className='flex flex-col h-screen w-full bg-background text-foreground'>
             {selection && (
                <InlineAIToolbar
                   position={toolbarPosition}
                   onCommand={handleAICommand}
                />
             )}
-            <header className='flex items-center justify-between p-4 border-b border-neutral-800 shrink-0'>
+            <header className='flex items-center justify-between p-4 border-b border-border shrink-0'>
                <div className='flex items-center gap-4'>
                   <Link href='/palmlets/1'>
                      <Tooltip>
@@ -165,7 +165,7 @@ export default function EditorPage({ params }: { params: { folderNumber: string 
                         className='text-4xl md:text-2xl rounded-sm font-semibold border-none focus-visible:ring-0 p-0 mb-2 h-auto bg-transparent'
                         placeholder='Untitled'
                      />
-                     <p className='text-sm text-neutral-400'>
+                     <p className='text-sm text-muted-foreground'>
                         Last saved 2 minutes ago
                      </p>
                   </div>
@@ -173,7 +173,7 @@ export default function EditorPage({ params }: { params: { folderNumber: string 
                <div className='flex items-center gap-4'>
                   <Button
                      variant='outline'
-                     className='text-neutral-300 border-neutral-700 hover:bg-neutral-800 hover:text-white'
+                     className='text-muted-foreground border-border hover:bg-accent hover:text-accent-foreground'
                   >
                      Use
                   </Button>
@@ -206,10 +206,10 @@ export default function EditorPage({ params }: { params: { folderNumber: string 
                   </div>
                </div>
 
-               <aside className='w-[400px] bg-[#0A0A0A] border-l border-neutral-800 flex flex-col'>
+               <aside className='w-[400px] bg-background border-l border-border flex flex-col'>
                   <Tabs defaultValue='preview' className='flex-1 flex flex-col'>
-                     <div className='p-4 border-b border-neutral-800'>
-                        <TabsList className='grid w-full grid-cols-3 bg-neutral-900'>
+                     <div className='p-4 border-b border-border'>
+                        <TabsList className='grid w-full grid-cols-3 bg-muted'>
                            <TabsTrigger value='preview'>
                               <Eye className='w-4 h-4 mr-2' /> Preview
                            </TabsTrigger>
@@ -225,13 +225,13 @@ export default function EditorPage({ params }: { params: { folderNumber: string 
                         value='preview'
                         className='flex-1 overflow-y-auto p-6'
                      >
-                        <h3 className='text-lg font-semibold mb-4 text-neutral-300'>
+                        <h3 className='text-lg font-semibold mb-4 text-foreground'>
                            Live Preview
                         </h3>
-                        <Card className='flex-1 bg-black border-neutral-800'>
-                           <CardContent className='p-4 text-base whitespace-pre-wrap text-neutral-300'>
+                        <Card className='flex-1 bg-card border-border'>
+                           <CardContent className='p-4 text-base whitespace-pre-wrap text-foreground'>
                               {content || (
-                                 <span className='text-neutral-500'>
+                                 <span className='text-muted-foreground'>
                                     Preview will appear here.
                                  </span>
                               )}
@@ -243,10 +243,10 @@ export default function EditorPage({ params }: { params: { folderNumber: string 
                         className='flex-1 overflow-y-auto p-6'
                      >
                         <div className='space-y-4'>
-                           <h3 className='text-lg font-semibold text-neutral-300'>
+                           <h3 className='text-lg font-semibold text-foreground'>
                               Variables
                            </h3>
-                           <p className='text-sm text-neutral-400'>
+                           <p className='text-sm text-muted-foreground'>
                               Variables are dynamic placeholders. Use{" "}
                               {"{{name}}"} to create one.
                            </p>
@@ -258,7 +258,7 @@ export default function EditorPage({ params }: { params: { folderNumber: string 
                                     </Badge>
                                  ))
                               ) : (
-                                 <p className='text-sm text-neutral-500'>
+                                 <p className='text-sm text-muted-foreground'>
                                     No variables found.
                                  </p>
                               )}
@@ -272,23 +272,23 @@ export default function EditorPage({ params }: { params: { folderNumber: string 
                         <div className='space-y-4'>
                            <div className='flex items-center gap-3 mb-4'>
                               <Bot className='w-6 h-6 text-blue-500' />
-                              <h3 className='text-lg font-semibold text-neutral-300'>
+                              <h3 className='text-lg font-semibold text-foreground'>
                                  AI Assistant
                               </h3>
                            </div>
-                           <p className='text-sm text-neutral-400'>
+                           <p className='text-sm text-muted-foreground'>
                               Generate, rewrite, or improve your template with
                               AI.
                            </p>
                            <Button
                               variant='outline'
-                              className='w-full justify-start border-neutral-700 hover:bg-neutral-800'
+                              className='w-full justify-start border-border hover:bg-accent hover:text-accent-foreground'
                               onClick={() => setIsCommandMenuOpen(true)}
                            >
                               <Wand2 className='w-4 h-4 mr-2' />
                               Generate with AI...
                            </Button>
-                           <p className='text-xs text-center text-neutral-600 pt-4'>
+                           <p className='text-xs text-center text-muted-foreground pt-4'>
                               Select text in the editor to get contextual AI
                               actions.
                            </p>

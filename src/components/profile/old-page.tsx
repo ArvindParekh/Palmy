@@ -70,7 +70,7 @@ export default function ProfilePage() {
       {/* Header Section */}
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-neutral-900 dark:text-white">Profile</h1>
+          <h1 className="text-3xl font-bold text-foreground">Profile</h1>
           <Button variant="outline" size="sm" className="gap-2">
             <Edit className="w-4 h-4" />
             Edit Profile
@@ -84,7 +84,7 @@ export default function ProfilePage() {
               <div className="flex-shrink-0">
                 <Avatar className="w-24 h-24">
                   <AvatarImage src={userData.avatar} alt={userData.name} />
-                  <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-2xl font-bold">
+                  <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-primary-foreground text-2xl font-bold">
                     {userData.name.split(" ").map(n => n[0]).join("")}
                   </AvatarFallback>
                 </Avatar>
@@ -93,7 +93,7 @@ export default function ProfilePage() {
               <div className="flex-1 space-y-4">
                 <div className="space-y-2">
                   <div className="flex items-center gap-3">
-                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
+                    <h2 className="text-2xl font-bold text-foreground">
                       {userData.name}
                     </h2>
                     {userData.isVerified && (
@@ -102,7 +102,7 @@ export default function ProfilePage() {
                         Verified
                       </Badge>
                     )}
-                    <Badge className="bg-gradient-to-r from-purple-500 to-purple-600 text-white">
+                    <Badge className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
                       {userData.membershipType}
                     </Badge>
                   </div>
@@ -140,7 +140,7 @@ export default function ProfilePage() {
               </div>
               <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">Templates</span>
             </div>
-            <p className="text-3xl font-bold text-neutral-900 dark:text-white">{userStats.templates}</p>
+            <p className="text-3xl font-bold text-foreground">{userStats.templates}</p>
             <p className="text-sm text-green-600 dark:text-green-400 mt-1">+3 this week</p>
           </CardContent>
         </Card>
@@ -153,7 +153,7 @@ export default function ProfilePage() {
               </div>
               <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">Success Rate</span>
             </div>
-            <p className="text-3xl font-bold text-neutral-900 dark:text-white">{userStats.successRate}%</p>
+            <p className="text-3xl font-bold text-foreground">{userStats.successRate}%</p>
             <p className="text-sm text-green-600 dark:text-green-400 mt-1">+5% this month</p>
           </CardContent>
         </Card>
@@ -166,7 +166,7 @@ export default function ProfilePage() {
               </div>
               <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">Rank</span>
             </div>
-            <p className="text-3xl font-bold text-neutral-900 dark:text-white">#{userStats.communityRank}</p>
+            <p className="text-3xl font-bold text-foreground">#{userStats.communityRank}</p>
             <p className="text-sm text-green-600 dark:text-green-400 mt-1">↑12 positions</p>
           </CardContent>
         </Card>
@@ -179,7 +179,7 @@ export default function ProfilePage() {
               </div>
               <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">Streak</span>
             </div>
-            <p className="text-3xl font-bold text-neutral-900 dark:text-white">{userStats.activeStreak}</p>
+            <p className="text-3xl font-bold text-foreground">{userStats.activeStreak}</p>
             <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">days active</p>
           </CardContent>
         </Card>
@@ -194,28 +194,28 @@ export default function ProfilePage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-neutral-600 dark:text-neutral-400">Total Views</span>
-                  <span className="font-semibold text-neutral-900 dark:text-white">{userStats.totalViews.toLocaleString()}</span>
+                  <span className="font-semibold text-foreground">{userStats.totalViews.toLocaleString()}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-neutral-600 dark:text-neutral-400">Community Forks</span>
-                  <span className="font-semibold text-neutral-900 dark:text-white">{userStats.totalForks}</span>
+                  <span className="font-semibold text-foreground">{userStats.totalForks}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-neutral-600 dark:text-neutral-400">Average Rating</span>
                   <div className="flex items-center gap-1">
                     <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                    <span className="font-semibold text-neutral-900 dark:text-white">{userStats.avgRating}</span>
+                    <span className="font-semibold text-foreground">{userStats.avgRating}</span>
                   </div>
                 </div>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-neutral-600 dark:text-neutral-400">Templates Used</span>
-                  <span className="font-semibold text-neutral-900 dark:text-white">{userStats.templatesUsed}</span>
+                  <span className="font-semibold text-foreground">{userStats.templatesUsed}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-neutral-600 dark:text-neutral-400">Member Since</span>
-                  <span className="font-semibold text-neutral-900 dark:text-white">{userData.joinedDate}</span>
+                  <span className="font-semibold text-foreground">{userData.joinedDate}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-neutral-600 dark:text-neutral-400">Status</span>
@@ -241,7 +241,7 @@ export default function ProfilePage() {
                   className={`p-4 rounded-lg border-2 transition-all ${
                     achievement.earned
                       ? "border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/20"
-                      : "border-neutral-200 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800/50 opacity-60"
+                      : "border-border bg-muted opacity-60"
                   }`}
                 >
                   <div className="flex flex-col items-center text-center space-y-2">
@@ -250,17 +250,17 @@ export default function ProfilePage() {
                         ? "bg-blue-500"
                         : "bg-neutral-400"
                     }`}>
-                      <achievement.icon className="w-4 h-4 text-white" />
+                      <achievement.icon className="w-4 h-4 text-primary-foreground" />
                     </div>
                     <div>
                       <p className={`text-sm font-medium ${
                         achievement.earned
-                          ? "text-neutral-900 dark:text-white"
-                          : "text-neutral-500 dark:text-neutral-400"
+                          ? "text-foreground"
+                          : "text-muted-foreground"
                       }`}>
                         {achievement.name}
                       </p>
-                      <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                      <p className="text-xs text-muted-foreground">
                         {achievement.description}
                       </p>
                     </div>
@@ -279,27 +279,27 @@ export default function ProfilePage() {
           <CardContent>
             <div className="space-y-4">
               {recentActivity.map((activity, index) => (
-                <div key={index} className="flex items-center gap-4 p-3 rounded-lg bg-neutral-50 dark:bg-neutral-800/50">
+                <div key={index} className="flex items-center gap-4 p-3 rounded-lg bg-muted">
                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
                     activity.type === "create" ? "bg-green-500" :
                     activity.type === "fork" ? "bg-blue-500" :
                     activity.type === "rating" ? "bg-yellow-500" :
                     "bg-purple-500"
                   }`}>
-                    {activity.type === "create" && <FileText className="w-4 h-4 text-white" />}
-                    {activity.type === "fork" && <GitBranch className="w-4 h-4 text-white" />}
-                    {activity.type === "rating" && <Star className="w-4 h-4 text-white" />}
-                    {activity.type === "update" && <Edit className="w-4 h-4 text-white" />}
+                    {activity.type === "create" && <FileText className="w-4 h-4 text-primary-foreground" />}
+                    {activity.type === "fork" && <GitBranch className="w-4 h-4 text-primary-foreground" />}
+                    {activity.type === "rating" && <Star className="w-4 h-4 text-primary-foreground" />}
+                    {activity.type === "update" && <Edit className="w-4 h-4 text-primary-foreground" />}
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-neutral-900 dark:text-white">
+                    <p className="text-sm font-medium text-foreground">
                       {activity.action}
                     </p>
-                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                    <p className="text-sm text-muted-foreground">
                       {activity.item}
                     </p>
                   </div>
-                  <div className="flex items-center gap-1 text-xs text-neutral-500 dark:text-neutral-400">
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Clock className="w-3 h-3" />
                     {activity.time}
                   </div>

@@ -126,25 +126,25 @@ export function LandingPage({ loggedIn }: { loggedIn: boolean }) {
             <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
-            <span className="text-xl font-bold text-neutral-900 dark:text-white">Templates</span>
+            <span className="text-xl font-bold text-foreground">Templates</span>
           </div>
 
           <nav className="hidden md:flex items-center gap-8">
             <a
               href="#features"
-              className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Features
             </a>
             <a
               href="#testimonials"
-              className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Testimonials
             </a>
             <a
               href="#pricing"
-              className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Pricing
             </a>
@@ -189,7 +189,7 @@ export function LandingPage({ loggedIn }: { loggedIn: boolean }) {
       <section className="container mx-auto px-6 py-24 text-center">
         <div className="space-y-8 max-w-4xl mx-auto">
           <div className="space-y-6">
-            <h1 className="text-5xl md:text-7xl font-bold text-neutral-900 dark:text-white leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
               Create job applications
               <span className="from-blue-600 to-purple-600 bg-clip-text text-transparent bg-gradient-to-r">
                 {" "}
@@ -224,7 +224,7 @@ export function LandingPage({ loggedIn }: { loggedIn: boolean }) {
       {/* Features Section */}
       <section id="features" className="container mx-auto px-6 py-24">
         <div className="text-center space-y-4 mb-16">
-          <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">
+          <h2 className="text-4xl font-bold text-foreground">
             Everything you need to land your next role
           </h2>
           <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
@@ -288,7 +288,7 @@ export function LandingPage({ loggedIn }: { loggedIn: boolean }) {
       {/* Testimonials Section */}
       <section id="testimonials" className="container mx-auto px-6 py-24">
         <div className="text-center space-y-4 mb-16">
-          <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">Loved by top performers</h2>
+          <h2 className="text-4xl font-bold text-foreground">Loved by top performers</h2>
           <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
             Our users have landed jobs at some of the best companies in the world.
           </p>
@@ -337,7 +337,7 @@ export function LandingPage({ loggedIn }: { loggedIn: boolean }) {
       <section id="pricing" className="bg-neutral-50 dark:bg-neutral-900/50 py-24">
         <div className="container mx-auto px-6">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">Choose your plan</h2>
+            <h2 className="text-4xl font-bold text-foreground">Choose your plan</h2>
             <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
               Simple, transparent pricing. No hidden fees.
             </p>
@@ -415,7 +415,7 @@ export function LandingPage({ loggedIn }: { loggedIn: boolean }) {
             <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
-            <span className="text-lg font-bold text-neutral-900 dark:text-white">Templates</span>
+            <span className="text-lg font-bold text-foreground">Templates</span>
           </div>
           <div className="text-sm text-neutral-600 dark:text-neutral-400 mt-4 md:mt-0">
             &copy; {new Date().getFullYear()} Templates, Inc. All rights reserved.

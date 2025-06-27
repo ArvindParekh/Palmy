@@ -32,7 +32,7 @@ export function AICommandMenu({ open, onOpenChange, onGenerate, loading }: AICom
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl bg-white dark:bg-black border-slate-200 dark:border-slate-800 shadow-2xl">
+      <DialogContent className="sm:max-w-2xl bg-card border-border shadow-2xl">
         <DialogHeader>
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg">
@@ -52,7 +52,7 @@ export function AICommandMenu({ open, onOpenChange, onGenerate, loading }: AICom
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="e.g., 'A professional cover letter for a Senior Software Engineer role at a fast-growing tech startup, highlighting skills in TypeScript, Next.js, and system design.'"
-            className="h-32 resize-none text-base border-slate-200 dark:border-slate-700 focus-visible:ring-1 focus-visible:ring-blue-500"
+            className="h-32 resize-none text-base border-border focus-visible:ring-1 focus-visible:ring-ring"
           />
         </div>
 

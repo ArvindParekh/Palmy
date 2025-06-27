@@ -45,7 +45,7 @@ export function CommunityFilters({
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                 <Input
                 placeholder="Search templates..."
-                className="pl-10 bg-neutral-100/80 dark:bg-neutral-800/80 border-0 focus-visible:ring-2 focus-visible:ring-blue-500"
+                className="pl-10 bg-muted border-0 focus-visible:ring-2 focus-visible:ring-ring"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 />

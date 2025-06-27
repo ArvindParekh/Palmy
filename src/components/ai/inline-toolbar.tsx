@@ -27,7 +27,7 @@ export function InlineAIToolbar({ position, onCommand }: InlineAIToolbarProps) {
 
   return (
     <div
-      className="absolute z-10 bg-black text-white rounded-lg shadow-2xl flex items-center p-1"
+      className="absolute z-10 bg-card text-foreground rounded-lg shadow-2xl flex items-center p-1 border border-border"
       style={{ 
         top: position.top, 
         left: position.left,
@@ -38,7 +38,7 @@ export function InlineAIToolbar({ position, onCommand }: InlineAIToolbarProps) {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant="ghost" size="sm" className="text-white hover:bg-neutral-800 hover:text-white" onClick={() => onCommand('improve')}>
+            <Button variant="ghost" size="sm" className="text-foreground hover:bg-accent hover:text-accent-foreground" onClick={() => onCommand('improve')}>
               <Sparkles className="w-4 h-4 mr-2 text-yellow-400" />
               Improve
             </Button>
@@ -51,7 +51,7 @@ export function InlineAIToolbar({ position, onCommand }: InlineAIToolbarProps) {
         {actions.map(action => (
           <Tooltip key={action.id}>
             <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-white hover:bg-neutral-800 hover:text-white h-8 w-8" onClick={() => onCommand(action.id)}>
+              <Button variant="ghost" size="icon" className="text-foreground hover:bg-accent hover:text-accent-foreground h-8 w-8" onClick={() => onCommand(action.id)}>
                 <action.icon className="w-4 h-4" />
                 <span className="sr-only">{action.label}</span>
               </Button>
@@ -65,7 +65,7 @@ export function InlineAIToolbar({ position, onCommand }: InlineAIToolbarProps) {
         {tones.map(tone => (
           <Tooltip key={tone.id}>
             <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-white hover:bg-neutral-800 hover:text-white h-8 w-8" onClick={() => onCommand(tone.id)}>
+              <Button variant="ghost" size="icon" className="text-foreground hover:bg-accent hover:text-accent-foreground h-8 w-8" onClick={() => onCommand(tone.id)}>
                 <tone.icon className="w-4 h-4" />
                 <span className="sr-only">{tone.label}</span>
               </Button>

@@ -85,7 +85,7 @@ export function PersonalizationModal({ template, onClose }: PersonalizationModal
           {/* Variables Form */}
           <div className="space-y-4 overflow-y-auto">
             <div className="space-y-3">
-              <h3 className="font-medium text-neutral-900 dark:text-white">Variables</h3>
+              <h3 className="font-medium text-foreground">Variables</h3>
               {variableKeys.map((key) => (
                 <div key={key} className="space-y-2">
                   <Label htmlFor={key} className="text-sm font-medium">
@@ -124,9 +124,9 @@ export function PersonalizationModal({ template, onClose }: PersonalizationModal
 
           {/* Live Preview */}
           <div className="space-y-4 overflow-hidden flex flex-col">
-            <h3 className="font-medium text-neutral-900 dark:text-white">Preview</h3>
+            <h3 className="font-medium text-foreground">Preview</h3>
             <div className="flex-1 overflow-y-auto">
-              <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 border border-neutral-200 dark:border-neutral-800">
+              <div className="bg-muted rounded-lg p-4 border border-border">
                 <div className="whitespace-pre-wrap text-sm text-neutral-700 dark:text-neutral-300">
                   {personalizedContent}
                 </div>
@@ -138,7 +138,7 @@ export function PersonalizationModal({ template, onClose }: PersonalizationModal
               <Button
                 onClick={copyToClipboard}
                 disabled={!allVariablesFilled}
-                className="flex-1 bg-black hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 dark:text-black"
+                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 <Copy className="w-4 h-4 mr-2" />
                 Copy

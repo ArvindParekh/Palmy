@@ -144,18 +144,18 @@ export default function CommunityPage() {
 
   return (
     <div className="relative w-full min-h-screen">
-       <div className="absolute inset-0 w-full h-full opacity-50"
-            style={{
-              backgroundImage: 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 32 32\' width=\'32\' height=\'32\' fill=\'none\' stroke=\'rgb(203 213 225 / 0.1)\'%3e%3cpath d=\'M0 .5H31.5V32\'/%3e%3c/svg%3e")',
-              backgroundPosition: '10px 10px',
-            }}
+       <div className="absolute inset-0 w-full h-full opacity-50 bg-grid"
+            // style={{
+            //   backgroundImage: 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 32 32\' width=\'32\' height=\'32\' fill=\'none\' stroke=\'rgb(203 213 225 / 0.1)\'%3e%3cpath d=\'M0 .5H31.5V32\'/%3e%3c/svg%3e")',
+            //   backgroundPosition: '10px 10px',
+            // }}
       />
       <div className="relative w-full max-w-3xl mx-auto min-h-screen p-4 md:p-6">
         <header className="mb-6">
-          <h1 className="text-3xl font-bold tracking-tighter text-neutral-900 dark:text-white">
+          <h1 className="text-3xl font-bold tracking-tighter text-foreground">
             Community Feed
           </h1>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             Discover, fork, and share templates with the community.
           </p>
         </header>
@@ -179,7 +179,7 @@ export default function CommunityPage() {
             ) : (
                 <div className="text-center py-12">
                     <h3 className="text-lg font-semibold">No templates found</h3>
-                    <p className="text-neutral-500 mt-1">Try adjusting your search or filters.</p>
+                    <p className="text-muted-foreground mt-1">Try adjusting your search or filters.</p>
                 </div>
             )}
           </div>

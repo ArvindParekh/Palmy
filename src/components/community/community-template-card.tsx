@@ -25,7 +25,7 @@ export function CommunityTemplateCard({
   author,
 }: CommunityTemplateCardProps) {
   return (
-    <div className="group relative rounded-2xl bg-white/60 dark:bg-neutral-900/60 backdrop-blur-md border border-white/40 dark:border-neutral-700/50 shadow-lg hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-blue-500/10 transition-all duration-300 h-full flex flex-col">
+    <div className="group relative rounded-2xl bg-card backdrop-blur-md border border-border shadow-lg hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 cursor-pointer overflow-hidden h-full flex flex-col">
        <div className="p-6 flex-grow">
         <div className="flex justify-between items-start mb-4">
             <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300 border-blue-200/80 dark:border-blue-800/80">{category}</Badge>
@@ -34,7 +34,7 @@ export function CommunityTemplateCard({
                 <span className="font-semibold text-sm">{rating.toFixed(1)}</span>
             </div>
         </div>
-        <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3 leading-tight">
+        <h3 className="text-lg font-semibold text-foreground mb-3 leading-tight">
             {title}
         </h3>
        </div>

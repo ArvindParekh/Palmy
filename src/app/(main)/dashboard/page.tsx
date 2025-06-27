@@ -39,10 +39,10 @@ export default async function DashboardPage() {
          {/* Header */}
          <header className='flex flex-col md:flex-row md:items-center md:justify-between gap-4'>
             <div className='space-y-1'>
-               <h1 className='text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white tracking-tighter'>
+               <h1 className='text-3xl md:text-4xl font-bold text-card-foreground dark:text-foreground tracking-tighter'>
                   Dashboard
                </h1>
-               <p className='text-neutral-600 dark:text-neutral-400'>
+               <p className='text-muted-foreground'>
                   Welcome back, let's get you started.
                </p>
             </div>
@@ -60,8 +60,8 @@ export default async function DashboardPage() {
                   <Separator />
                   <section>
                      <div className='flex items-center justify-between mb-6'>
-                        <h2 className='text-2xl font-semibold text-neutral-900 dark:text-white flex items-center gap-3'>
-                           <FilePlus className='w-6 h-6 text-neutral-500' />
+                        <h2 className='text-2xl font-semibold text-card-foreground dark:text-foreground flex items-center gap-3'>
+                           <FilePlus className='w-6 h-6 text-muted-foreground' />
                            Recently Edited
                         </h2>
                         <Link href='/palmlets'>

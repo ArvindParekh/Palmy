@@ -49,12 +49,12 @@ const Switch = ({
     aria-checked={checked}
     onClick={() => onCheckedChange(!checked)}
     className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:ring-offset-neutral-900 ${
-      checked ? "bg-blue-600" : "bg-neutral-200 dark:bg-neutral-700"
+      checked ? "bg-blue-600" : "bg-muted"
     }`}
   >
     <span
       aria-hidden="true"
-      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-background shadow ring-0 transition duration-200 ease-in-out ${
         checked ? "translate-x-5" : "translate-x-0"
       }`}
     />
@@ -92,8 +92,8 @@ export default function SettingsPage() {
   return (
     <div className="w-full min-h-screen p-6 space-y-8">
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold text-neutral-900 dark:text-white">Settings</h1>
-        <p className="text-neutral-600 dark:text-neutral-400">
+        <h1 className="text-3xl font-bold text-foreground">Settings</h1>
+        <p className="text-muted-foreground">
           Manage your account settings and preferences.
         </p>
       </div>
@@ -139,7 +139,7 @@ function ProfileSettings() {
               <UploadCloud className="w-4 h-4 mr-2" />
               Upload new picture
             </Button>
-            <p className="text-xs text-neutral-500">
+            <p className="text-xs text-muted-foreground">
               PNG, JPG, GIF up to 10MB.
             </p>
           </div>
@@ -292,7 +292,7 @@ function ThemeButton({
       className={`p-4 rounded-lg border-2 flex flex-col items-center gap-2 transition-colors ${
         currentTheme === value
           ? "border-blue-500 bg-blue-50 dark:bg-blue-950/20"
-          : "border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50"
+          : "border-muted bg-background hover:bg-muted hover:border-muted"
       }`}
     >
       <Icon className="w-6 h-6" />
@@ -321,7 +321,7 @@ function NotificationSettings() {
           Choose how you want to be notified.
         </CardDescription>
       </CardHeader>
-      <CardContent className="divide-y divide-neutral-200 dark:divide-neutral-800">
+      <CardContent className="divide-y divide-muted">
         <NotificationItem
           title="Community Activity"
           description="Get notified about forks, ratings, and comments."
@@ -355,8 +355,8 @@ function NotificationItem({ title, description, checked, onToggle }: any) {
   return (
     <div className="py-4 flex items-center justify-between">
       <div className="max-w-prose">
-        <h4 className="font-medium text-neutral-900 dark:text-white">{title}</h4>
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+        <h4 className="font-medium text-foreground">{title}</h4>
+        <p className="text-sm text-muted-foreground">
           {description}
         </p>
       </div>
@@ -379,11 +379,11 @@ function BillingSettings() {
         <Separator/>
         <div className="space-y-2">
           <h4 className="font-medium">Billing History</h4>
-           <p className="text-sm text-neutral-500">No invoices yet.</p>
+           <p className="text-sm text-muted-foreground">No invoices yet.</p>
         </div>
       </CardContent>
        <CardFooter className="border-t pt-6 flex justify-between items-center">
-        <p className="text-sm text-neutral-500">Next invoice on July 1, 2024</p>
+        <p className="text-sm text-muted-foreground">Next invoice on July 1, 2024</p>
         <Button variant="outline">Update Payment Method</Button>
       </CardFooter>
     </Card>

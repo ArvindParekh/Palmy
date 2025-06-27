@@ -31,7 +31,7 @@ export function PodiumSection({ topUsers }: PodiumSectionProps) {
     <div className="px-8 py-16">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3">
+          <h2 className="text-2xl font-semibold text-foreground mb-3">
             Top Performers
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
@@ -132,7 +132,7 @@ function PodiumCard({ user, position }: { user: LeaderboardUser; position: numbe
           
           {/* User Info */}
           <div className="space-y-2">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <h3 className="text-xl font-semibold text-foreground">
               {user.name}
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
@@ -142,7 +142,7 @@ function PodiumCard({ user, position }: { user: LeaderboardUser; position: numbe
           
           {/* Score */}
           <div className="space-y-1">
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">
+            <p className="text-2xl font-bold text-foreground">
               {user.score.toLocaleString()}
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wider">
@@ -153,13 +153,13 @@ function PodiumCard({ user, position }: { user: LeaderboardUser; position: numbe
           {/* Quick Stats */}
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div className="text-center">
-              <p className="font-semibold text-gray-900 dark:text-white">
+              <p className="font-semibold text-foreground">
                 {user.stats.templates}
               </p>
               <p className="text-gray-500 dark:text-gray-500">Templates</p>
             </div>
             <div className="text-center">
-              <p className="font-semibold text-gray-900 dark:text-white">
+              <p className="font-semibold text-foreground">
                 {user.stats.successRate}%
               </p>
               <p className="text-gray-500 dark:text-gray-500">Success</p>

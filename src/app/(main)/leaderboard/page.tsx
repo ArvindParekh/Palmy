@@ -217,7 +217,7 @@ export default function LeaderboardPage() {
             return <Award className='w-6 h-6 text-amber-600' />;
          default:
             return (
-               <div className='w-6 h-6 bg-neutral-100 dark:bg-neutral-800 rounded-full flex items-center justify-center text-xs font-bold'>
+               <div className='w-6 h-6 bg-muted rounded-full flex items-center justify-center text-xs font-bold'>
                   {rank}
                </div>
             );
@@ -244,20 +244,20 @@ export default function LeaderboardPage() {
    return (
       <div className='w-full max-w-6xl mx-auto min-h-screen p-4 md:p-6 space-y-8'>
          <div className='text-center space-y-2'>
-            <div className='inline-block p-3 bg-neutral-100 dark:bg-neutral-800/50 rounded-lg'>
+            <div className='inline-block p-3 bg-muted rounded-lg'>
                <Trophy className='w-8 h-8 text-yellow-500' />
             </div>
-            <h1 className='text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white'>
+            <h1 className='text-3xl md:text-4xl font-bold text-foreground'>
                Community Leaderboard
             </h1>
-            <p className='text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto'>
+            <p className='text-muted-foreground max-w-2xl mx-auto'>
                See who's making the biggest impact. Rankings are updated daily
                based on community engagement and template success.
             </p>
          </div>
 
          <Tabs defaultValue='creators'>
-            <TabsList className='grid w-full max-w-md mx-auto grid-cols-2 bg-neutral-100 dark:bg-neutral-800/50'>
+            <TabsList className='grid w-full max-w-md mx-auto grid-cols-2 bg-muted'>
                <TabsTrigger value='creators'>
                   <Users className='w-4 h-4 mr-2' />
                   Top Creators
@@ -312,7 +312,7 @@ export default function LeaderboardPage() {
                               </TableCell>
                               <TableCell>
                                  <p className='font-medium'>{template.title}</p>
-                                 <p className='text-sm text-neutral-500'>
+                                 <p className='text-sm text-muted-foreground'>
                                     by @{template.author}
                                  </p>
                               </TableCell>
@@ -358,14 +358,14 @@ const PodiumItem = ({ user, order }: { user: (typeof topCreators)[0], order: str
          </div>
          <div className="text-center">
             <h3 className="font-bold text-lg">{user.name}</h3>
-            <p className="text-sm text-neutral-500">@{user.username}</p>
+            <p className="text-sm text-muted-foreground">@{user.username}</p>
          </div>
       </div>
    )
 };
 
 const LeaderboardRow = ({ user, getRankIcon }: { user: (typeof topCreators)[0], getRankIcon: (rank: number) => React.JSX.Element }) => (
-   <div className="flex items-center justify-between p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/50 transition-colors">
+   <div className="flex items-center justify-between p-3 rounded-lg hover:bg-muted transition-colors">
       <div className="flex items-center gap-4">
          <div className="flex items-center justify-center w-8">{getRankIcon(user.rank)}</div>
          <Avatar className="h-10 w-10">
@@ -377,33 +377,33 @@ const LeaderboardRow = ({ user, getRankIcon }: { user: (typeof topCreators)[0], 
                <p className="font-medium">{user.name}</p>
                {user.isVerified && <Award className="w-4 h-4 text-blue-500" />}
             </div>
-            <p className="text-sm text-neutral-500">@{user.username} • {user.specialty}</p>
+            <p className="text-sm text-muted-foreground">@{user.username} • {user.specialty}</p>
          </div>
       </div>
       <div className="flex items-center gap-6 text-sm">
          <div className="text-center hidden md:block">
             <p className="font-semibold">{user.templates}</p>
-            <p className="text-neutral-500 text-xs">Templates</p>
+            <p className="text-muted-foreground text-xs">Templates</p>
          </div>
          <div className="text-center">
             <p className="font-semibold text-green-600">{user.successRate}%</p>
-            <p className="text-neutral-500 text-xs">Success</p>
+            <p className="text-muted-foreground text-xs">Success</p>
          </div>
          <div className="text-center hidden md:block">
             <p className="font-semibold text-yellow-500">{user.avgRating}</p>
-            <p className="text-neutral-500 text-xs">Rating</p>
+            <p className="text-muted-foreground text-xs">Rating</p>
          </div>
       </div>
    </div>
 );
 
 const TemplateRow = ({ template, getRankIcon }: { template: (typeof topTemplates)[0], getRankIcon: (rank: number) => React.JSX.Element }) => (
-   <div className="flex items-center justify-between p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800/50 transition-colors">
+   <div className="flex items-center justify-between p-3 rounded-lg hover:bg-muted transition-colors">
       <div className="flex items-center gap-4">
          <div className="flex items-center justify-center w-8">{getRankIcon(template.rank)}</div>
          <div>
             <p className="font-medium">{template.title}</p>
-            <div className="flex items-center gap-4 text-sm text-neutral-500">
+            <div className="flex items-center gap-4 text-sm text-muted-foreground">
                <span>by @{template.author}</span>
                <Badge variant="secondary">{template.category}</Badge>
             </div>
@@ -412,15 +412,15 @@ const TemplateRow = ({ template, getRankIcon }: { template: (typeof topTemplates
       <div className="flex items-center gap-6 text-sm">
          <div className="text-center">
             <p className="font-semibold">{template.forks}</p>
-            <p className="text-neutral-500 text-xs">Forks</p>
+            <p className="text-muted-foreground text-xs">Forks</p>
          </div>
          <div className="text-center">
             <p className="font-semibold text-green-600">{template.successRate}%</p>
-            <p className="text-neutral-500 text-xs">Success</p>
+            <p className="text-muted-foreground text-xs">Success</p>
          </div>
          <div className="text-center hidden md:block">
             <p className="font-semibold text-yellow-500">{template.rating}</p>
-            <p className="text-neutral-500 text-xs">Rating</p>
+            <p className="text-muted-foreground text-xs">Rating</p>
          </div>
       </div>
    </div>

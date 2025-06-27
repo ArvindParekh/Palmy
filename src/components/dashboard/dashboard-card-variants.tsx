@@ -7,7 +7,7 @@ export function DashboardCardGradient({ title, description }: { title: string, d
             <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="relative z-10 flex flex-col justify-between h-full">
                 <div className="flex flex-col gap-3">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{title}</h2>
+                    <h2 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">{title}</h2>
                     <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
                 </div>
                 <div className="flex justify-end mt-4">
@@ -30,7 +30,7 @@ export function DashboardCardMinimal({ title, description }: { title: string, de
                         <div className="w-5 h-5 rounded-full bg-blue-500 dark:bg-blue-400"></div>
                     </div>
                     <div>
-                        <h2 className="text-lg font-medium text-gray-900 dark:text-white">{title}</h2>
+                        <h2 className="text-lg font-medium text-foreground">{title}</h2>
                         <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{description}</p>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ export function DashboardCardAnimated({ title, description }: { title: string, d
             <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
             <div className="relative z-10 flex flex-col justify-between h-full">
                 <div className="space-y-3">
-                    <h2 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{title}</h2>
+                    <h2 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">{title}</h2>
                     <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
                 </div>
                 <div className="flex items-center justify-between mt-4">

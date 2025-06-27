@@ -18,7 +18,7 @@ export function ShareTemplatePrompt({ onTemplateShare }: ShareTemplatePromptProp
 
     return (
         <>
-            <div className="bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 flex gap-4 items-start cursor-pointer hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
+            <div className="bg-card border border-border rounded-xl p-5 flex gap-4 items-start cursor-pointer hover:border-primary/50 transition-colors"
                 onClick={() => setDialogOpen(true)}
             >
                 <Avatar className="w-10 h-10">

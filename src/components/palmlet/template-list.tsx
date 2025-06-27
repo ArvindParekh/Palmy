@@ -141,7 +141,7 @@ function EmptyState({ searchQuery }: { searchQuery?: string }) {
       <div className="p-6 rounded-full bg-gray-100 dark:bg-gray-800 mb-6">
         <FolderOpen className="w-12 h-12 text-gray-400" />
       </div>
-      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+      <h3 className="text-xl font-semibold text-foreground mb-2">
         {searchQuery ? 'No templates found' : 'No templates yet'}
       </h3>
       <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md">

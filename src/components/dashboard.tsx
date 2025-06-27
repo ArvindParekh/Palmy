@@ -80,8 +80,8 @@ export function Dashboard({ onNavigate, onUseTemplate }: DashboardProps) {
       {/* Header */}
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold text-neutral-900 dark:text-white">Good morning, John</h1>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-2 text-lg">Ready to land your next role?</p>
+          <h1 className="text-3xl font-bold text-foreground">Good morning, John</h1>
+          <p className="text-muted-foreground mt-2 text-lg">Ready to land your next role?</p>
         </div>
 
         {/* Stats */}
@@ -93,9 +93,9 @@ export function Dashboard({ onNavigate, onUseTemplate }: DashboardProps) {
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <stat.icon className={`w-5 h-5 ${stat.color}`} />
-                      <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">{stat.title}</span>
+                      <span className="text-sm font-medium text-muted-foreground">{stat.title}</span>
                     </div>
-                    <p className="text-3xl font-bold text-neutral-900 dark:text-white">{stat.value}</p>
+                    <p className="text-3xl font-bold text-foreground">{stat.value}</p>
                     <p className="text-sm text-green-600 dark:text-green-400">{stat.change}</p>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ export function Dashboard({ onNavigate, onUseTemplate }: DashboardProps) {
 
       {/* Quick Actions */}
       <div className="space-y-6">
-        <h2 className="text-xl font-semibold text-neutral-900 dark:text-white">Quick Actions</h2>
+        <h2 className="text-xl font-semibold text-foreground">Quick Actions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {quickActions.map((action, index) => (
             <Button
@@ -117,11 +117,11 @@ export function Dashboard({ onNavigate, onUseTemplate }: DashboardProps) {
               className="h-24 flex-col gap-3 border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 group"
             >
               <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${action.color} flex items-center justify-center`}>
-                <action.icon className="w-4 h-4 text-white" />
+                <action.icon className="w-4 h-4 text-primary-foreground" />
               </div>
               <div className="text-center">
                 <p className="font-medium text-sm">{action.title}</p>
-                <p className="text-xs text-neutral-500 group-hover:text-neutral-600 dark:group-hover:text-neutral-400">
+                <p className="text-xs text-muted-foreground group-hover:text-muted-foreground">
                   {action.description}
                 </p>
               </div>
@@ -133,12 +133,12 @@ export function Dashboard({ onNavigate, onUseTemplate }: DashboardProps) {
       {/* Recent Templates */}
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-neutral-900 dark:text-white">Recent Templates</h2>
+          <h2 className="text-xl font-semibold text-foreground">Recent Templates</h2>
           <Button
             variant="ghost"
             size="sm"
             onClick={() => onNavigate("templates")}
-            className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+            className="text-muted-foreground hover:text-foreground"
           >
             View all
             <ArrowUpRight className="w-4 h-4 ml-1" />
@@ -149,33 +149,33 @@ export function Dashboard({ onNavigate, onUseTemplate }: DashboardProps) {
           {recentTemplates.map((template) => (
             <Card
               key={template.id}
-              className="border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors cursor-pointer group"
+              className="border-border hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer group"
             >
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center text-lg">
+                    <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center text-lg">
                       {template.icon}
                     </div>
                     <div className="space-y-1">
-                      <h3 className="font-medium text-neutral-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                      <h3 className="font-medium text-foreground group-hover:text-primary transition-colors">
                         {template.title}
                       </h3>
                       <div className="flex items-center gap-3">
                         <Badge variant="secondary" className="text-xs">
                           {template.category}
                         </Badge>
-                        <span className="text-xs text-green-600 dark:text-green-400 font-medium">
+                        <span className="text-xs text-green-600 font-medium">
                           {template.successRate}% success
                         </span>
-                        <span className="text-xs text-neutral-500">{template.lastUsed}</span>
+                        <span className="text-xs text-muted-foreground">{template.lastUsed}</span>
                       </div>
                     </div>
                   </div>
                   <Button
                     size="sm"
                     onClick={() => onUseTemplate(template)}
-                    className="bg-black hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 dark:text-black opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity"
                   >
                     Use
                   </Button>
@@ -188,17 +188,17 @@ export function Dashboard({ onNavigate, onUseTemplate }: DashboardProps) {
 
       {/* AI Insights */}
       <div className="space-y-6">
-        <h2 className="text-xl font-semibold text-neutral-900 dark:text-white">AI Insights</h2>
+        <h2 className="text-xl font-semibold text-foreground">AI Insights</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card className="border-neutral-200 dark:border-neutral-800 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20">
             <CardContent className="p-6">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                  <Target className="w-5 h-5 text-white" />
+                  <Target className="w-5 h-5 text-primary-foreground" />
                 </div>
                 <div className="space-y-2">
-                  <h3 className="font-medium text-neutral-900 dark:text-white">Optimization Tip</h3>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                  <h3 className="font-medium text-foreground">Optimization Tip</h3>
+                  <p className="text-sm text-muted-foreground">
                     Your cover letters perform 23% better when you mention specific company achievements. Try adding
                     this to your templates.
                   </p>
@@ -211,11 +211,11 @@ export function Dashboard({ onNavigate, onUseTemplate }: DashboardProps) {
             <CardContent className="p-6">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-white" />
+                  <TrendingUp className="w-5 h-5 text-primary-foreground" />
                 </div>
                 <div className="space-y-2">
-                  <h3 className="font-medium text-neutral-900 dark:text-white">Trending Pattern</h3>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                  <h3 className="font-medium text-foreground">Trending Pattern</h3>
+                  <p className="text-sm text-muted-foreground">
                     Templates with 150-200 words have the highest response rates in your industry. Consider adjusting
                     your length.
                   </p>

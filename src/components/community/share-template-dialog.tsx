@@ -121,14 +121,14 @@ export function ShareTemplateDialog({ open, onOpenChange, onTemplateShare }: Sha
                         className={cn(
                             "group p-3 rounded-lg border-2 cursor-pointer transition-all",
                             selectedTemplateId === template.id 
-                                ? "border-blue-500 bg-blue-50 dark:bg-blue-950/50" 
-                                : "border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700"
+                                ? "border-blue-500 bg-blue-100" 
+                                : "border-muted bg-background hover:bg-muted hover:border-muted"
                         )}
                     >
                         <div className="flex justify-between items-start">
-                             <h4 className="font-semibold text-sm text-neutral-800 dark:text-neutral-200">{template.title}</h4>
+                             <h4 className={cn("font-semibold text-sm", selectedTemplateId === template.id ? "text-neutral-900" : "text-foreground")}>{template.title}</h4>
                              <CheckCircle className={cn(
-                                 "w-5 h-5 text-neutral-300 dark:text-neutral-700 transition-all",
+                                 "w-5 h-5 text-muted-foreground transition-all",
                                  selectedTemplateId === template.id ? "text-blue-500" : "opacity-0 group-hover:opacity-100"
                              )}/>
                         </div>

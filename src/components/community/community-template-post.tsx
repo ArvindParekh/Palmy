@@ -34,7 +34,7 @@ export function CommunityTemplatePost({
   stats,
 }: CommunityTemplatePostProps) {
   return (
-    <div className="group bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-6 flex gap-5 transition-all duration-300 hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/5">
+    <div className="group bg-card border border-border rounded-2xl p-6 flex gap-5 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
       <Avatar className="w-10 h-10 hidden md:block flex-shrink-0">
         <AvatarImage src={author.avatarUrl} alt={author.name} />
         <AvatarFallback>{author.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
@@ -46,7 +46,7 @@ export function CommunityTemplatePost({
             <AvatarFallback>{author.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
           </Avatar>
           <div>
-            <span className="font-semibold text-neutral-900 dark:text-white">{author.name}</span>
+            <span className="font-semibold text-foreground">{author.name}</span>
             <div className="flex items-center gap-1.5">
                 <span className="text-neutral-500 dark:text-neutral-400">@{author.username}</span>
                 <span className="text-neutral-500 dark:text-neutral-400">·</span>
@@ -55,8 +55,8 @@ export function CommunityTemplatePost({
           </div>
         </div>
         <div className="mt-4 space-y-4">
-          <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{title}</h3>
-          <p className="text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap line-clamp-4 font-mono text-sm p-4 bg-neutral-50 dark:bg-neutral-800/60 rounded-lg border border-neutral-200/50 dark:border-neutral-700/50">
+          <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+          <p className="text-muted-foreground whitespace-pre-wrap line-clamp-4 font-mono text-sm p-4 bg-muted rounded-lg border border-border">
             {contentSnippet}
           </p>
           <div className="flex gap-2">
