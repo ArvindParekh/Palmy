@@ -29,9 +29,10 @@ interface TemplateListProps {
     sortOrder: SortOrder;
     viewMode: ViewMode;
   };
+  folderId: string;
 }
 
-export function TemplateList({ palmlets, filters }: TemplateListProps) {
+export function TemplateList({ palmlets, filters, folderId }: TemplateListProps) {
   const router = useRouter();
   const colorThemes = ['sage', 'lavender', 'cream', 'pearl', 'stone', 'mist'] as const;
 
@@ -126,6 +127,7 @@ export function TemplateList({ palmlets, filters }: TemplateListProps) {
             onEdit={handleEditTemplate}
             onCopy={handleCopyTemplate}
             onUse={handleUseTemplate}
+            folderId={folderId}
           />
         ))}
       </div>

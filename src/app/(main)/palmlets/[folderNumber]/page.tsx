@@ -83,6 +83,7 @@ export default async function FolderPage({
                palmlets={[]}
                folderName={folderInfo.data?.folderName || ""}
                folderNumber={folderNumber}
+               folderId={folderInfo.data?.id || ""}
             />
          </div>
       );
@@ -212,6 +213,7 @@ export default async function FolderPage({
             palmlets={palmlets}
             folderName={folderInfo.data?.folderName || ""}
             folderNumber={folderNumber}
+            folderId={folderInfo.data?.id || ""}
          />
       </div>
    );
