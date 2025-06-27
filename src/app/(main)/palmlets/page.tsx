@@ -58,6 +58,7 @@ export default async function PalmletPage() {
                      description={folder.folderDescription || 'No description'}
                      palmletCount={folder.palmlets?.length || 0}
                      colorTheme={colorThemes[index % colorThemes.length]}
+                     url={`/palmlets/${folder.id}`}
                   />
                ))
             ) : (

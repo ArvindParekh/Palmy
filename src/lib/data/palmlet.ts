@@ -1,4 +1,5 @@
 import { prisma } from "../db"
+import { Prisma } from "@/generated/prisma/client";
 
 export const getPalmlet = async (palmletId: string) => {
     try {
@@ -24,15 +25,60 @@ export const getPalmlet = async (palmletId: string) => {
     }
 }
 
-export const getUserPalmlets = async (userId: string) => {
+export const getFolderPalmlets = async (folderId: string) : Promise<{
+    message: string;
+    success: boolean;
+    data: Prisma.PalmletGetPayload<{
+        include: {
+            tags: true;
+            variables: true;
+            folder: true;
+        };
+    }>[];
+}> => {
     try {
-        const palmlets = await prisma.palmlet.findMany({
+        const allPalmlets = await prisma.palmlet.findMany({
             where: {
-                userId: userId,
+                folder: {
+                    id: folderId,
+                }
             },
             include: {
                 tags: true,
                 variables: true,
+                folder: true,
+            },
+            orderBy: {
+                updatedAt: 'desc',
+            },
+        });
+
+        return {
+            message: "Folder palmlets fetched successfully",
+            success: true,
+            data: allPalmlets,
+        };
+    } catch (error) {
+        return {
+            message: "Failed to fetch folder palmlets",
+            success: false,
+            data: [],
+        };
+    }
+};
+
+export const getUserPalmlets = async (userId: string) => {
+    try {
+        const palmlets = await prisma.palmlet.findMany({
+            where: {
+                folder: {
+                    userId: userId,
+                }
+            },
+            include: {
+                tags: true,
+                variables: true,
+                folder: true,
             },
             orderBy: {
                 updatedAt: 'desc',

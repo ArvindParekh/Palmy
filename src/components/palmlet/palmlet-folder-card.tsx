@@ -1,4 +1,5 @@
 import { Folder, FolderOpen, FileText, ChevronRight, ArrowRight, MoreHorizontal, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export interface PalmletFolderCardProps {
   title: string;
@@ -6,6 +7,7 @@ export interface PalmletFolderCardProps {
   palmletCount: number;
   colorTheme?: 'sage' | 'lavender' | 'cream' | 'pearl' | 'stone' | 'mist';
   icon?: React.ReactNode;
+  url: string;
 }
 
 // Variant 1: Luxurious glass morphism card with perfect dark mode
@@ -14,7 +16,8 @@ export function PalmletFolderCard({
   description, 
   palmletCount, 
   colorTheme = 'sage',
-  icon 
+  icon,
+  url
 }: PalmletFolderCardProps) {
   const colorClasses = {
     sage: {
@@ -70,7 +73,7 @@ export function PalmletFolderCard({
   const colors = colorClasses[colorTheme];
 
   return (
-    <div className="group relative w-full h-full min-h-60 max-w-sm rounded-3xl bg-white/70 dark:bg-slate-900/80 backdrop-blur-lg border border-white/40 dark:border-slate-700/50 shadow-xl hover:shadow-2xl hover:shadow-black/10 dark:hover:shadow-black/30 transition-all duration-500 cursor-pointer overflow-hidden">
+    <Link href={url} className="group relative w-full h-full min-h-60 max-w-sm rounded-3xl bg-white/70 dark:bg-slate-900/80 backdrop-blur-lg border border-white/40 dark:border-slate-700/50 shadow-xl hover:shadow-2xl hover:shadow-black/10 dark:hover:shadow-black/30 transition-all duration-500 cursor-pointer overflow-hidden">
       {/* Dual gradient background for light/dark modes */}
       <div className={`absolute inset-0 bg-gradient-to-br light:${colors.lightBg} dark:${colors.darkBg} opacity-70 group-hover:opacity-90 transition-opacity duration-500`} />
       
@@ -106,7 +109,7 @@ export function PalmletFolderCard({
           <ChevronRight className="w-4 h-4 text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-200 group-hover:translate-x-1 transition-all duration-300" />
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
