@@ -4,7 +4,6 @@ import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
 export async function createPalmletFolder(data: { userId: string, folderName: string, folderDescription: string}) {
-    console.log(data);
     const { userId, folderName, folderDescription } = data;
 
     try {
@@ -45,6 +44,8 @@ export async function deletePalmletFolder(data: { userId: string, folderName: st
             }
         })
 
+        revalidatePath('/palmlets');
+
         return {
             message: "Folder deleted successfully",
             success: true,
@@ -58,22 +59,21 @@ export async function deletePalmletFolder(data: { userId: string, folderName: st
     }
 }
 
-export async function updatePalmletFolder(data: { userId: string, folderName: string, folderDescription: string }) {
-    const { userId, folderName, folderDescription } = data;
+export async function updatePalmletFolder(data: { folderId: string, folderName: string, folderDescription: string }) {
+    const { folderId, folderName, folderDescription } = data;
 
     try {
         const updatedFolder = await prisma.palmlet_Folder.update({
             where: {
-                userId_folderName: {
-                    userId,
-                    folderName
-                }
+                id: folderId,
             },
             data: {
                 folderDescription,
                 folderName
             }
         })
+
+        revalidatePath('/palmlets');
 
         return {
             message: "Folder updated successfully",

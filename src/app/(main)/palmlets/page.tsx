@@ -6,6 +6,8 @@ import { NewFolderDialog } from "@/components/palmlet/new-folder-dialog";
 import { getPalmletFolders } from "@/actions/palmlet-folder";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { FolderCardWrapper } from "@/components/palmlet/folder-card-wrapper";
+import { Toaster } from "@/components/ui/sonner";
 
 export default async function PalmletPage() {
    const session = await auth.api.getSession({
@@ -23,6 +25,7 @@ export default async function PalmletPage() {
 
    return (
       <div className='w-full h-full p-16'>
+         <Toaster />
          <h1 className='text-5xl font-bold text-yellow-300'>Palmlets</h1>
          <p className='text-sm text-muted-foreground font-medium mt-4'>
             Organize your palmlets into folders and manage them here.
@@ -52,13 +55,15 @@ export default async function PalmletPage() {
          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-20'>
             {folders && folders.length > 0 ? (
                folders.map((folder, index) => (
-                  <PalmletFolderCard
+                  <FolderCardWrapper
                      key={folder.id}
+                     folderId={folder.id}
                      title={folder.folderName}
                      description={folder.folderDescription || 'No description'}
                      palmletCount={folder.palmlets?.length || 0}
                      colorTheme={colorThemes[index % colorThemes.length]}
                      url={`/palmlets/${folder.id}`}
+                     userId={session.user.id}
                   />
                ))
             ) : (

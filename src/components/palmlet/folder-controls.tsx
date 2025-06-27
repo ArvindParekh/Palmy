@@ -22,7 +22,7 @@ import {
   DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { createPalmlet } from "@/actions/palmlet";
+import { createNewPalmlet } from "@/actions/palmlet";
 import Link from "next/link";
 
 type ViewMode = 'grid' | 'list';
@@ -136,7 +136,7 @@ export function FolderControls({ allTags, folderName, folderNumber, onFiltersCha
 
   const handleNewTemplate = async () => {
     // In a real app, get userId from session/auth
-    const result = await createPalmlet("user-123", folderName); 
+    const result = await createNewPalmlet(folderName, folderNumber, folderId, userId, folderDescription); 
     if (result.success && result.data) {
       router.push(`/palmlets/editor/${result.data.id}`);
     } else {

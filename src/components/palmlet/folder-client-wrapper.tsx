@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { FolderControls } from "./folder-controls";
 import { TemplateList } from "./template-list";
 
@@ -25,7 +25,12 @@ interface FolderClientWrapperProps {
   folderId: string;
 }
 
-export function FolderClientWrapper({ palmlets, folderName, folderNumber, folderId }: FolderClientWrapperProps) {
+export function FolderClientWrapper({ 
+  palmlets, 
+  folderName, 
+  folderNumber, 
+  folderId 
+}: FolderClientWrapperProps) {
   const [filters, setFilters] = useState({
     searchQuery: "",
     selectedTags: [] as string[],
@@ -34,34 +39,29 @@ export function FolderClientWrapper({ palmlets, folderName, folderNumber, folder
     viewMode: 'grid' as ViewMode,
   });
 
-  // Extract all unique tags from palmlets
-  const allTags = Array.from(
-    new Set(palmlets.flatMap(p => p.tags.map(tag => tag.tagName)))
-  ).map(tagName => ({ tagName }));
-
-  const handleFiltersChange = (newFilters: {
-    searchQuery: string;
-    selectedTags: string[];
-    sortBy: SortBy;
-    sortOrder: SortOrder;
-    viewMode: ViewMode;
-  }) => {
-    setFilters(newFilters);
-  };
+  // Get all unique tags from palmlets
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>();
+    palmlets.forEach(palmlet => {
+      palmlet.tags.forEach(tag => tagSet.add(tag.tagName));
+    });
+    return Array.from(tagSet).map(tagName => ({ tagName }));
+  }, [palmlets]);
 
   return (
-    <>
+    <div className="w-full">
       <FolderControls
         allTags={allTags}
         folderName={folderName}
         folderNumber={folderNumber}
-        onFiltersChange={handleFiltersChange}
+        onFiltersChange={setFilters}
       />
+      
       <TemplateList
         palmlets={palmlets}
         filters={filters}
         folderId={folderId}
       />
-    </>
+    </div>
   );
 } 
