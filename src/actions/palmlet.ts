@@ -87,6 +87,10 @@ export async function getRecentlyEditedPalmlets(userId: string) {
             updatedAt: "desc",
          },
          take: 3,
+         include: {
+            tags: true,
+            variables: true,
+         },
       });
 
       return {

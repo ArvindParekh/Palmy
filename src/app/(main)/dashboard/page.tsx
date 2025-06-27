@@ -1,4 +1,4 @@
-import { FilePlus, Link } from "lucide-react";
+import { FilePlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
    TemplateCard,
@@ -6,18 +6,20 @@ import {
 } from "@/components/palmlet/template-card";
 import { Separator } from "@/components/ui/separator";
 import { redirect } from "next/navigation";
-import { createPalmlet, getRecentlyEditedPalmlets } from "@/actions/palmlet";
+import { getRecentlyEditedPalmlets } from "@/actions/palmlet";
+import { createNewPalmlet } from "@/actions/palmlet";
 import { QuickStart } from "@/components/dashboard/quick-start";
 import { authClient } from "@/lib/auth-client";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
+import Link from "next/link";
 
 export default async function DashboardPage() {
    const handleNewTemplate = async () => {
       // In a real app, get userId from session/auth
-      const result = await createPalmlet("user-123");
+      const result = await createNewPalmlet("user-123", "1", "Untitled", "");
       if (result.success && result.data) {
-         redirect(`/palmlets/editor/${result.data.id}`);
+         redirect(`/palmlets/${result.data.folderNumber}/editor/${result.data.id}`);
       } else {
          // Handle error, maybe with a toast notification
          console.error(result.message);
@@ -68,7 +70,7 @@ export default async function DashboardPage() {
                      </div>
                      <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6'>
                         {recentTemplates.map((template) => (
-                           <TemplateCard {...template} key={template.id} />
+                           <TemplateCard {...template} key={template.id} tags={template.tags} variables={template.variables} />
                         ))}
                      </div>
                   </section>
