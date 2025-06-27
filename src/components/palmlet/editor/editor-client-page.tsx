@@ -128,6 +128,12 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
 
   const handleSave = async () => {
     console.log("Saving template:", title, content);
+
+    if (title === templateData.title && content === templateData.content) {
+      toast.info("No changes to save");
+      return;
+    }
+
     const result = await updatePalmlet(id, title, content || "", templateData.tags.map((t) => t.tagName), variables, folderNumber);
     if (result.success) {
       toast.success("Template saved successfully");
@@ -154,7 +160,7 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
         )}
         <header className="flex items-center justify-between p-4 border-b border-neutral-800 shrink-0">
           <div className="flex items-center gap-4">
-            <Link href="/palmlets/1">
+            <Link href={`/palmlets/${folderNumber}`}>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button variant="ghost" size="icon">
@@ -162,7 +168,7 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Back to Palmlets</p>
+                  <p>Back to Folder</p>
                 </TooltipContent>
               </Tooltip>
             </Link>
