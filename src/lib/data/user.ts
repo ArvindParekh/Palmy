@@ -8,7 +8,15 @@ export const getUserWithPalmlets = async (userId: string) => {
                 id: userId
             },
             include: {
-                palmlets: true,
+                folders: {
+                    include: {
+                        palmlets: {
+                            include: {
+                                tags: true,
+                            }
+                        },
+                    }
+                },
             }
         })
 
@@ -21,5 +29,34 @@ export const getUserWithPalmlets = async (userId: string) => {
         return {
             message: "Failed to fetch user",
         }
+    }
+}
+
+export const getUserInfo = async (userId: string) => {
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                id: userId
+            },
+            select: {
+                name: true,
+                email: true,
+                image: true,
+                createdAt: true,
+                updatedAt: true,
+                emailVerified: true,
+            }
+        })
+
+        return {
+            message: "User info fetched successfully",
+            success: true,
+            data: user,
+        };
+    } catch (error) {
+        return {
+            message: "Failed to fetch user info",
+            success: false,
+        };
     }
 }
