@@ -37,6 +37,8 @@ import { updateUserDetails, updateUserPassword } from "@/actions/user";
 import { toast } from "sonner";
 import { Toaster } from "../ui/sonner";
 
+import DeleteAccountDialog from "./delete-account-dialog";
+
 // This is a placeholder for a real Switch component.
 // You can install the shadcn/ui Switch component with:
 // pnpm dlx shadcn-ui@latest add switch
@@ -307,7 +309,11 @@ function AccountSettings({
                </div>
                <div className='space-y-2'>
                   <Label htmlFor='new-password'>New Password</Label>
-                  <Input id='new-password' type='password' onChange={(e)=> setPassword(e.target.value)} />
+                  <Input
+                     id='new-password'
+                     type='password'
+                     onChange={(e) => setPassword(e.target.value)}
+                  />
                </div>
             </CardContent>
             <CardFooter className='border-t pt-6'>
@@ -325,10 +331,7 @@ function AccountSettings({
                </CardDescription>
             </CardHeader>
             <CardFooter>
-               <Button variant='destructive'>
-                  <Trash2 className='w-4 h-4 mr-2' />
-                  Delete Account
-               </Button>
+               <DeleteAccountDialog userId={user.id} />
             </CardFooter>
          </Card>
       </div>
