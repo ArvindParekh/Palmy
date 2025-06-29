@@ -33,7 +33,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Prisma } from "@/generated/prisma";
-import { updateUserDetails } from "@/actions/user";
+import { updateUserDetails, updateUserPassword } from "@/actions/user";
 import { toast } from "sonner";
 import { Toaster } from "../ui/sonner";
 
@@ -95,7 +95,7 @@ export default function SettingsClientPage({
          case "profile":
             return <ProfileSettings user={user} />;
          case "account":
-            return <AccountSettings />;
+            return <AccountSettings user={user} />;
          case "appearance":
             return <AppearanceSettings />;
          case "notifications":
@@ -204,7 +204,11 @@ function ProfileSettings({
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                <div className='space-y-2'>
                   <Label htmlFor='name'>Full Name</Label>
-                  <Input id='name' value={name} onChange={(e) => setName(e.target.value)} />
+                  <Input
+                     id='name'
+                     value={name}
+                     onChange={(e) => setName(e.target.value)}
+                  />
                </div>
                <div className='space-y-2'>
                   <Label htmlFor='username'>Username</Label>
@@ -231,7 +235,41 @@ function ProfileSettings({
    );
 }
 
-function AccountSettings() {
+function AccountSettings({
+   user,
+}: {
+   user: Prisma.UserGetPayload<{
+      select: {
+         email: true;
+         id: true;
+         name: true;
+         image: true;
+         createdAt: true;
+         updatedAt: true;
+         emailVerified: true;
+      };
+   }>;
+}) {
+   const [password, setPassword] = useState("");
+
+   const handlePasswordUpdate = async () => {
+      if (!password) {
+         toast.error("Password is required");
+         return;
+      }
+
+      // if (password === user.) {
+      //    toast.error("Password is the same as the current password");
+      //    return;
+      // }
+      const res = await updateUserPassword(user.id, password);
+      if (res.success) {
+         toast.success(res.message);
+      } else {
+         toast.error(res.message);
+      }
+   };
+
    return (
       <div className='space-y-8'>
          <Card>
@@ -244,9 +282,10 @@ function AccountSettings() {
             <CardContent className='space-y-2'>
                <Label htmlFor='email'>Email</Label>
                <Input
+                  disabled
                   id='email'
                   type='email'
-                  defaultValue='arvind@example.com'
+                  defaultValue={user.email}
                />
             </CardContent>
             <CardFooter className='border-t pt-6'>
@@ -268,11 +307,11 @@ function AccountSettings() {
                </div>
                <div className='space-y-2'>
                   <Label htmlFor='new-password'>New Password</Label>
-                  <Input id='new-password' type='password' />
+                  <Input id='new-password' type='password' onChange={(e)=> setPassword(e.target.value)} />
                </div>
             </CardContent>
             <CardFooter className='border-t pt-6'>
-               <Button>
+               <Button onClick={() => handlePasswordUpdate()}>
                   <Key className='w-4 h-4 mr-2' />
                   Change Password
                </Button>

@@ -2,7 +2,7 @@
 "use server";
 
 import { auth } from "@/lib/auth";
-import { updateUserSchema } from "@/zod/user";
+import { updateUserPasswordSchema, updateUserSchema } from "@/zod/user";
 import { headers } from "next/headers";
 
 export async function updateUserDetails(userId: string, name: string) {
@@ -23,8 +23,31 @@ export async function updateUserDetails(userId: string, name: string) {
       headers: await headers(),
    });
 
-   if (!status)
-      return { message: "Failed to update user", success: false };
+   if (!status) return { message: "Failed to update user", success: false };
 
    return { message: "User updated successfully", success: true };
+}
+
+export async function updateUserPassword(userId: string, newPassword: string) {
+   const validatedFields = updateUserPasswordSchema.safeParse({
+      password: newPassword,
+      userId,
+   });
+
+   if (!validatedFields.success)
+      return { message: "Invalid fields", success: false };
+
+   const ctx = await auth.$context;
+   const hash = await ctx.password.hash(newPassword);
+   try {
+      const res = await ctx.internalAdapter.updatePassword(userId, hash);
+
+      return { message: "Password updated successfully", success: true };
+   } catch (error) {
+      return {
+         message: "Failed to update password",
+         success: false,
+         error: error,
+      };
+   }
 }
