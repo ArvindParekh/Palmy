@@ -1,15 +1,11 @@
 import {
-   User,
    Calendar,
    FileText,
-   TrendingUp,
    Trophy,
    Award,
    Flame,
    Star,
    Edit,
-   Mail,
-   MapPin,
    GitBranch,
    Eye,
    Users,
@@ -19,16 +15,16 @@ import { Button } from "@/components/ui/button";
 import {
    Card,
    CardContent,
-   CardDescription,
    CardHeader,
    CardTitle,
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getUserInfo, getUserWithPalmlets } from "@/lib/data/user";
+import { getUserWithPalmlets } from "@/lib/data/user";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { format } from "date-fns";
 
 // Dummy Users icon for achievements
 const UsersIcon = (props: any) => (
@@ -195,7 +191,7 @@ export default async function ProfilePage() {
                         <StatItem icon={Star} value={0} label='Avg. Rating' />
                         <StatItem
                            icon={Calendar}
-                           value={userData.createdAt.toString()}
+                           value={format(userData.createdAt, "MMM d, yyyy")}
                            label='Joined'
                         />
                      </div>
