@@ -31,6 +31,7 @@ import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { formatDistanceToNow } from "date-fns";
 import { useRouter } from "next/navigation";
+import { generatePalmletText } from "@/actions/ai";
 
 // This will be the main editor page.
 export default function EditorPage({ id, folderNumber, templateData }: { id: string, folderNumber: string, templateData: Prisma.PalmletGetPayload<{
@@ -60,11 +61,23 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
   const handleGenerate = async (prompt: string) => {
     console.log("Generating with prompt:", prompt);
     setIsGenerating(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    const generatedContent = `/* AI Generated content for prompt: "${prompt}" */\n\nThis is the AI-generated template content. It should be replaced with a real API call to a language model.`;
-    setContent(generatedContent);
-    setIsGenerating(false);
     setIsCommandMenuOpen(false);
+    
+    try {
+      const result = await generatePalmletText(prompt, content);
+      
+      if (result.success) {
+        setContent(content + '\n\n' + result.text);
+        toast.success("Content generated successfully");
+      } else {
+        toast.error(result.error || "Failed to generate content");
+      }
+    } catch (error) {
+      console.error('Error generating content:', error);
+      toast.error('Failed to generate content');
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   const handleMouseUp = useCallback(() => {
