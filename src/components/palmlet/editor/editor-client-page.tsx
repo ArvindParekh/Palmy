@@ -61,13 +61,12 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
   const handleGenerate = async (prompt: string) => {
     console.log("Generating with prompt:", prompt);
     setIsGenerating(true);
-    setIsCommandMenuOpen(false);
     
     try {
       const result = await generatePalmletText(prompt, content);
       
       if (result.success) {
-        setContent(content + '\n\n' + result.text);
+        handleContentChange(result.text as string);
         toast.success("Content generated successfully");
       } else {
         toast.error(result.error || "Failed to generate content");
@@ -77,6 +76,7 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
       toast.error('Failed to generate content');
     } finally {
       setIsGenerating(false);
+      setIsCommandMenuOpen(false);
     }
   };
 
