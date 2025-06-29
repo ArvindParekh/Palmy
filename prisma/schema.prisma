@@ -35,7 +35,7 @@ model Palmlet_Folder {
   id String @id @default(uuid())
 
   userId String
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   folderName String
   folderDescription String?
@@ -52,7 +52,7 @@ model Palmlet {
   id String @id @default(uuid())
 
   folderId String
-  folder   Palmlet_Folder   @relation(fields: [folderId], references: [id])
+  folder   Palmlet_Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
 
   title   String
   content String?
