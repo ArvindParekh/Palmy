@@ -20,7 +20,7 @@ export default function DeleteAccountDialog({ userId }: { userId: string }) {
    const [confirm, setConfirm] = useState("");
    const router = useRouter();
    const handleDeleteAccount = async () => {
-      const res = await authClient.deleteUser();
+      const res = await authClient.deleteUser(); // deletion of user data is automatically taken care of because of the cascade delete in the prisma schema
       if (res.error) {
          toast.error(res.error.message);
       } else {
