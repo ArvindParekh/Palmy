@@ -5,15 +5,20 @@ import { auth } from "@/lib/auth";
 import { updateUserSchema } from "@/zod/user";
 import { headers } from "next/headers";
 
-export async function updateUserDetails(prevState: any, formData: FormData) {
-   const validatedFields = updateUserSchema.safeParse(formData.get("name"));
+export async function updateUserDetails(userId: string, name: string) {
+   const validatedFields = updateUserSchema.safeParse({
+      name,
+   });
 
    if (!validatedFields.success)
       return { message: "Invalid fields", success: false };
 
    const { status } = await auth.api.updateUser({
+      query: {
+         id: userId,
+      },
       body: {
-         name: validatedFields.data,
+         name: validatedFields.data.name,
       },
       headers: await headers(),
    });
