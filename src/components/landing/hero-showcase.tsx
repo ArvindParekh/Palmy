@@ -1,6 +1,6 @@
 "use client"
 
-import { Check } from "lucide-react"
+import { Check, FileText, MessageSquare } from "lucide-react"
 import { motion } from "framer-motion"
 
 const steps = [
@@ -11,21 +11,35 @@ const steps = [
         icon: Check,
         text: "Identified key skills: Golang, Kubernetes, GCP, Distributed Systems",
         color: "text-green-400",
+        isStrikethrough: false,
       },
-      { icon: Check, text: "Generated 3 tailored resume bullet points", color: "text-green-400" },
-      { icon: Check, text: "Created a draft cover letter", color: "text-green-400" },
+      { 
+        icon: Check, 
+        text: "Generated 3 tailored resume bullet points", 
+        color: "text-green-400",
+        isStrikethrough: false,
+      },
+      { 
+        icon: Check, 
+        text: "Created a draft cover letter", 
+        color: "text-green-400",
+        isStrikethrough: false,
+      },
     ],
   },
   {
     output: [
       {
-        text: "yo {HiringManagerName}, saw you're looking for a SWE...",
+        icon: FileText,
+        text: 'Dear {HiringManagerName}, I was excited to see the Senior Software Engineer position, as my experience in building scalable distributed systems with Go and Kubernetes aligns perfectly with your requirements.',
         color: "text-neutral-500",
         isStrikethrough: true,
       },
       {
-        text: 'Dear {HiringManagerName}, I was excited to see the Senior Software Engineer position, as my experience in building scalable distributed systems with Go and Kubernetes aligns perfectly with your requirements.',
+        icon: MessageSquare,
+        text: "yo {HiringManagerName}, saw you're looking for a SWE...",
         color: "text-neutral-200",
+        isStrikethrough: false,
       },
     ],
   },
@@ -62,10 +76,12 @@ export function HeroShowcase() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: i * 1.5 + j * 0.3 + 0.5, duration: 0.5 }}
-                  className={`flex items-start gap-2 ${line.color}`}
+                  className={`flex items-start gap-2 mb-1 ${line.color}`}
                 >
-                  {line.icon && <line.icon className="w-4 h-4 mt-0.5 flex-shrink-0" />}
-                  <p className={line.isStrikethrough ? "line-through" : ""}>{line.text}</p>
+                  <line.icon className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span className={`text-left flex-1 ${line.isStrikethrough ? "line-through" : ""}`}>
+                    {line.text}
+                  </span>
                 </motion.div>
               ))}
             </div>
