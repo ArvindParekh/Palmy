@@ -36,9 +36,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -673.7916151269085,
-			"y": 848.8780935492655,
-			"lastActivityTimestamp": 1751036844737,
+			"x": -459.94835696591684,
+			"y": 1525.285003528054,
+			"lastActivityTimestamp": 1751227811193,
 			"meta": {}
 		},
 		{
@@ -251,9 +251,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": 1216.5964800611337,
-			"y": -577.4756610821529,
-			"z": 0.8400809009979233,
+			"x": 746.056201472925,
+			"y": -1330.1220924124489,
+			"z": 2.0341979822428256,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -410,12 +410,12 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": "shape:n-MHFx4Wwcm9ODlsKBRiN",
+			"editingShapeId": "shape:4RlrMktKzp6YBnTdp59Yd",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:n-MHFx4Wwcm9ODlsKBRiN"
+				"shape:4RlrMktKzp6YBnTdp59Yd"
 			],
-			"hoveredShapeId": "shape:n-MHFx4Wwcm9ODlsKBRiN",
+			"hoveredShapeId": "shape:4RlrMktKzp6YBnTdp59Yd",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -780,6 +780,101 @@
 			},
 			"parentId": "page:page",
 			"index": "a8AXa",
+			"typeName": "shape"
+		},
+		{
+			"x": -535.9812843461632,
+			"y": 1493.846830666043,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:4RlrMktKzp6YBnTdp59Yd",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 402.96875,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Todo:"
+								}
+							]
+						},
+						{
+							"type": "bulletList",
+							"content": [
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "make everything responsive"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "cursor-pointer on buttons"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "add ai features"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aF48I",
 			"typeName": "shape"
 		},
 		{
