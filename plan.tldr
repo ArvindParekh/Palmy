@@ -36,9 +36,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -459.94835696591684,
-			"y": 1525.285003528054,
-			"lastActivityTimestamp": 1751227811193,
+			"x": -433.9665293900428,
+			"y": 1875.7823239010545,
+			"lastActivityTimestamp": 1751759152663,
 			"meta": {}
 		},
 		{
@@ -251,9 +251,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": 746.056201472925,
-			"y": -1330.1220924124489,
-			"z": 2.0341979822428256,
+			"x": 842.725921075398,
+			"y": -1381.7922505451359,
+			"z": 1.149820675831187,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -410,12 +410,12 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": "shape:4RlrMktKzp6YBnTdp59Yd",
+			"editingShapeId": "shape:drYa55WcJqN6_0YQ0mU7q",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:4RlrMktKzp6YBnTdp59Yd"
+				"shape:drYa55WcJqN6_0YQ0mU7q"
 			],
-			"hoveredShapeId": "shape:4RlrMktKzp6YBnTdp59Yd",
+			"hoveredShapeId": null,
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -533,6 +533,51 @@
 				"terminal": "start"
 			},
 			"typeName": "binding"
+		},
+		{
+			"x": -548.7670393952915,
+			"y": 1727.933182227628,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:D_Xbdmh30HH4RzFdk0Kcj",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 278.546875,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Make community page"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							}
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aG9Db",
+			"typeName": "shape"
 		},
 		{
 			"x": 910,
@@ -862,6 +907,11 @@
 											"content": [
 												{
 													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
 													"text": "add ai features"
 												}
 											]
@@ -926,7 +976,7 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1683,
+				"w": 1259,
 				"h": 939
 			},
 			"insets": [
@@ -1063,6 +1113,45 @@
 				"terminal": "start"
 			},
 			"typeName": "binding"
+		},
+		{
+			"x": -554.8549452289033,
+			"y": 1816.0941572323995,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:drYa55WcJqN6_0YQ0mU7q",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 652.078125,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Make leaderboard page - figure out the top players"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aH46N",
+			"typeName": "shape"
 		},
 		{
 			"x": 727,

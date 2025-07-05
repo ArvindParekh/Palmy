@@ -137,7 +137,7 @@ export default async function ProfilePage() {
    return (
       <div className='w-full max-w-5xl mx-auto min-h-screen p-4 md:p-6 space-y-6'>
          <Card className='overflow-hidden'>
-            <div className='relative h-32 md:h-40 bg-muted'>
+            <div className='relative h-24 sm:h-32 md:h-40 bg-muted'>
                {/* Abstract background pattern */}
                <svg
                   className='absolute inset-0 w-full h-full opacity-50'
@@ -148,40 +148,40 @@ export default async function ProfilePage() {
                   }}
                />
             </div>
-            <div className='px-6 pb-6'>
-               <div className='flex flex-col md:flex-row items-start gap-6 -mt-16 md:-mt-20'>
-                  <Avatar className='w-32 h-32 md:w-40 md:h-40 border-4 border-border flex-shrink-0'>
+            <div className='px-4 md:px-6 pb-6'>
+               <div className='flex flex-col md:flex-row items-start gap-4 md:gap-6 -mt-12 sm:-mt-16 md:-mt-20'>
+                  <Avatar className='w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 border-4 border-border flex-shrink-0'>
                      <AvatarImage
                         src={userData.image as string}
                         alt={userData.name}
                      />
-                     <AvatarFallback className='text-5xl'>
+                     <AvatarFallback className='text-2xl sm:text-3xl md:text-5xl'>
                         {userData.name
                            .split(" ")
                            .map((n: string) => n[0])
                            .join("")}
                      </AvatarFallback>
                   </Avatar>
-                  <div className='flex-1 pt-20 md:pt-24 space-y-4'>
-                     <div className='flex flex-col md:flex-row md:items-start justify-between'>
+                  <div className='flex-1 pt-12 sm:pt-20 md:pt-24 space-y-4'>
+                     <div className='flex flex-col md:flex-row md:items-start justify-between gap-4'>
                         <div className='space-y-1'>
-                           <h1 className='text-2xl md:text-3xl font-bold text-foreground'>
+                           <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-foreground'>
                               {userData.name}
                            </h1>
-                           <p className='text-muted-foreground'>
+                           <p className='text-sm md:text-base text-muted-foreground'>
                               @{userData.email}
                            </p>
-                           <p className='text-sm text-muted-foreground pt-2 max-w-md'>
+                           <p className='text-xs sm:text-sm text-muted-foreground pt-2 max-w-md'>
                               {userData.email}
                            </p>
                         </div>
-                        <Button variant='outline' className='mt-4 md:mt-0'>
+                        <Button variant='outline' size='sm' className='mt-2 md:mt-0 self-start'>
                            <Edit className='w-4 h-4 mr-2' />
                            Edit Profile
                         </Button>
                      </div>
 
-                     <div className='flex flex-wrap gap-6 text-sm text-muted-foreground'>
+                     <div className='flex flex-wrap gap-4 md:gap-6 text-xs sm:text-sm text-muted-foreground'>
                         <StatItem
                            icon={FileText}
                            value={allPalmletsCount}
@@ -202,16 +202,16 @@ export default async function ProfilePage() {
 
          <Tabs defaultValue='overview' className='w-full'>
             <TabsList className='grid w-full grid-cols-3 bg-muted'>
-               <TabsTrigger value='overview'>Overview</TabsTrigger>
-               <TabsTrigger value='templates'>Templates</TabsTrigger>
-               <TabsTrigger value='achievements'>Achievements</TabsTrigger>
+               <TabsTrigger value='overview' className='text-xs sm:text-sm'>Overview</TabsTrigger>
+               <TabsTrigger value='templates' className='text-xs sm:text-sm'>Templates</TabsTrigger>
+               <TabsTrigger value='achievements' className='text-xs sm:text-sm'>Achievements</TabsTrigger>
             </TabsList>
 
             <TabsContent value='overview' className='mt-6'>
-               <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+               <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6'>
                   <Card>
                      <CardHeader>
-                        <CardTitle>Top Templates</CardTitle>
+                        <CardTitle className='text-base md:text-lg'>Top Templates</CardTitle>
                      </CardHeader>
                      <CardContent className='space-y-4'>
                         {allPalmlets?.slice(0, 5).map((palmlet: any) => (
@@ -221,7 +221,7 @@ export default async function ProfilePage() {
                   </Card>
                   <Card>
                      <CardHeader>
-                        <CardTitle>Recent Activity</CardTitle>
+                        <CardTitle className='text-base md:text-lg'>Recent Activity</CardTitle>
                      </CardHeader>
                      <CardContent>
                         {/* Placeholder for activity feed */}
@@ -234,7 +234,7 @@ export default async function ProfilePage() {
             </TabsContent>
 
             <TabsContent value='templates' className='mt-6'>
-               <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+               <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6'>
                   {allPalmlets?.map((palmlet: any) => (
                      <TemplateCard key={palmlet.id} palmlet={palmlet} />
                   ))}
@@ -242,7 +242,7 @@ export default async function ProfilePage() {
             </TabsContent>
 
             <TabsContent value='achievements' className='mt-6'>
-               <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+               <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6'>
                   {achievements.map((achievement) => (
                      <AchievementCard key={achievement.name} {...achievement} />
                   ))}
@@ -263,8 +263,8 @@ function StatItem({
    label: string;
 }) {
    return (
-      <div className='flex items-center gap-2'>
-         <Icon className='w-4 h-4 text-muted-foreground' />
+      <div className='flex items-center gap-1 md:gap-2'>
+         <Icon className='w-3 h-3 md:w-4 md:h-4 text-muted-foreground' />
          <span className='font-semibold text-foreground'>{value}</span>
          <span className='text-muted-foreground'>{label}</span>
       </div>
@@ -283,9 +283,9 @@ function TemplateItem({
    };
 }) {
    return (
-      <div className='flex items-center justify-between'>
-         <div>
-            <p className='font-medium text-foreground'>{palmlet.title}</p>
+      <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4'>
+         <div className='flex-1'>
+            <p className='font-medium text-foreground text-sm md:text-base'>{palmlet.title}</p>
             <div className='flex flex-wrap gap-1 mt-1'>
                {palmlet.tags.slice(0, 3).map((tag) => (
                   <Badge
@@ -303,7 +303,7 @@ function TemplateItem({
                )}
             </div>
          </div>
-         <div className='flex items-center gap-4 text-sm'>
+         <div className='flex items-center gap-3 md:gap-4 text-xs md:text-sm'>
             <StatItem icon={GitBranch} value={palmlet.forks} label='forks' />
             <StatItem icon={Star} value={palmlet.rating} label='rating' />
          </div>

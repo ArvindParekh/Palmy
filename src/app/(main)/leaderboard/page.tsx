@@ -242,15 +242,15 @@ export default function LeaderboardPage() {
    };
 
    return (
-      <div className='w-full max-w-6xl mx-auto min-h-screen p-4 md:p-6 space-y-8'>
+      <div className='w-full max-w-6xl mx-auto min-h-screen p-4 md:p-6 space-y-6 md:space-y-8'>
          <div className='text-center space-y-2'>
             <div className='inline-block p-3 bg-muted rounded-lg'>
-               <Trophy className='w-8 h-8 text-yellow-500' />
+               <Trophy className='w-6 h-6 md:w-8 md:h-8 text-yellow-500' />
             </div>
-            <h1 className='text-3xl md:text-4xl font-bold text-foreground'>
+            <h1 className='text-2xl md:text-3xl lg:text-4xl font-bold text-foreground'>
                Community Leaderboard
             </h1>
-            <p className='text-muted-foreground max-w-2xl mx-auto'>
+            <p className='text-sm md:text-base text-muted-foreground max-w-2xl mx-auto'>
                See who's making the biggest impact. Rankings are updated daily
                based on community engagement and template success.
             </p>
@@ -258,30 +258,30 @@ export default function LeaderboardPage() {
 
          <Tabs defaultValue='creators'>
             <TabsList className='grid w-full max-w-md mx-auto grid-cols-2 bg-muted'>
-               <TabsTrigger value='creators'>
-                  <Users className='w-4 h-4 mr-2' />
-                  Top Creators
+               <TabsTrigger value='creators' className='text-xs md:text-sm'>
+                  <Users className='w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2' />
+                  <span className='hidden sm:inline'>Top </span>Creators
                </TabsTrigger>
-               <TabsTrigger value='templates'>
-                  <TrendingUp className='w-4 h-4 mr-2' />
-                  Top Templates
+               <TabsTrigger value='templates' className='text-xs md:text-sm'>
+                  <TrendingUp className='w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2' />
+                  <span className='hidden sm:inline'>Top </span>Templates
                </TabsTrigger>
             </TabsList>
 
-            <TabsContent value='creators' className='mt-8'>
-               <div className='grid grid-cols-1 md:grid-cols-3 gap-6 items-end'>
+            <TabsContent value='creators' className='mt-6 md:mt-8'>
+               <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 items-end'>
                   {podium.map((creator, index) => (
                      <PodiumItem
                         key={creator.username}
                         user={creator}
-                        order={index === 0 ? 'order-first md:order-2' : index === 1 ? 'order-first md:order-1' : 'order-first md:order-3'}
+                        order={index === 0 ? 'order-first sm:order-2' : index === 1 ? 'order-first sm:order-1' : 'order-first sm:order-3'}
                      />
                   ))}
                </div>
 
-               <Card className='mt-8'>
+               <Card className='mt-6 md:mt-8'>
                   <CardContent className='p-0'>
-                     <div className='space-y-2 p-4'>
+                     <div className='space-y-1 md:space-y-2 p-2 md:p-4'>
                         {topCreators.map((creator) => (
                            <LeaderboardRow key={creator.username} user={creator} getRankIcon={getRankIcon} />
                         ))}
@@ -290,47 +290,49 @@ export default function LeaderboardPage() {
                </Card>
             </TabsContent>
 
-            <TabsContent value='templates' className='mt-8'>
+            <TabsContent value='templates' className='mt-6 md:mt-8'>
                <Card>
-                  <Table>
-                     <TableHeader>
-                        <TableRow>
-                           <TableHead className='w-16'>Rank</TableHead>
-                           <TableHead>Template</TableHead>
-                           <TableHead>Category</TableHead>
-                           <TableHead className='text-right'>Forks</TableHead>
-                           <TableHead className='text-right'>
-                              Success Rate
-                           </TableHead>
-                        </TableRow>
-                     </TableHeader>
-                     <TableBody>
-                        {topTemplates.map((template) => (
-                           <TableRow key={template.rank}>
-                              <TableCell className='font-medium text-lg'>
-                                 {template.rank}
-                              </TableCell>
-                              <TableCell>
-                                 <p className='font-medium'>{template.title}</p>
-                                 <p className='text-sm text-muted-foreground'>
-                                    by @{template.author}
-                                 </p>
-                              </TableCell>
-                              <TableCell>
-                                 <Badge variant='secondary'>
-                                    {template.category}
-                                 </Badge>
-                              </TableCell>
-                              <TableCell className='text-right font-medium'>
-                                 {template.forks.toLocaleString()}
-                              </TableCell>
-                              <TableCell className='text-right font-medium text-green-600 dark:text-green-400'>
-                                 {template.successRate}%
-                              </TableCell>
+                  <div className='overflow-x-auto'>
+                     <Table>
+                        <TableHeader>
+                           <TableRow>
+                              <TableHead className='w-16 text-xs md:text-sm'>Rank</TableHead>
+                              <TableHead className='text-xs md:text-sm'>Template</TableHead>
+                              <TableHead className='text-xs md:text-sm'>Category</TableHead>
+                              <TableHead className='text-right text-xs md:text-sm'>Forks</TableHead>
+                              <TableHead className='text-right text-xs md:text-sm'>
+                                 Success Rate
+                              </TableHead>
                            </TableRow>
-                        ))}
-                     </TableBody>
-                  </Table>
+                        </TableHeader>
+                        <TableBody>
+                           {topTemplates.map((template) => (
+                              <TableRow key={template.rank}>
+                                 <TableCell className='font-medium text-sm md:text-base'>
+                                    {template.rank}
+                                 </TableCell>
+                                 <TableCell className='min-w-[200px]'>
+                                    <p className='font-medium text-sm md:text-base'>{template.title}</p>
+                                    <p className='text-xs md:text-sm text-muted-foreground'>
+                                       by @{template.author}
+                                    </p>
+                                 </TableCell>
+                                 <TableCell>
+                                    <Badge variant='secondary' className='text-xs'>
+                                       {template.category}
+                                    </Badge>
+                                 </TableCell>
+                                 <TableCell className='text-right font-medium text-sm md:text-base'>
+                                    {template.forks.toLocaleString()}
+                                 </TableCell>
+                                 <TableCell className='text-right font-medium text-green-600 dark:text-green-400 text-sm md:text-base'>
+                                    {template.successRate}%
+                                 </TableCell>
+                              </TableRow>
+                           ))}
+                        </TableBody>
+                     </Table>
+                  </div>
                </Card>
             </TabsContent>
          </Tabs>
@@ -340,25 +342,25 @@ export default function LeaderboardPage() {
 
 const PodiumItem = ({ user, order }: { user: (typeof topCreators)[0], order: string }) => {
    const rankMeta = {
-      1: { border: "border-yellow-400 dark:border-yellow-500", shadow: "shadow-yellow-500/20", height: "md:pt-6" },
+      1: { border: "border-yellow-400 dark:border-yellow-500", shadow: "shadow-yellow-500/20", height: "sm:pt-6" },
       2: { border: "border-neutral-300 dark:border-neutral-600", shadow: "shadow-neutral-400/20", height: "" },
       3: { border: "border-amber-500 dark:border-amber-600", shadow: "shadow-amber-600/20", height: "" },
    }[user.rank] || {};
 
    return (
-      <div className={cn("text-center space-y-4", order, rankMeta.height)}>
+      <div className={cn("text-center space-y-3 md:space-y-4", order, rankMeta.height)}>
          <div className="relative inline-block">
-            <Avatar className="w-28 h-28 border-4 border-background">
+            <Avatar className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 border-4 border-background">
                <AvatarImage src={user.avatar} />
-               <AvatarFallback className="text-3xl">{user.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
+               <AvatarFallback className="text-lg sm:text-xl md:text-3xl">{user.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
             </Avatar>
-            <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-background rounded-full flex items-center justify-center">
-               {user.rank === 1 ? <Crown className="w-5 h-5 text-yellow-500" /> : <span className="font-bold text-sm">{user.rank}</span>}
+            <div className="absolute -bottom-2 -right-2 w-6 h-6 sm:w-8 sm:h-8 bg-background rounded-full flex items-center justify-center">
+               {user.rank === 1 ? <Crown className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-yellow-500" /> : <span className="font-bold text-xs sm:text-sm">{user.rank}</span>}
             </div>
          </div>
          <div className="text-center">
-            <h3 className="font-bold text-lg">{user.name}</h3>
-            <p className="text-sm text-muted-foreground">@{user.username}</p>
+            <h3 className="font-bold text-base sm:text-lg">{user.name}</h3>
+            <p className="text-xs sm:text-sm text-muted-foreground">@{user.username}</p>
          </div>
       </div>
    )

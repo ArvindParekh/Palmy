@@ -150,12 +150,12 @@ export default function CommunityPage() {
             //   backgroundPosition: '10px 10px',
             // }}
       />
-      <div className="relative w-full max-w-3xl mx-auto min-h-screen p-4 md:p-6">
+      <div className="relative w-full max-w-4xl mx-auto min-h-screen p-4 md:p-6">
         <header className="mb-6">
-          <h1 className="text-3xl font-bold tracking-tighter text-foreground">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tighter text-foreground">
             Community Feed
           </h1>
-          <p className="text-muted-foreground mt-1">
+          <p className="text-sm md:text-base text-muted-foreground mt-1">
             Discover, fork, and share templates with the community.
           </p>
         </header>

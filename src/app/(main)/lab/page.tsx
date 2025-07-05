@@ -131,45 +131,45 @@ Best regards,
 
   return (
     <div className="h-full bg-background flex flex-col items-center justify-center font-inter">
-      <div className="max-w-4xl mx-auto px-4 py-8 md:py-16">
+      <div className="max-w-4xl mx-auto px-4 py-6 md:py-8 lg:py-16">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
+        <div className="text-center mb-8 md:mb-12">
+          <h1 className="text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-4">
             Prompts to templates in{' '}
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               seconds
             </span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto">
             Describe the template you need and let us do the rest.
           </p>
         </div>
 
         {/* Main Input */}
-        <div className="mb-12">
+        <div className="mb-8 md:mb-12">
           <div className="relative">
             <Input
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Describe the template you want to create..."
-              className="text-lg h-14 pr-32 rounded-2xl bg-accent/50 border py-7"
+              className="text-sm md:text-base lg:text-lg h-12 md:h-14 pr-24 md:pr-32 rounded-2xl bg-accent/50 border py-3 md:py-7"
               disabled={isGenerating}
             />
             <Button
               onClick={handleGenerate}
               disabled={!prompt.trim() || isGenerating}
-              className="absolute right-2 top-2 h-10 px-6 rounded-xl"
+              className="absolute right-2 top-2 h-8 md:h-10 px-3 md:px-6 rounded-xl text-sm"
             >
               {isGenerating ? (
                 <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Generating...
+                  <Loader2 className="w-4 h-4 mr-1 md:mr-2 animate-spin" />
+                  <span className="hidden sm:inline">Generating...</span>
                 </>
               ) : (
                 <>
                   <ArrowUpRight className="w-4 h-4" />
-                  {/* Generate */}
+                  <span className="hidden sm:inline ml-1">Generate</span>
                 </>
               )}
             </Button>
@@ -178,25 +178,25 @@ Best regards,
 
         {/* Template Examples */}
         {!generatedTemplate && (
-          <div className="mb-12">
+          <div className="mb-8 md:mb-12">
             {/* <h2 className="text-lg font-semibold mb-6 text-center">Or try one of these:</h2> */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {templateExamples.map((example, index) => (
                 <Card
                   key={index}
                   className="cursor-pointer hover:shadow-lg hover:shadow-white/30 transition-shadow border-2 hover:border-blue-200"
                   onClick={() => handleExampleClick(example)}
                 >
-                  <CardHeader className="">
+                  <CardHeader className="pb-3">
                     <div className="flex items-center gap-2">
                       <div className="p-2 bg-blue-100 rounded-lg">
                         <example.icon className="w-4 h-4 text-blue-600" />
                       </div>
-                      <CardTitle className="text-sm">{example.title}</CardTitle>
+                      <CardTitle className="text-sm md:text-base">{example.title}</CardTitle>
                     </div>
                   </CardHeader>
-                  <CardContent className="">
-                    <p className="text-sm text-muted-foreground">{example.description}</p>
+                  <CardContent className="pt-0">
+                    <p className="text-xs md:text-sm text-muted-foreground">{example.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -208,13 +208,13 @@ Best regards,
         {generatedTemplate && (
           <Card className="mb-8">
             <CardHeader>
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <CardTitle className="flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-blue-600" />
+                  <CardTitle className="flex items-center gap-2 text-base md:text-lg">
+                    <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
                     {generatedTemplate.title}
                   </CardTitle>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <p className="text-xs md:text-sm text-muted-foreground mt-1">
                     {generatedTemplate.variables.length} variables detected
                   </p>
                 </div>
@@ -223,25 +223,25 @@ Best regards,
                     variant="outline"
                     size="sm"
                     onClick={handleCopy}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-2 text-xs md:text-sm"
                   >
                     {copied ? (
                       <>
-                        <Check className="w-4 h-4" />
-                        Copied!
+                        <Check className="w-3 h-3 md:w-4 md:h-4" />
+                        <span className="hidden sm:inline">Copied!</span>
                       </>
                     ) : (
                       <>
-                        <Copy className="w-4 h-4" />
-                        Copy
+                        <Copy className="w-3 h-3 md:w-4 md:h-4" />
+                        <span className="hidden sm:inline">Copy</span>
                       </>
                     )}
                   </Button>
                   <Dialog open={showSaveDialog} onOpenChange={setShowSaveDialog}>
                     <DialogTrigger asChild>
-                      <Button size="sm" className="flex items-center gap-2">
-                        <Save className="w-4 h-4" />
-                        Save to Library
+                      <Button size="sm" className="flex items-center gap-2 text-xs md:text-sm">
+                        <Save className="w-3 h-3 md:w-4 md:h-4" />
+                        <span className="hidden sm:inline">Save to Library</span>
                       </Button>
                     </DialogTrigger>
                     <DialogContent>
@@ -325,11 +325,11 @@ Best regards,
               </div>
             </CardHeader>
             <CardContent>
-              <div className="bg-muted rounded-lg p-4 mb-4">
-                <div className="text-sm whitespace-pre-wrap font-mono">
+              <div className="bg-muted rounded-lg p-3 md:p-4 mb-4">
+                <div className="text-xs md:text-sm whitespace-pre-wrap font-mono">
                   {generatedTemplate.content.split(/(\{\{[^}]+\}\})/g).map((part, index) => 
                     part.startsWith('{{') && part.endsWith('}}') ? (
-                      <span key={index} className="bg-blue-100 text-blue-800 px-2 py-1 rounded-md font-medium">
+                      <span key={index} className="bg-blue-100 text-blue-800 px-1 md:px-2 py-1 rounded-md font-medium text-xs md:text-sm">
                         {part}
                       </span>
                     ) : (
@@ -340,10 +340,10 @@ Best regards,
               </div>
 
               <div>
-                <h3 className="text-sm font-medium mb-3">Variables</h3>
+                <h3 className="text-sm md:text-base font-medium mb-3">Variables</h3>
                 <div className="flex flex-wrap gap-2">
                   {generatedTemplate.variables.map((variable, index) => (
-                    <Badge key={index} variant="secondary">
+                    <Badge key={index} variant="secondary" className="text-xs">
                       {variable}
                     </Badge>
                   ))}
@@ -362,7 +362,8 @@ Best regards,
                 setGeneratedTemplate(null)
               }}
               variant="outline"
-              size="lg"
+              size="default"
+              className="text-sm md:text-base"
             >
               <Plus className="w-4 h-4 mr-2" />
               Create Another Template

@@ -16,6 +16,7 @@ import {
    UploadCloud,
    Mail,
    Building,
+   ChevronDown,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -32,6 +33,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+   DropdownMenu,
+   DropdownMenuContent,
+   DropdownMenuItem,
+   DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Prisma } from "@/generated/prisma";
 import { updateUserDetails, updateUserPassword } from "@/actions/user";
 import { toast } from "sonner";
@@ -110,22 +117,57 @@ export default function SettingsClientPage({
    };
 
    return (
-      <div className='w-full min-h-screen p-6 space-y-8'>
+      <div className='w-full min-h-screen p-4 md:p-6 space-y-6 md:space-y-8'>
          <Toaster />
          <div className='space-y-2'>
-            <h1 className='text-3xl font-bold text-foreground'>Settings</h1>
-            <p className='text-muted-foreground'>
+            <h1 className='text-2xl md:text-3xl font-bold text-foreground'>Settings</h1>
+            <p className='text-sm md:text-base text-muted-foreground'>
                Manage your account settings and preferences.
             </p>
          </div>
 
-         <div className='flex flex-col lg:flex-row gap-10'>
-            <nav className='flex flex-row overflow-x-auto lg:flex-col gap-2 lg:w-48'>
+         <div className='flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-10'>
+            {/* Mobile Dropdown Navigation */}
+            <div className='lg:hidden'>
+               <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                     <Button variant="outline" className="w-full justify-between">
+                                                 <div className="flex items-center gap-2">
+                            {(() => {
+                               const activeTabData = settingsTabs.find(tab => tab.id === activeTab) || settingsTabs[0];
+                               return (
+                                  <>
+                                     <activeTabData.icon className="w-4 h-4" />
+                                     {activeTabData.title}
+                                  </>
+                               );
+                            })()}
+                         </div>
+                        <ChevronDown className="w-4 h-4" />
+                     </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-full">
+                     {settingsTabs.map((tab) => (
+                        <DropdownMenuItem
+                           key={tab.id}
+                           onClick={() => setActiveTab(tab.id)}
+                           className="flex items-center gap-2"
+                        >
+                           <tab.icon className="w-4 h-4" />
+                           {tab.title}
+                        </DropdownMenuItem>
+                     ))}
+                  </DropdownMenuContent>
+               </DropdownMenu>
+            </div>
+
+            {/* Desktop Navigation */}
+            <nav className='hidden lg:flex lg:flex-col gap-2 lg:w-48'>
                {settingsTabs.map((tab) => (
                   <Button
                      key={tab.id}
                      variant={activeTab === tab.id ? "secondary" : "ghost"}
-                     className='justify-start gap-3 w-full'
+                     className='justify-start gap-2 md:gap-3 w-full text-sm whitespace-nowrap'
                      onClick={() => setActiveTab(tab.id)}
                   >
                      <tab.icon className='w-4 h-4' />
@@ -182,10 +224,10 @@ function ProfileSettings({
             </CardDescription>
          </CardHeader>
          <CardContent className='space-y-6'>
-            <div className='flex items-center gap-6'>
-               <Avatar className='w-20 h-20'>
+            <div className='flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6'>
+               <Avatar className='w-16 h-16 sm:w-20 sm:h-20'>
                   <AvatarImage src={user.image as string} />
-                  <AvatarFallback className='text-2xl'>
+                  <AvatarFallback className='text-xl sm:text-2xl'>
                      {user.name
                         .split(" ")
                         .map((n) => n[0])
@@ -193,7 +235,7 @@ function ProfileSettings({
                   </AvatarFallback>
                </Avatar>
                <div className='space-y-2'>
-                  <Button variant='outline'>
+                  <Button variant='outline' size='sm'>
                      <UploadCloud className='w-4 h-4 mr-2' />
                      Upload new picture
                   </Button>
