@@ -27,7 +27,7 @@ export default async function MainLayout({
          <div className='flex min-h-screen min-w-screen bg-background'>
             <AppSidebar />
             <SidebarInset className='flex-1'>
-               <Header />
+               {/* <Header /> */}
                <main className="flex-1 p-8 w-full">{children}</main>
             </SidebarInset>
          </div>

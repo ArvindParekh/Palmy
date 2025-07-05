@@ -40,7 +40,7 @@ export function AppSidebar() {
       >
          <SidebarHeader className='p-6 border-b border-border'>
             <div className='flex items-center gap-3'>
-               <div className='w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center'>
+               <div className='w-8 h-8 bg-orange-400 rounded-lg flex items-center justify-center'>
                   <Sparkles className='w-4 h-4 text-foreground' />
                </div>
                <div>
