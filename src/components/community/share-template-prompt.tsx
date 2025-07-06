@@ -6,7 +6,7 @@ import { ShareTemplateDialog } from "./share-template-dialog";
 import { Prisma } from "@/generated/prisma/client";
 
 interface ShareTemplatePromptProps {
-    onTemplateShare: (template: { title: string; content: string; tags: string[]; variables: string[] }) => void;
+    onTemplateShare: (template: { title: string; content: string; tags: string[]; variables: string[] }) => Promise<void>;
     userTemplates: Prisma.PalmletGetPayload<{
         include: {
             tags: true,

@@ -22,14 +22,14 @@ import {
 } from "@/components/ui/select";
 import React, { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
-import { X } from "lucide-react";
+import { Loader2, X } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Prisma } from "@/generated/prisma/client";
 
 interface ShareTemplateDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onTemplateShare: (template: { title: string; content: string; tags: string[]; variables: string[] }) => void;
+  onTemplateShare: (template: { title: string; content: string; tags: string[]; variables: string[] }) => Promise<void>;
   userTemplates: Prisma.PalmletGetPayload<{
     include: {
       tags: true,
@@ -77,6 +77,7 @@ export function ShareTemplateDialog({ open, onOpenChange, onTemplateShare, userT
   const [content, setContent] = useState("");
   const [tags, setTags] = useState<string[]>([]);
   const [variables, setVariables] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   useEffect(() => {
     if (selectedTemplateId) {
         const selected = userTemplates?.find(t => t.id === selectedTemplateId);
@@ -114,10 +115,17 @@ export function ShareTemplateDialog({ open, onOpenChange, onTemplateShare, userT
     setTags(tags.filter(tag => tag !== tagToRemove));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!title || !content) return;
-    onTemplateShare({ title, content, tags, variables });
-    handleOpenChange(false);
+    setIsSubmitting(true);
+    try {
+      await onTemplateShare({ title, content, tags, variables });
+      handleOpenChange(false);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -200,7 +208,9 @@ export function ShareTemplateDialog({ open, onOpenChange, onTemplateShare, userT
             <DialogClose asChild>
                 <Button type="button" variant="outline">Cancel</Button>
             </DialogClose>
-            <Button type="submit" onClick={handleSubmit} disabled={!title || !content}>Share Template</Button>
+            <Button type="submit" onClick={handleSubmit} disabled={!title || !content || isSubmitting}>
+                {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : "Share Template"}
+            </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
