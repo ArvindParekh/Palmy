@@ -56,6 +56,9 @@ model Palmlet {
 
   title   String
   content String?
+  isPublic Boolean @default(false)
+  // views Int @default(0)
+  upvotes Int @default(0)
 
   tags      Palmlet_Tag[]
   variables Palmlet_Variable[]
