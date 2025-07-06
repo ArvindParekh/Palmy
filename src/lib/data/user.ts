@@ -13,6 +13,7 @@ export const getUserWithPalmlets = async (userId: string) => {
                         palmlets: {
                             include: {
                                 tags: true,
+                                variables: true,
                             }
                         },
                     }

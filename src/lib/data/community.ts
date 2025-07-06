@@ -2,12 +2,19 @@ import { prisma } from "../db";
 
 export const getPopularPalmlets = async () => {
     try {
-        const trendingPalmlets = await prisma.palmlet.findMany({
-            where: {
-                isPublic: true,
-            },
+        const trendingPalmlets = await prisma.sharedPalmlet.findMany({
             orderBy: {
                 upvotes: "desc",
+            },
+            include: {
+                variables: true,
+                user: {
+                    select: {
+                        name: true,
+                        image: true,
+                        email: true,
+                    }
+                }
             },
             take: 10,
         })
@@ -18,6 +25,7 @@ export const getPopularPalmlets = async () => {
             data: trendingPalmlets,
         }
     } catch (error) {
+        console.error(error);
         return {
             message: "Failed to fetch trending palmlets",
             success: false,
@@ -27,12 +35,19 @@ export const getPopularPalmlets = async () => {
 
 export const getLatestPalmlets = async () => {
     try {
-        const latestPalmlets = await prisma.palmlet.findMany({
-            where: {
-                isPublic: true,
-            },
+        const latestPalmlets = await prisma.sharedPalmlet.findMany({
             orderBy: {
                 createdAt: "desc",
+            },
+            include: {
+                variables: true,
+                user: {
+                    select: {
+                        name: true,
+                        image: true,
+                        email: true,
+                    }
+                }
             },
             take: 10,
         })
@@ -43,6 +58,7 @@ export const getLatestPalmlets = async () => {
             data: latestPalmlets,
         }
     } catch (error) {
+        console.error(error);
         return {
             message: "Failed to fetch latest palmlets",
             success: false,

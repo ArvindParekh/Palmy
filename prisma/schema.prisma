@@ -81,8 +81,6 @@ model SharedPalmlet {
   variables Palmlet_Variable[]
 
   createdAt DateTime @default(now())
-
-  @@map("shared_palmlet")
 }
 
 enum SharedPalmletTags {
