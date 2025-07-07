@@ -10,6 +10,8 @@ import { Prisma } from "@/generated/prisma/client";
 import { ContentPreviewDialog } from "./content-preview-dialog";
 import { ForkTemplateDialog } from "./fork-template-dialog";
 import { formatDistanceToNow } from "date-fns";
+import { upvotePost } from "@/actions/community";
+import { toast } from "sonner";
 
 // export interface CommunityTemplatePostProps {
 //   id: string;
@@ -50,6 +52,24 @@ export function CommunityTemplatePost({ post, userFolders }: {
 }) {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isForkDialogOpen, setIsForkDialogOpen] = useState(false);
+  const [upvoteCount, setUpvoteCount] = useState(post.upvotes);
+  const [isUpvoting, setIsUpvoting] = useState(false);
+
+  const handleUpvote = async () => {
+    if (isUpvoting) return;
+    
+    setIsUpvoting(true);
+    const result = await upvotePost(post.id);
+    
+    if (result.success && result.data) {
+      setUpvoteCount(result.data.upvotes);
+      // toast.success("Post upvoted!");
+    } else {
+      toast.error(result.message || "Failed to upvote post");
+    }
+    
+    setIsUpvoting(false);
+  };
 
   const handleFork = async (folderId: string, templateData: any) => {
     // This would need to be implemented with the actual fork API
@@ -57,6 +77,7 @@ export function CommunityTemplatePost({ post, userFolders }: {
     // For now, just simulate the action
     throw new Error("Fork functionality not yet implemented");
   };
+
   return (
     <div className="group bg-card border border-border rounded-2xl p-6 flex gap-5 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
       <Avatar className="w-10 h-10 hidden md:block flex-shrink-0">
@@ -99,7 +120,17 @@ export function CommunityTemplatePost({ post, userFolders }: {
         </div>
 
         <div className="mt-5 flex items-center gap-2">
-          <ActionButton icon={ArrowBigUp} count={post.upvotes} label="Upvote" activeColor="text-red-400" />
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800/70"
+            onClick={handleUpvote}
+            disabled={isUpvoting}
+          >
+            <ArrowBigUp className="w-4 h-4" />
+            <span className="text-sm font-medium">{upvoteCount}</span>
+            <span className="sr-only">Upvote</span>
+          </Button>
           <Button 
             variant="ghost" 
             size="sm" 
@@ -108,7 +139,7 @@ export function CommunityTemplatePost({ post, userFolders }: {
             disabled={!userFolders || userFolders.length === 0}
           >
             <GitBranch className="w-4 h-4" />
-            <span className="text-sm font-medium">{post.upvotes}</span>
+            <span className="text-sm font-medium">Fork</span>
             <span className="sr-only">Fork</span>
           </Button>
         </div>
@@ -139,21 +170,4 @@ export function CommunityTemplatePost({ post, userFolders }: {
       </div>
     </div>
   );
-}
-
-const ActionButton = ({icon: Icon, count, label, activeColor}: {icon: React.ElementType, count: number, label: string, activeColor: string}) => {
-    const [isLiked, setIsLiked] = React.useState(false);
-
-    return (
-        <Button 
-            variant="ghost" 
-            size="sm" 
-            className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800/70"
-            onClick={() => setIsLiked(!isLiked)}
-        >
-            <Icon className={cn("w-4 h-4", isLiked && activeColor)} />
-            <span className={cn("text-sm font-medium", isLiked && activeColor)}>{isLiked ? count + 1 : count}</span>
-            <span className="sr-only">{label}</span>
-        </Button>
-    )
 } 
