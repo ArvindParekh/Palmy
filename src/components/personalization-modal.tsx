@@ -75,13 +75,13 @@ export function PersonalizationModal({ template, onClose }: PersonalizationModal
 
   return (
     <Dialog open={!!template} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
-        <DialogHeader>
+      <DialogContent className="max-w-4xl max-h-[90vh] flex flex-col">
+        <DialogHeader className="flex-shrink-0">
           <DialogTitle className="text-xl font-semibold">{template.title}</DialogTitle>
           <DialogDescription>Fill in the variables below to personalize your template</DialogDescription>
         </DialogHeader>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 overflow-hidden min-h-0">
           {/* Variables Form */}
           <div className="space-y-4 overflow-y-auto">
             <div className="space-y-3">
@@ -123,46 +123,46 @@ export function PersonalizationModal({ template, onClose }: PersonalizationModal
           </div>
 
           {/* Live Preview */}
-          <div className="space-y-4 overflow-hidden flex flex-col">
-            <h3 className="font-medium text-foreground">Preview</h3>
-            <div className="flex-1 overflow-y-auto">
+          <div className="space-y-4 flex flex-col overflow-hidden">
+            <h3 className="font-medium text-foreground flex-shrink-0">Preview</h3>
+            <div className="flex-1 overflow-y-auto min-h-0">
               <div className="bg-muted rounded-lg p-4 border border-border">
                 <div className="whitespace-pre-wrap text-sm text-neutral-700 dark:text-neutral-300">
                   {personalizedContent}
                 </div>
               </div>
             </div>
-
-            {/* Actions */}
-            <div className="flex gap-2 pt-4 border-t border-neutral-200 dark:border-neutral-800">
-              <Button
-                onClick={copyToClipboard}
-                disabled={!allVariablesFilled}
-                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
-              >
-                <Copy className="w-4 h-4 mr-2" />
-                Copy
-              </Button>
-              <Button
-                variant="outline"
-                onClick={downloadAsText}
-                disabled={!allVariablesFilled}
-                className="border-neutral-200 dark:border-neutral-800"
-              >
-                <Download className="w-4 h-4 mr-2" />
-                Download
-              </Button>
-              <Button
-                variant="outline"
-                onClick={openInEmail}
-                disabled={!allVariablesFilled}
-                className="border-neutral-200 dark:border-neutral-800"
-              >
-                <Mail className="w-4 h-4 mr-2" />
-                Email
-              </Button>
-            </div>
           </div>
+        </div>
+
+        {/* Actions - Fixed at bottom */}
+        <div className="flex gap-2 pt-4 border-t border-neutral-200 dark:border-neutral-800 flex-shrink-0">
+          <Button
+            onClick={copyToClipboard}
+            disabled={!allVariablesFilled}
+            className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
+          >
+            <Copy className="w-4 h-4 mr-2" />
+            Copy
+          </Button>
+          <Button
+            variant="outline"
+            onClick={downloadAsText}
+            disabled={!allVariablesFilled}
+            className="border-neutral-200 dark:border-neutral-800"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Download
+          </Button>
+          <Button
+            variant="outline"
+            onClick={openInEmail}
+            disabled={!allVariablesFilled}
+            className="border-neutral-200 dark:border-neutral-800"
+          >
+            <Mail className="w-4 h-4 mr-2" />
+            Email
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

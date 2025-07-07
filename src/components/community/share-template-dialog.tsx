@@ -130,81 +130,84 @@ export function ShareTemplateDialog({ open, onOpenChange, onTemplateShare, userT
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-[625px]">
-        <DialogHeader>
+      <DialogContent className="sm:max-w-[625px] max-h-[90vh] flex flex-col">
+        <DialogHeader className="flex-shrink-0">
           <DialogTitle>Share a Template</DialogTitle>
           <DialogDescription>
             Select a template to pre-fill the form, then customize and share.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-2">
-          <Label>Select a personal template (optional)</Label>
-          <Select value={selectedTemplateId || ""} onValueChange={setSelectedTemplateId}>
-            <SelectTrigger>
-              <SelectValue placeholder="Choose a template to pre-fill..." />
-            </SelectTrigger>
-            <SelectContent>
-              {userTemplates?.map(template => (
-                <SelectItem key={template.id} value={template.id}>
-                  {template.title}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <Separator />
-
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="title">Title</Label>
-            <Input
-              id="title"
-              placeholder="e.g., The best cold email template"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="content">Template Content</Label>
-            <Textarea
-              id="content"
-              placeholder="Paste your template here or select one above. Use {{variable}} for placeholders."
-              className="min-h-[150px]"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label>Tags (up to 5)</Label>
-            <div className="space-y-2">
-              <div className="flex flex-wrap gap-2">
-                {tags.map(tag => (
-                  <Badge key={tag} variant="secondary" className="flex items-center gap-1">
-                    {tag}
-                    <button onClick={() => removeTag(tag)} className="rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 p-0.5">
-                      <X className="w-3 h-3"/>
-                    </button>
-                  </Badge>
+        <div className="flex-1 overflow-y-auto space-y-4 min-h-0">
+          <div className="space-y-2">
+            <Label>Select a personal template (optional)</Label>
+            <Select value={selectedTemplateId || ""} onValueChange={setSelectedTemplateId}>
+              <SelectTrigger>
+                <SelectValue placeholder="Choose a template to pre-fill..." />
+              </SelectTrigger>
+              <SelectContent>
+                {userTemplates?.map(template => (
+                  <SelectItem key={template.id} value={template.id}>
+                    {template.title}
+                  </SelectItem>
                 ))}
-              </div>
-              <Select value="" onValueChange={handleTagSelect} disabled={tags.length >= 5}>
-                <SelectTrigger>
-                  <SelectValue placeholder={tags.length >= 5 ? "Maximum 5 tags selected" : "Add a tag..."} />
-                </SelectTrigger>
-                <SelectContent>
-                  {availableTags.filter(tag => !tags.includes(tag)).map(tag => (
-                    <SelectItem key={tag} value={tag}>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <Separator />
+
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="title">Title</Label>
+              <Input
+                id="title"
+                placeholder="e.g., The best cold email template"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="content">Template Content</Label>
+              <Textarea
+                id="content"
+                placeholder="Paste your template here or select one above. Use {{variable}} for placeholders."
+                className="min-h-[200px] max-h-[300px] resize-none"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label>Tags (up to 5)</Label>
+              <div className="space-y-2">
+                <div className="flex flex-wrap gap-2">
+                  {tags.map(tag => (
+                    <Badge key={tag} variant="secondary" className="flex items-center gap-1">
                       {tag}
-                    </SelectItem>
+                      <button onClick={() => removeTag(tag)} className="rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 p-0.5">
+                        <X className="w-3 h-3"/>
+                      </button>
+                    </Badge>
                   ))}
-                </SelectContent>
-              </Select>
+                </div>
+                <Select value="" onValueChange={handleTagSelect} disabled={tags.length >= 5}>
+                  <SelectTrigger>
+                    <SelectValue placeholder={tags.length >= 5 ? "Maximum 5 tags selected" : "Add a tag..."} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {availableTags.filter(tag => !tags.includes(tag)).map(tag => (
+                      <SelectItem key={tag} value={tag}>
+                        {tag}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
         </div>
-        <DialogFooter>
+        
+        <DialogFooter className="flex-shrink-0">
             <DialogClose asChild>
                 <Button type="button" variant="outline">Cancel</Button>
             </DialogClose>
