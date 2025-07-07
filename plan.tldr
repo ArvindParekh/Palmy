@@ -36,9 +36,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -673.7916151269085,
-			"y": 848.8780935492655,
-			"lastActivityTimestamp": 1751036844737,
+			"x": -308.88060038925045,
+			"y": 1517.6324111219812,
+			"lastActivityTimestamp": 1751896533869,
 			"meta": {}
 		},
 		{
@@ -251,9 +251,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": 1216.5964800611337,
-			"y": -577.4756610821529,
-			"z": 0.8400809009979233,
+			"x": 752.5839222966079,
+			"y": -1316.93290409515,
+			"z": 1.016444948082147,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -410,12 +410,12 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": "shape:n-MHFx4Wwcm9ODlsKBRiN",
+			"editingShapeId": "shape:4RlrMktKzp6YBnTdp59Yd",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:n-MHFx4Wwcm9ODlsKBRiN"
+				"shape:4RlrMktKzp6YBnTdp59Yd"
 			],
-			"hoveredShapeId": "shape:n-MHFx4Wwcm9ODlsKBRiN",
+			"hoveredShapeId": "shape:4RlrMktKzp6YBnTdp59Yd",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -533,6 +533,99 @@
 				"terminal": "start"
 			},
 			"typeName": "binding"
+		},
+		{
+			"x": -548.7670393952915,
+			"y": 1727.933182227628,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:D_Xbdmh30HH4RzFdk0Kcj",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 489.5625,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"marks": [
+										{
+											"type": "highlight"
+										}
+									],
+									"text": "Make community page"
+								}
+							]
+						},
+						{
+							"type": "bulletList",
+							"content": [
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
+													"text": "add a load more button at the end"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
+													"text": "sort as popular, new, etc. "
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aG9Db",
+			"typeName": "shape"
 		},
 		{
 			"x": 910,
@@ -783,6 +876,111 @@
 			"typeName": "shape"
 		},
 		{
+			"x": -535.9812843461632,
+			"y": 1493.846830666043,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:4RlrMktKzp6YBnTdp59Yd",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 402.96875,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Todo:"
+								}
+							]
+						},
+						{
+							"type": "bulletList",
+							"content": [
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
+													"text": "make everything responsive"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "cursor-pointer on buttons"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
+													"text": "add ai features"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aF48I",
+			"typeName": "shape"
+		},
+		{
 			"meta": {},
 			"id": "binding:aDKG7MAcN6BaIinwI6Td2",
 			"type": "arrow",
@@ -849,7 +1047,7 @@
 			"isFocused": true,
 			"devicePixelRatio": 1,
 			"isCoarsePointer": false,
-			"isHoveringCanvas": true,
+			"isHoveringCanvas": false,
 			"openMenus": [],
 			"isChangingStyle": false,
 			"isReadonly": false,
@@ -968,6 +1166,45 @@
 				"terminal": "start"
 			},
 			"typeName": "binding"
+		},
+		{
+			"x": -562.419822154658,
+			"y": 2027.9107111535377,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:drYa55WcJqN6_0YQ0mU7q",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 652.078125,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Make leaderboard page - figure out the top players"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aH46N",
+			"typeName": "shape"
 		},
 		{
 			"x": 727,

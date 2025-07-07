@@ -13,16 +13,29 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import React, { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
-import { X, CheckCircle } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Loader2, X } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { Prisma } from "@/generated/prisma/client";
 
 interface ShareTemplateDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onTemplateShare: (template: { title: string; content: string; tags: string[] }) => void;
+  onTemplateShare: (template: { title: string; content: string; tags: string[]; variables: string[] }) => Promise<void>;
+  userTemplates: Prisma.PalmletGetPayload<{
+    include: {
+      tags: true,
+      variables: true,
+    }
+  }>[] | undefined
 }
 
 const userTemplates = [
@@ -30,36 +43,49 @@ const userTemplates = [
     id: 'user-template-1',
     title: "High-Impact Startup Pitch",
     content: "Hey {{name}}, I'm reaching out because I'm incredibly impressed with what you're building at {{company}}. My experience in {{skill}} could be a great asset...",
-    tags: ["Business", "Pitch", "Startup"],
+    tags: ["Startups", "Outreach", "Networking"],
   },
   {
     id: 'user-template-2',
     title: "FAANG-Ready Cover Letter",
     content: "Dear {{hiringManager}}, I am writing to apply for the {{role}} position at {{company}}. With my background in large-scale systems and passion for {{field}}, I am confident I can contribute significantly to your team.",
-    tags: ["Cover Letter", "FAANG", "Tech"],
+    tags: ["CoverLetter", "Interview"],
   },
   {
     id: 'user-template-3',
     title: "Networking Follow-Up",
     content: "Hi {{name}}, it was great connecting at {{event}}. I really enjoyed our conversation about {{topic}}. Let's keep in touch.",
-    tags: ["Networking", "Follow-up"],
+    tags: ["Networking", "FollowUp"],
   },
 ];
 
-export function ShareTemplateDialog({ open, onOpenChange, onTemplateShare }: ShareTemplateDialogProps) {
+const availableTags = [
+  "LinkedIn",
+  "Outreach", 
+  "Networking",
+  "FollowUp",
+  "Interview",
+  "PostInterview",
+  "CoverLetter",
+  "Startups",
+  "ColdEmail"
+];
+
+export function ShareTemplateDialog({ open, onOpenChange, onTemplateShare, userTemplates }: ShareTemplateDialogProps) {
   const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [tags, setTags] = useState<string[]>([]);
-  const [currentTag, setCurrentTag] = useState("");
-
+  const [variables, setVariables] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   useEffect(() => {
     if (selectedTemplateId) {
-        const selected = userTemplates.find(t => t.id === selectedTemplateId);
+        const selected = userTemplates?.find(t => t.id === selectedTemplateId);
         if (selected) {
             setTitle(selected.title);
-            setContent(selected.content);
-            setTags(selected.tags);
+            setContent(selected.content ?? "");
+            // Don't autofill tags - let user choose them manually
+            setVariables(selected.variables.map(v => v.variableName));
         }
     }
   }, [selectedTemplateId]);
@@ -69,7 +95,7 @@ export function ShareTemplateDialog({ open, onOpenChange, onTemplateShare }: Sha
     setTitle("");
     setContent("");
     setTags([]);
-    setCurrentTag("");
+    setVariables([]);
   }
   
   const handleOpenChange = (isOpen: boolean) => {
@@ -79,14 +105,9 @@ export function ShareTemplateDialog({ open, onOpenChange, onTemplateShare }: Sha
     onOpenChange(isOpen);
   }
 
-  const handleTagInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === ' ' && currentTag.trim() !== '') {
-        e.preventDefault();
-        const newTag = currentTag.trim();
-        if (!tags.includes(newTag) && tags.length < 5) {
-            setTags([...tags, newTag]);
-        }
-        setCurrentTag("");
+  const handleTagSelect = (tag: string) => {
+    if (!tags.includes(tag) && tags.length < 5) {
+      setTags([...tags, tag]);
     }
   };
 
@@ -94,11 +115,17 @@ export function ShareTemplateDialog({ open, onOpenChange, onTemplateShare }: Sha
     setTags(tags.filter(tag => tag !== tagToRemove));
   };
 
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!title || !content) return;
-    onTemplateShare({ title, content, tags });
-    handleOpenChange(false);
+    setIsSubmitting(true);
+    try {
+      await onTemplateShare({ title, content, tags, variables });
+      handleOpenChange(false);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -112,29 +139,19 @@ export function ShareTemplateDialog({ open, onOpenChange, onTemplateShare }: Sha
         </DialogHeader>
 
         <div className="space-y-2">
-            <Label>Select a personal template (optional)</Label>
-            <div className="space-y-3 max-h-[200px] overflow-y-auto pr-4">
-                {userTemplates.map(template => (
-                    <div
-                        key={template.id}
-                        onClick={() => setSelectedTemplateId(template.id)}
-                        className={cn(
-                            "group p-3 rounded-lg border-2 cursor-pointer transition-all",
-                            selectedTemplateId === template.id 
-                                ? "border-blue-500 bg-blue-100" 
-                                : "border-muted bg-background hover:bg-muted hover:border-muted"
-                        )}
-                    >
-                        <div className="flex justify-between items-start">
-                             <h4 className={cn("font-semibold text-sm", selectedTemplateId === template.id ? "text-neutral-900" : "text-foreground")}>{template.title}</h4>
-                             <CheckCircle className={cn(
-                                 "w-5 h-5 text-muted-foreground transition-all",
-                                 selectedTemplateId === template.id ? "text-blue-500" : "opacity-0 group-hover:opacity-100"
-                             )}/>
-                        </div>
-                    </div>
-                ))}
-            </div>
+          <Label>Select a personal template (optional)</Label>
+          <Select value={selectedTemplateId || ""} onValueChange={setSelectedTemplateId}>
+            <SelectTrigger>
+              <SelectValue placeholder="Choose a template to pre-fill..." />
+            </SelectTrigger>
+            <SelectContent>
+              {userTemplates?.map(template => (
+                <SelectItem key={template.id} value={template.id}>
+                  {template.title}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         <Separator />
@@ -160,25 +177,30 @@ export function ShareTemplateDialog({ open, onOpenChange, onTemplateShare }: Sha
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="tags">Tags (up to 5)</Label>
-             <div className="flex flex-wrap items-center gap-2">
+            <Label>Tags (up to 5)</Label>
+            <div className="space-y-2">
+              <div className="flex flex-wrap gap-2">
                 {tags.map(tag => (
-                    <Badge key={tag} variant="secondary" className="flex items-center gap-1">
-                        {tag}
-                        <button onClick={() => removeTag(tag)} className="rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 p-0.5">
-                            <X className="w-3 h-3"/>
-                        </button>
-                    </Badge>
+                  <Badge key={tag} variant="secondary" className="flex items-center gap-1">
+                    {tag}
+                    <button onClick={() => removeTag(tag)} className="rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 p-0.5">
+                      <X className="w-3 h-3"/>
+                    </button>
+                  </Badge>
                 ))}
-                 <Input
-                    id="tags"
-                    placeholder={tags.length > 0 ? "Add more..." : "Add tags (space-separated)"}
-                    className="flex-1 min-w-[150px] border-none focus-visible:ring-0 focus-visible:ring-offset-0"
-                    value={currentTag}
-                    onChange={(e) => setCurrentTag(e.target.value)}
-                    onKeyDown={handleTagInput}
-                    disabled={tags.length >= 5}
-                />
+              </div>
+              <Select value="" onValueChange={handleTagSelect} disabled={tags.length >= 5}>
+                <SelectTrigger>
+                  <SelectValue placeholder={tags.length >= 5 ? "Maximum 5 tags selected" : "Add a tag..."} />
+                </SelectTrigger>
+                <SelectContent>
+                  {availableTags.filter(tag => !tags.includes(tag)).map(tag => (
+                    <SelectItem key={tag} value={tag}>
+                      {tag}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>
@@ -186,7 +208,9 @@ export function ShareTemplateDialog({ open, onOpenChange, onTemplateShare }: Sha
             <DialogClose asChild>
                 <Button type="button" variant="outline">Cancel</Button>
             </DialogClose>
-            <Button type="submit" onClick={handleSubmit} disabled={!title || !content}>Share Template</Button>
+            <Button type="submit" onClick={handleSubmit} disabled={!title || !content || isSubmitting}>
+                {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : "Share Template"}
+            </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

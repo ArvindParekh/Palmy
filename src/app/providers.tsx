@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import type { ReactNode } from "react"
 import { ThemeProvider } from "@/components/theme/theme-provider"
+import { Analytics } from "@vercel/analytics/next"
 // import { ModeToggle } from "@/components/theme/mode-toggle"
 
 import { authClient } from "@/lib/auth-client"
@@ -32,6 +33,7 @@ export function Providers({ children }: { children: ReactNode }) {
                 {children}
                 {/* <ModeToggle /> */}
             </ThemeProvider>
+            <Analytics />
         </AuthUIProvider>
     )
 }

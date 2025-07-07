@@ -123,7 +123,7 @@ export function LandingPage({ loggedIn }: { loggedIn: boolean }) {
       <header className="sticky top-0 z-50 w-full border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-black/80 backdrop-blur-xl">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-br from-yellow-500 via-orange-500 to-red-500 rounded-lg flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <span className="text-xl font-bold text-foreground">Templates</span>
@@ -191,7 +191,7 @@ export function LandingPage({ loggedIn }: { loggedIn: boolean }) {
           <div className="space-y-6">
             <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
               Create job applications
-              <span className="from-blue-600 to-purple-600 bg-clip-text text-transparent bg-gradient-to-r">
+              <span className="from-yellow-500 via-orange-500 to-red-500 bg-clip-text text-transparent bg-gradient-to-r">
                 {" "}
                 10x faster
               </span>
@@ -412,7 +412,7 @@ export function LandingPage({ loggedIn }: { loggedIn: boolean }) {
       <footer className="border-t border-neutral-200 dark:border-neutral-800">
         <div className="container mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-br from-yellow-500 via-orange-500 to-red-500 rounded-lg flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <span className="text-lg font-bold text-foreground">Templates</span>

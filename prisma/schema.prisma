@@ -28,6 +28,7 @@ model User {
   sessions      Session[]
   accounts      Account[]
   folders       Palmlet_Folder[]
+  sharedPalmlets SharedPalmlet[]
   @@map("user")
 }
 
@@ -35,7 +36,7 @@ model Palmlet_Folder {
   id String @id @default(uuid())
 
   userId String
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   folderName String
   folderDescription String?
@@ -52,7 +53,7 @@ model Palmlet {
   id String @id @default(uuid())
 
   folderId String
-  folder   Palmlet_Folder   @relation(fields: [folderId], references: [id])
+  folder   Palmlet_Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
 
   title   String
   content String?
@@ -66,11 +67,39 @@ model Palmlet {
   @@unique([folderId, title])
 }
 
+model SharedPalmlet {
+  id String @id @default(uuid())
+
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title String
+  content String
+  upvotes Int @default(0)
+  // views Int @default(0)
+  tags SharedPalmletTags[]
+  variables Palmlet_Variable[]
+
+  createdAt DateTime @default(now())
+}
+
+enum SharedPalmletTags {
+  LinkedIn
+  Outreach
+  Networking
+  FollowUp
+  Interview
+  PostInterview
+  CoverLetter
+  Startups
+  ColdEmail
+}
+
 model Palmlet_Tag {
   id String @id @default(uuid())
 
   palmlets Palmlet[]
-
+  
   tagName String @unique
 
   createdAt DateTime @default(now())
@@ -81,6 +110,7 @@ model Palmlet_Variable {
   id String @id @default(uuid())
 
   palmlets Palmlet[]
+  sharedPalmlets SharedPalmlet[]
 
   variableName String @unique
 }

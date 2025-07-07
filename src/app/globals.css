@@ -137,3 +137,8 @@
 @utility bg-grid {
   @apply bg-background bg-[linear-gradient(to_right,theme(colors.muted-foreground/0.2)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.muted-foreground/0.2)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,theme(colors.muted-foreground/0.15)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.muted-foreground/0.15)_1px,transparent_1px)] bg-[size:24px_24px];
 }
+
+/* Custom black sidebar background */
+[data-slot="sidebar"] {
+  --sidebar: bg-background;
+}
