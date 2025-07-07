@@ -101,8 +101,8 @@ export function UseTemplateDialog({ open, onOpenChange, template }: UseTemplateD
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="max-w-7xl max-h-[95vh] w-[90vw] overflow-hidden flex flex-col">
-        <DialogHeader>
+      <DialogContent className="max-w-7xl max-h-[95vh] w-[90vw] flex flex-col">
+        <DialogHeader className="flex-shrink-0">
           <DialogTitle className="flex items-center gap-2 text-xl">
             <Zap className="w-5 h-5" />
             Use Template: {template.title}
@@ -112,7 +112,7 @@ export function UseTemplateDialog({ open, onOpenChange, template }: UseTemplateD
           </DialogDescription>
         </DialogHeader>
 
-        <div className="flex-1 overflow-hidden space-y-6">
+        <div className="flex-1 overflow-y-auto space-y-6 min-h-0">
           {/* Variables Section */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
@@ -151,19 +151,14 @@ export function UseTemplateDialog({ open, onOpenChange, template }: UseTemplateD
           </div>
 
           {/* Preview Section */}
-          <div className="flex flex-col gap-4 flex-1 overflow-hidden">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Eye className="w-4 h-4" />
-                <h3 className="font-medium text-foreground">Preview</h3>
-              </div>
-              
-              {/* Actions */}
-              
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <Eye className="w-4 h-4" />
+              <h3 className="font-medium text-foreground">Preview</h3>
             </div>
             
-            <Card className="flex-1 overflow-hidden">
-              <CardContent className="p-6 h-full overflow-y-auto">
+            <Card>
+              <CardContent className="p-6 max-h-80 overflow-y-auto">
                 <div className="whitespace-pre-wrap text-sm leading-relaxed">
                   {personalizedContent.split(/({{.*?}})/).map((part, index) => {
                     const match = part.match(/{{(.*?)}}/);
@@ -182,36 +177,37 @@ export function UseTemplateDialog({ open, onOpenChange, template }: UseTemplateD
                 </div>
               </CardContent>
             </Card>
-
-            <div className="flex gap-2">
-                <Button
-                  onClick={copyToClipboard}
-                  disabled={!allVariablesFilled}
-                  size="sm"
-                >
-                  <Copy className="w-4 h-4 mr-2" />
-                  Copy to Clipboard
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={downloadAsText}
-                  disabled={!allVariablesFilled}
-                  size="sm"
-                >
-                  <Download className="w-4 h-4 mr-2" />
-                  Download
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={openInEmail}
-                  disabled={!allVariablesFilled}
-                  size="sm"
-                >
-                  <Mail className="w-4 h-4 mr-2" />
-                  Email
-                </Button>
-              </div>
           </div>
+        </div>
+
+        {/* Action Buttons - Fixed at bottom */}
+        <div className="flex gap-2 pt-4 border-t border-border flex-shrink-0">
+          <Button
+            onClick={copyToClipboard}
+            disabled={!allVariablesFilled}
+            size="sm"
+          >
+            <Copy className="w-4 h-4 mr-2" />
+            Copy to Clipboard
+          </Button>
+          <Button
+            variant="outline"
+            onClick={downloadAsText}
+            disabled={!allVariablesFilled}
+            size="sm"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Download
+          </Button>
+          <Button
+            variant="outline"
+            onClick={openInEmail}
+            disabled={!allVariablesFilled}
+            size="sm"
+          >
+            <Mail className="w-4 h-4 mr-2" />
+            Email
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

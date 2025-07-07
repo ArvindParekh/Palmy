@@ -41,8 +41,8 @@ export function ContentPreviewDialog({ open, onOpenChange, title, content, varia
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[700px]">
-        <DialogHeader>
+      <DialogContent className="sm:max-w-[700px] max-h-[90vh] flex flex-col">
+        <DialogHeader className="flex-shrink-0">
           <DialogTitle className="flex items-center justify-between">
             <span>{title}</span>
             <div className="flex gap-2">
@@ -62,8 +62,8 @@ export function ContentPreviewDialog({ open, onOpenChange, title, content, varia
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4">
-          <div className="bg-muted/50 border rounded-lg p-4">
+        <div className="space-y-4 flex-1 overflow-y-auto min-h-0">
+          <div className="bg-muted/50 border rounded-lg p-4 max-h-96 overflow-y-auto">
             <div 
               className="whitespace-pre-wrap text-sm leading-relaxed"
               dangerouslySetInnerHTML={{ __html: highlightedContent }}
@@ -71,7 +71,7 @@ export function ContentPreviewDialog({ open, onOpenChange, title, content, varia
           </div>
           
           {variables.length > 0 && (
-            <div className="space-y-2">
+            <div className="space-y-2 flex-shrink-0">
               <h4 className="font-semibold text-sm">Variables in this template:</h4>
               <div className="flex flex-wrap gap-2">
                 {variables.map((variable) => (
