@@ -36,9 +36,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -189.0630795784532,
-			"y": 2022.6600914087603,
-			"lastActivityTimestamp": 1751894261239,
+			"x": -308.88060038925045,
+			"y": 1517.6324111219812,
+			"lastActivityTimestamp": 1751896533869,
 			"meta": {}
 		},
 		{
@@ -251,9 +251,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": 1344.976273833808,
-			"y": -1482.5278789098575,
-			"z": 0.6609492856357373,
+			"x": 752.5839222966079,
+			"y": -1316.93290409515,
+			"z": 1.016444948082147,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -410,12 +410,12 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": null,
+			"editingShapeId": "shape:4RlrMktKzp6YBnTdp59Yd",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:drYa55WcJqN6_0YQ0mU7q"
+				"shape:4RlrMktKzp6YBnTdp59Yd"
 			],
-			"hoveredShapeId": "shape:drYa55WcJqN6_0YQ0mU7q",
+			"hoveredShapeId": "shape:4RlrMktKzp6YBnTdp59Yd",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -585,6 +585,11 @@
 											"content": [
 												{
 													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
 													"text": "add a load more button at the end"
 												}
 											]
@@ -602,6 +607,11 @@
 											"content": [
 												{
 													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
 													"text": "sort as popular, new, etc. "
 												}
 											]
@@ -911,6 +921,11 @@
 											"content": [
 												{
 													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
 													"text": "make everything responsive"
 												}
 											]
@@ -1015,7 +1030,7 @@
 				"x": 0,
 				"y": 0,
 				"w": 1683,
-				"h": 662
+				"h": 939
 			},
 			"insets": [
 				false,
@@ -1032,7 +1047,7 @@
 			"isFocused": true,
 			"devicePixelRatio": 1,
 			"isCoarsePointer": false,
-			"isHoveringCanvas": true,
+			"isHoveringCanvas": false,
 			"openMenus": [],
 			"isChangingStyle": false,
 			"isReadonly": false,
