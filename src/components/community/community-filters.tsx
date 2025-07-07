@@ -76,9 +76,9 @@ export function CommunityFilters({
         <div className="border-b border-neutral-200 dark:border-neutral-800">
         <Tabs value={activeSort} onValueChange={setActiveSort} className="w-full">
             <TabsList className="bg-transparent p-0">
-            <TabsTrigger value="trending" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-neutral-900 dark:data-[state=active]:border-neutral-100 rounded-none -mb-px px-4">Trending</TabsTrigger>
-            <TabsTrigger value="popular" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-neutral-900 dark:data-[state=active]:border-neutral-100 rounded-none -mb-px px-4">Popular</TabsTrigger>
             <TabsTrigger value="recent" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-neutral-900 dark:data-[state=active]:border-neutral-100 rounded-none -mb-px px-4">Recent</TabsTrigger>
+            <TabsTrigger value="popular" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-neutral-900 dark:data-[state=active]:border-neutral-100 rounded-none -mb-px px-4">Popular</TabsTrigger>
+            <TabsTrigger value="trending" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-neutral-900 dark:data-[state=active]:border-neutral-100 rounded-none -mb-px px-4">Trending</TabsTrigger>
             </TabsList>
         </Tabs>
         </div>
