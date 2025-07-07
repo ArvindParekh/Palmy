@@ -10,6 +10,9 @@ import { ShareTemplatePrompt } from "@/components/community/share-template-promp
 import { Prisma, SharedPalmletTags } from "@/generated/prisma/client";
 import { createCommunityTemplate } from "@/actions/community";
 import { toast } from "sonner";
+import { Button } from "../ui/button";
+import { Loader2 } from "lucide-react";
+import { loadMorePalmlets } from "@/actions/community";
 
 // const initialCommunityPosts: CommunityTemplatePostProps[] = [
 //   {
@@ -122,7 +125,9 @@ export default function CommunityPage({ popularPalmlets, latestPalmlets, userTem
   const [searchQuery, setSearchQuery] = useState("");
   const [activeSort, setActiveSort] = useState("trending");
   const [activeTags, setActiveTags] = useState<string[]>([]);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
   const allTags = useMemo(() => [...new Set(communityPosts.flatMap(p => p.tags))], [communityPosts]);
 
   const handleShareTemplate = async (newTemplate: { title: string; content: string; tags: string[]; variables: string[] }) => {
@@ -152,6 +157,19 @@ export default function CommunityPage({ popularPalmlets, latestPalmlets, userTem
         toast.error(result.message);
     }
   };
+
+  const handleLoadMore = async () => {
+    setIsLoading(true);
+    const result = await loadMorePalmlets(page+1);
+    if (result.success) {
+      setCommunityPosts([...communityPosts, ...result.data || []]);
+      setPage(page + 1);
+      setHasMore((result?.data?.length || 0) > 0);
+    } else {
+      toast.error(result.message);
+    }
+    setIsLoading(false);
+  }
 
   const filteredPosts = useMemo(() => {
     let posts = [...communityPosts];
@@ -228,6 +246,12 @@ export default function CommunityPage({ popularPalmlets, latestPalmlets, userTem
                 </div>
             )}
           </div>
+
+          {hasMore && (
+            <div className="flex justify-center">
+              <Button variant="outline" onClick={() => handleLoadMore()} disabled={isLoading}>{isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Load More"}</Button>
+            </div>
+          )}
         </main>
       </div>
     </div>

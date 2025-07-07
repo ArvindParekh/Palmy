@@ -11,12 +11,12 @@ export default async function Community() {
         headers: await headers()
     })
     const popularPalmlets = await getPopularPalmlets();
-    const latestPalmlets = await getLatestPalmlets();
+    const latestPalmlets = await getLatestPalmlets(1);
     const userTemplates = await getUserWithPalmlets(session?.user?.id as string);
 
 
     return (
-        <div className="w-full min-h-screen p-4 md:p-12 space-y-12">
+        <div className="w-full min-h-screen">
             <Toaster />
             <CommunityPage popularPalmlets={popularPalmlets.data} latestPalmlets={latestPalmlets.data} userTemplates={userTemplates.data} />
         </div>

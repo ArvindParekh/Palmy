@@ -68,3 +68,35 @@ export async function createCommunityTemplate(data: {
     }
     
 }
+
+export async function loadMorePalmlets(page: number) {
+    try {
+        const latestPalmlets = await prisma.sharedPalmlet.findMany({
+            orderBy:{
+                createdAt: "desc"
+            },
+            include: {
+                variables: true,
+                user: {
+                    select: {
+                        email: true,
+                        name: true,
+                        image: true,
+                    }
+                }
+            },
+            take: 10,
+            skip: (page - 1) * 10,
+        })
+
+        return {
+            success: true,
+            data: latestPalmlets,
+        }
+    } catch (error) {
+        return {
+            success: false,
+            message: "Failed to load more palmlets"
+        }
+    }
+}

@@ -36,9 +36,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -433.9665293900428,
-			"y": 1875.7823239010545,
-			"lastActivityTimestamp": 1751759152663,
+			"x": -189.0630795784532,
+			"y": 2022.6600914087603,
+			"lastActivityTimestamp": 1751894261239,
 			"meta": {}
 		},
 		{
@@ -251,9 +251,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": 842.725921075398,
-			"y": -1381.7922505451359,
-			"z": 1.149820675831187,
+			"x": 1344.976273833808,
+			"y": -1482.5278789098575,
+			"z": 0.6609492856357373,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -410,12 +410,12 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": "shape:drYa55WcJqN6_0YQ0mU7q",
+			"editingShapeId": null,
 			"croppingShapeId": null,
 			"selectedShapeIds": [
 				"shape:drYa55WcJqN6_0YQ0mU7q"
 			],
-			"hoveredShapeId": null,
+			"hoveredShapeId": "shape:drYa55WcJqN6_0YQ0mU7q",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -546,7 +546,7 @@
 			"props": {
 				"color": "black",
 				"size": "m",
-				"w": 278.546875,
+				"w": 489.5625,
 				"font": "draw",
 				"textAlign": "start",
 				"autoSize": true,
@@ -562,15 +562,53 @@
 							"content": [
 								{
 									"type": "text",
+									"marks": [
+										{
+											"type": "highlight"
+										}
+									],
 									"text": "Make community page"
 								}
 							]
 						},
 						{
-							"type": "paragraph",
-							"attrs": {
-								"dir": "auto"
-							}
+							"type": "bulletList",
+							"content": [
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "add a load more button at the end"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "sort as popular, new, etc. "
+												}
+											]
+										}
+									]
+								}
+							]
 						}
 					]
 				}
@@ -976,8 +1014,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1259,
-				"h": 939
+				"w": 1683,
+				"h": 662
 			},
 			"insets": [
 				false,
@@ -1115,8 +1153,8 @@
 			"typeName": "binding"
 		},
 		{
-			"x": -554.8549452289033,
-			"y": 1816.0941572323995,
+			"x": -562.419822154658,
+			"y": 2027.9107111535377,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
