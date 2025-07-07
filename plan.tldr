@@ -36,9 +36,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -391.1156985903132,
-			"y": 2437.6287344926936,
-			"lastActivityTimestamp": 1751908024410,
+			"x": -84.10701183280275,
+			"y": 2483.3917042112994,
+			"lastActivityTimestamp": 1751910374480,
 			"meta": {}
 		},
 		{
@@ -251,9 +251,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": 680.0889611301727,
-			"y": -2065.807632921911,
-			"z": 1.5087901080116721,
+			"x": 639.9538053988214,
+			"y": -2017.3697524855493,
+			"z": 1.1244105520341874,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -526,6 +526,11 @@
 											"content": [
 												{
 													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
 													"text": "make sure all links/redirects are working in the app"
 												}
 											]
@@ -599,6 +604,11 @@
 											"content": [
 												{
 													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
 													"text": "implement upvote in community"
 												}
 											]
@@ -616,7 +626,34 @@
 											"content": [
 												{
 													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
 													"text": "add ai to /lab"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
+													"text": "implement save to library in /lab"
 												}
 											]
 										}
@@ -1236,8 +1273,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1683,
-				"h": 939
+				"w": 1259,
+				"h": 662
 			},
 			"insets": [
 				false,
