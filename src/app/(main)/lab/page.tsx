@@ -136,7 +136,7 @@ Best regards,
         <div className="text-center mb-8 md:mb-12">
           <h1 className="text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-4">
             Prompts to templates in{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 bg-clip-text text-transparent">
               seconds
             </span>
           </h1>
