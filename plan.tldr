@@ -36,9 +36,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -308.88060038925045,
-			"y": 1517.6324111219812,
-			"lastActivityTimestamp": 1751896533869,
+			"x": -549.5874708479145,
+			"y": 2103.0739516220506,
+			"lastActivityTimestamp": 1751903217789,
 			"meta": {}
 		},
 		{
@@ -251,9 +251,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": 752.5839222966079,
-			"y": -1316.93290409515,
-			"z": 1.016444948082147,
+			"x": 643.1336285551614,
+			"y": -1633.3314177587781,
+			"z": 0.9941616233030527,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -293,6 +293,45 @@
 			},
 			"parentId": "page:page",
 			"index": "a3Bpb",
+			"typeName": "shape"
+		},
+		{
+			"x": -549.5874708479145,
+			"y": 2086.8708266220506,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:lffEj0F_WG94Tz9bCgCaT",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 461.96875,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "fork templates from community page"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aJ4qt",
 			"typeName": "shape"
 		},
 		{
@@ -410,12 +449,12 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": "shape:4RlrMktKzp6YBnTdp59Yd",
+			"editingShapeId": "shape:lffEj0F_WG94Tz9bCgCaT",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:4RlrMktKzp6YBnTdp59Yd"
+				"shape:lffEj0F_WG94Tz9bCgCaT"
 			],
-			"hoveredShapeId": "shape:4RlrMktKzp6YBnTdp59Yd",
+			"hoveredShapeId": "shape:lffEj0F_WG94Tz9bCgCaT",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -1029,7 +1068,7 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1683,
+				"w": 1259,
 				"h": 939
 			},
 			"insets": [
@@ -1047,7 +1086,7 @@
 			"isFocused": true,
 			"devicePixelRatio": 1,
 			"isCoarsePointer": false,
-			"isHoveringCanvas": false,
+			"isHoveringCanvas": true,
 			"openMenus": [],
 			"isChangingStyle": false,
 			"isReadonly": false,
@@ -1168,8 +1207,8 @@
 			"typeName": "binding"
 		},
 		{
-			"x": -562.419822154658,
-			"y": 2027.9107111535377,
+			"x": -556.3845861735454,
+			"y": 1895.1355195690583,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
@@ -1195,6 +1234,11 @@
 							"content": [
 								{
 									"type": "text",
+									"marks": [
+										{
+											"type": "highlight"
+										}
+									],
 									"text": "Make leaderboard page - figure out the top players"
 								}
 							]
@@ -1204,6 +1248,45 @@
 			},
 			"parentId": "page:page",
 			"index": "aH46N",
+			"typeName": "shape"
+		},
+		{
+			"x": -543.5522348668018,
+			"y": 1997.3481595688786,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:bVY10QOXW4ptD5UPUjMBE",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 189.859375,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Version control"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aIBr0",
 			"typeName": "shape"
 		},
 		{

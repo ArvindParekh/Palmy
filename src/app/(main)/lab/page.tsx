@@ -8,7 +8,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 
 import { Sparkles, Plus, Save, Copy, Check, Mail, MessageSquare, FileText, Users, Loader2, ArrowRight, ArrowUpRight } from 'lucide-react'
-import { cn } from '@/lib/utils'
 
 interface TemplateData {
   content: string

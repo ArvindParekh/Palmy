@@ -2,7 +2,6 @@ import { FilePlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
    TemplateCard,
-   TemplateCardProps,
 } from "@/components/palmlet/template-card";
 import { Separator } from "@/components/ui/separator";
 import { getRecentlyEditedPalmlets } from "@/actions/palmlet";
