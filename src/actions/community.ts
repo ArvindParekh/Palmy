@@ -100,3 +100,38 @@ export async function loadMorePalmlets(page: number) {
         }
     }
 }
+
+export async function upvotePost(postId: string) {
+    try {
+        const updatedPost = await prisma.sharedPalmlet.update({
+            where: {
+                id: postId
+            },
+            data: {
+                upvotes: {
+                    increment: 1
+                }
+            },
+            include: {
+                user: {
+                    select: {
+                        name: true,
+                        image: true,
+                        email: true,
+                    }
+                },
+                variables: true,
+            }
+        });
+
+        return {
+            success: true,
+            data: updatedPost
+        }
+    } catch (error) {
+        return {
+            success: false,
+            message: "Failed to upvote post"
+        }
+    }
+}

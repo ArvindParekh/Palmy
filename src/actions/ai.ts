@@ -58,12 +58,52 @@ export async function improvePalmletText(
       formal: `Rewrite this text in a formal tone while keeping {{variables}}:\n\n${text}`,
       casual: `Rewrite this text in a casual tone while keeping {{variables}}:\n\n${text}`,
    };
+
+   try {
+      const result = await generateText({
+         model: google("gemini-2.0-flash"),
+         system: systemPrompt,
+         messages: [
+            {
+               role: "user",
+               content: prompts[action] + (context ? `\n\nAdditional context: ${context}` : ""),
+            },
+         ],
+      });
+
+      return {
+         success: true,
+         text: result.text,
+      };
+   } catch (error) {
+      console.error("Error improving text:", error);
+      return {
+         success: false,
+         error: "Failed to improve text",
+      };
+   }
 }
 
 export async function detectVariables(text: string, cursorPosition?: number) {
    // returns suggested {{variables}} for existing text
+   const variableRegex = /\{\{([^}]+)\}\}/g;
+   const matches = [];
+   let match;
+   
+   while ((match = variableRegex.exec(text)) !== null) {
+      matches.push(match[1]);
+   }
+   
+   return {
+      success: true,
+      variables: [...new Set(matches)], 
+   };
 }
 
 export async function getSuggestions(text: string, cursorPosition?: number) {
    // real-time suggestions (could be debounced) - would cost me a lot!
+   return {
+      success: true,
+      suggestions: [],
+   };
 }

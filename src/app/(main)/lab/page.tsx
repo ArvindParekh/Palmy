@@ -6,8 +6,11 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Toaster } from "@/components/ui/sonner"
 
 import { Sparkles, Plus, Save, Copy, Check, Mail, MessageSquare, FileText, Users, Loader2, ArrowRight, ArrowUpRight } from 'lucide-react'
+import { generatePalmletText, detectVariables } from '@/actions/ai'
+import { toast } from 'sonner'
 
 interface TemplateData {
   content: string
@@ -65,30 +68,30 @@ export default function LabPage() {
     
     setIsGenerating(true)
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    const mockTemplate: TemplateData = {
-      title: generateTemplateTitle(prompt),
-      category: 'Cold Email',
-      content: `Subject: Quick question about {{Company}}'s {{Recent_News}}
-
-Hi {{First_Name}},
-
-I hope this message finds you well. I came across {{Company}} and was impressed by {{Recent_News}}.
-
-I'm {{Your_Name}} from {{Your_Company}}, and we specialize in {{Your_Service}}. I noticed that {{Company}} might benefit from {{Specific_Benefit}}.
-
-Would you be open to a brief 15-minute call to discuss how we could help {{Company}} achieve {{Specific_Goal}}?
-
-Best regards,
-{{Your_Name}}
-{{Your_Title}}
-{{Your_Company}}`,
-      variables: ['Company', 'Recent_News', 'First_Name', 'Your_Name', 'Your_Company', 'Your_Service', 'Specific_Benefit', 'Specific_Goal', 'Your_Title']
+    try {
+      const result = await generatePalmletText(prompt, "")
+      
+      if (result.success && result.text) {
+        // Detect variables in the generated text
+        const variableResult = await detectVariables(result.text)
+        
+        const template: TemplateData = {
+          title: generateTemplateTitle(prompt),
+          category: 'Generated Template',
+          content: result.text,
+          variables: variableResult.success ? variableResult.variables : []
+        }
+        
+        setGeneratedTemplate(template)
+        toast.success("Template generated successfully!")
+      } else {
+        toast.error(result.error || "Failed to generate template")
+      }
+    } catch (error) {
+      console.error("Error generating template:", error)
+      toast.error("An error occurred while generating the template")
     }
     
-    setGeneratedTemplate(mockTemplate)
     setIsGenerating(false)
   }
 
@@ -130,6 +133,7 @@ Best regards,
 
   return (
     <div className="h-full bg-background flex flex-col items-center justify-center font-inter">
+      <Toaster />
       <div className="max-w-4xl mx-auto px-4 py-6 md:py-8 lg:py-16">
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">

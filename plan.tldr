@@ -36,9 +36,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -549.5874708479145,
-			"y": 2103.0739516220506,
-			"lastActivityTimestamp": 1751903217789,
+			"x": -391.1156985903132,
+			"y": 2437.6287344926936,
+			"lastActivityTimestamp": 1751908024410,
 			"meta": {}
 		},
 		{
@@ -251,9 +251,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": 643.1336285551614,
-			"y": -1633.3314177587781,
-			"z": 0.9941616233030527,
+			"x": 680.0889611301727,
+			"y": -2065.807632921911,
+			"z": 1.5087901080116721,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -449,12 +449,12 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": "shape:lffEj0F_WG94Tz9bCgCaT",
+			"editingShapeId": "shape:zk2rRUcFOAvGLSx50BnQ7",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:lffEj0F_WG94Tz9bCgCaT"
+				"shape:zk2rRUcFOAvGLSx50BnQ7"
 			],
-			"hoveredShapeId": "shape:lffEj0F_WG94Tz9bCgCaT",
+			"hoveredShapeId": "shape:zk2rRUcFOAvGLSx50BnQ7",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -462,6 +462,174 @@
 			"id": "instance_page_state:page:page",
 			"pageId": "page:page",
 			"typeName": "instance_page_state"
+		},
+		{
+			"x": -541.5673742704694,
+			"y": 2189.4516602061094,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:zk2rRUcFOAvGLSx50BnQ7",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 886.078125,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Launch plan:"
+								}
+							]
+						},
+						{
+							"type": "bulletList",
+							"content": [
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "remove all bs stats anywhere in the app"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "make sure all links/redirects are working in the app"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "better all public pages:"
+												}
+											]
+										},
+										{
+											"type": "bulletList",
+											"content": [
+												{
+													"type": "listItem",
+													"content": [
+														{
+															"type": "paragraph",
+															"attrs": {
+																"dir": "auto"
+															},
+															"content": [
+																{
+																	"type": "text",
+																	"text": "/community - add a few helpful templates"
+																}
+															]
+														}
+													]
+												},
+												{
+													"type": "listItem",
+													"content": [
+														{
+															"type": "paragraph",
+															"attrs": {
+																"dir": "auto"
+															},
+															"content": [
+																{
+																	"type": "text",
+																	"text": "/leaderboard - delete bs data from db and show this properly"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "implement upvote in community"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "add ai to /lab"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aK3TZ",
+			"typeName": "shape"
 		},
 		{
 			"x": 446,
@@ -1068,7 +1236,7 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1259,
+				"w": 1683,
 				"h": 939
 			},
 			"insets": [

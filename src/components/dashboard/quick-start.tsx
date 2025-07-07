@@ -9,14 +9,14 @@ const actions = [
     icon: FilePlus,
     title: "Create from scratch",
     description: "Start with a blank canvas and build your template.",
-    href: "/palmlets/editor/new",
+    href: "/palmlets",
     cta: "New Template",
   },
   {
     icon: Bot,
     title: "Generate with AI",
     description: "Describe what you need and let our AI create a draft for you.",
-    href: "/palmlets/new/ai",
+    href: "/lab",
     cta: "Use AI Assistant",
   },
   {
