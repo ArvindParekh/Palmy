@@ -25,13 +25,20 @@ import { Badge } from "@/components/ui/badge";
 import { ModeToggle } from "./theme/mode-toggle";
 import { usePathname } from "next/navigation";
 import AppSidebarContent from "./app-sidebar-content";
+import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { getUserInfo } from "@/lib/data/user";
 
 
 
-export function AppSidebar() {
+export async function AppSidebar() {
 
-   
+   const session = await auth.api.getSession({
+      headers: await headers()
+   })
 
+   const user = (await getUserInfo(session?.user?.id as string)).data;
 
    return (
       <Sidebar
@@ -59,18 +66,20 @@ export function AppSidebar() {
          <SidebarFooter className='p-4 border-t border-border'>
             <div className='flex items-center gap-3'>
                <Avatar className='w-8 h-8'>
-                  <AvatarImage src='/placeholder.svg?height=32&width=32' />
-                  <AvatarFallback className='bg-gradient-to-br from-primary to-accent text-foreground text-xs font-medium'>
-                     JD
+                  <AvatarImage src={user?.image || ""} />
+                  <AvatarFallback className='bg-gradient-to-br from-yellow-500 via-orange-500 to-red-500 text-foreground text-xs font-medium'>
+                     {user?.name.split(" ").map((n: string) => n[0]).join("")}
                   </AvatarFallback>
                </Avatar>
                <div className='flex-1 min-w-0'>
-                  <p className='text-sm font-medium text-foreground truncate'>
-                     John Doe
-                  </p>
+                  <Link href="/profile" className='hover:underline'>
+                     <p className='text-sm font-medium text-foreground truncate cursor-pointer'>
+                        {user?.name}
+                     </p>
+                  </Link>
                   <div className='flex items-start gap-2'>
                      <p className='text-xs text-muted-foreground truncate'>
-                        Pro Member
+                        {user?.email}
                      </p>
                   </div>
                </div>
