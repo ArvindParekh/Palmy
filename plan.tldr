@@ -36,9 +36,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -84.10701183280275,
-			"y": 2483.3917042112994,
-			"lastActivityTimestamp": 1751910374480,
+			"x": 751.0137767321878,
+			"y": 2130.082840371392,
+			"lastActivityTimestamp": 1752121404091,
 			"meta": {}
 		},
 		{
@@ -251,9 +251,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": 639.9538053988214,
-			"y": -2017.3697524855493,
-			"z": 1.1244105520341874,
+			"x": 179.08249538307192,
+			"y": -1742.253517950197,
+			"z": 1.1525688599546986,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -449,12 +449,12 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": "shape:zk2rRUcFOAvGLSx50BnQ7",
+			"editingShapeId": "shape:cpCXH1KKAVMgARNTPwB-k",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:zk2rRUcFOAvGLSx50BnQ7"
+				"shape:cpCXH1KKAVMgARNTPwB-k"
 			],
-			"hoveredShapeId": "shape:zk2rRUcFOAvGLSx50BnQ7",
+			"hoveredShapeId": "shape:cpCXH1KKAVMgARNTPwB-k",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -758,6 +758,45 @@
 			},
 			"parentId": "page:page",
 			"index": "aCbjy",
+			"typeName": "shape"
+		},
+		{
+			"x": 366.6549627890348,
+			"y": 2109.5415797738397,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:cpCXH1KKAVMgARNTPwB-k",
+			"type": "text",
+			"props": {
+				"color": "violet",
+				"size": "m",
+				"w": 594.705292802494,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1.214187601344933,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Show walkthroughs to first time users!"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aLAm5",
 			"typeName": "shape"
 		},
 		{
@@ -1259,7 +1298,9 @@
 		{
 			"followingUserId": null,
 			"opacityForNextShape": 1,
-			"stylesForNextShape": {},
+			"stylesForNextShape": {
+				"tldraw:color": "violet"
+			},
 			"brush": null,
 			"scribbles": [],
 			"cursor": {
@@ -1273,8 +1314,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1259,
-				"h": 662
+				"w": 1683,
+				"h": 939
 			},
 			"insets": [
 				false,
