@@ -151,13 +151,6 @@ export default function CommunityPage({
 
    return (
       <div className='relative w-full min-h-screen'>
-         <div
-            className='absolute inset-0 w-full h-full opacity-50 bg-grid'
-            // style={{
-            //   backgroundImage: 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 32 32\' width=\'32\' height=\'32\' fill=\'none\' stroke=\'rgb(203 213 225 / 0.1)\'%3e%3cpath d=\'M0 .5H31.5V32\'/%3e%3c/svg%3e")',
-            //   backgroundPosition: '10px 10px',
-            // }}
-         />
          <div className='relative w-full max-w-4xl mx-auto min-h-screen p-4 md:p-6'>
             <header className='mb-6'>
                <h1 className='text-2xl md:text-3xl font-bold tracking-tighter text-foreground'>

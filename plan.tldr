@@ -36,9 +36,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": -84.10701183280275,
-			"y": 2483.3917042112994,
-			"lastActivityTimestamp": 1751910374480,
+			"x": -902.6984602736804,
+			"y": 2052.122411225852,
+			"lastActivityTimestamp": 1752428836967,
 			"meta": {}
 		},
 		{
@@ -157,6 +157,45 @@
 			"typeName": "shape"
 		},
 		{
+			"x": -1041.9067069870075,
+			"y": 2033.7096315161166,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:VJePOvsU6NLnO26u3umOD",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 297.984375,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "create onboarding-flow"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aL71V",
+			"typeName": "shape"
+		},
+		{
 			"x": 248,
 			"y": 316,
 			"rotation": 0,
@@ -251,9 +290,9 @@
 			"typeName": "binding"
 		},
 		{
-			"x": 639.9538053988214,
-			"y": -2017.3697524855493,
-			"z": 1.1244105520341874,
+			"x": 1209.8404649268941,
+			"y": -1688.6342114743868,
+			"z": 0.9051187912701256,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -449,12 +488,12 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": "shape:zk2rRUcFOAvGLSx50BnQ7",
+			"editingShapeId": null,
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:zk2rRUcFOAvGLSx50BnQ7"
+				"shape:VJePOvsU6NLnO26u3umOD"
 			],
-			"hoveredShapeId": "shape:zk2rRUcFOAvGLSx50BnQ7",
+			"hoveredShapeId": "shape:VJePOvsU6NLnO26u3umOD",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -509,6 +548,11 @@
 											"content": [
 												{
 													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
 													"text": "remove all bs stats anywhere in the app"
 												}
 											]
@@ -1187,6 +1231,11 @@
 											"content": [
 												{
 													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
 													"text": "cursor-pointer on buttons"
 												}
 											]
@@ -1273,8 +1322,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1259,
-				"h": 662
+				"w": 1683,
+				"h": 939
 			},
 			"insets": [
 				false,

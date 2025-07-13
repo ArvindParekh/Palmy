@@ -16,9 +16,12 @@ export default async function Community() {
 
 
     return (
-        <div className="w-full min-h-screen">
-            <Toaster />
-            <CommunityPage popularPalmlets={popularPalmlets.data || []} latestPalmlets={latestPalmlets.data || []} userTemplates={userTemplates?.data || null} />
+        <div className="relative w-full min-h-screen">
+            <div className="absolute inset-0 w-full h-full opacity-50 bg-grid"></div>
+            <div className="relative z-10">
+                <Toaster />
+                <CommunityPage popularPalmlets={popularPalmlets.data || []} latestPalmlets={latestPalmlets.data || []} userTemplates={userTemplates?.data || null} />
+            </div>
         </div>
     )
 }
