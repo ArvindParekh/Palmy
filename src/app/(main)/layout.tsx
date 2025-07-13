@@ -1,7 +1,6 @@
 
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { Header } from "@/components/header";
 import { MobileNav } from "@/components/mobile-nav";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -41,7 +40,7 @@ export default async function MainLayout({
                   </div>
                   <MobileNav />
                </header>
-               <main className="flex-1 p-4 md:p-8 w-full">{children}</main>
+               <main className="flex-1 p-4 md:p-6 w-full">{children}</main>
             </SidebarInset>
          </div>
       </SidebarProvider>

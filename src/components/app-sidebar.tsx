@@ -10,6 +10,7 @@ import {
    SidebarMenuButton,
    SidebarMenuItem,
    SidebarRail,
+   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import {
    Home,
@@ -43,21 +44,25 @@ export async function AppSidebar() {
    return (
       <Sidebar
          variant='inset'
+         collapsible='icon'
          className='border-r border-border'
       >
-         <SidebarHeader className='p-6 border-b border-border'>
-            <div className='flex items-center gap-3'>
-               <div className='w-8 h-8 bg-orange-400 rounded-lg flex items-center justify-center'>
-                  <Sparkles className='w-4 h-4 text-foreground' />
+         <SidebarHeader className='p-4 border-b border-border'>
+            <div className='flex items-center justify-between'>
+               <div className='flex items-center gap-3 group-data-[collapsible=icon]:hidden'>
+                  <div className='w-8 h-8 bg-orange-400 rounded-lg flex items-center justify-center'>
+                     <Sparkles className='w-4 h-4 text-foreground' />
+                  </div>
+                  <div className='group-data-[collapsible=icon]:hidden'>
+                     <h1 className='font-semibold text-foreground'>
+                        Palmly
+                     </h1>
+                     <p className='text-xs text-muted-foreground'>
+                        Job application toolkit
+                     </p>
+                  </div>
                </div>
-               <div>
-                  <h1 className='font-semibold text-foreground'>
-                     Palmly
-                  </h1>
-                  <p className='text-xs text-muted-foreground'>
-                     Job application toolkit
-                  </p>
-               </div>
+               <SidebarTrigger className='w-8 h-8' />
             </div>
          </SidebarHeader>
 
@@ -71,7 +76,7 @@ export async function AppSidebar() {
                      {user?.name.split(" ").map((n: string) => n[0]).join("")}
                   </AvatarFallback>
                </Avatar>
-               <div className='flex-1 min-w-0'>
+               <div className='flex-1 min-w-0 group-data-[collapsible=icon]:hidden'>
                   <Link href="/profile" className='hover:underline'>
                      <p className='text-sm font-medium text-foreground truncate cursor-pointer'>
                         {user?.name}
@@ -83,7 +88,9 @@ export async function AppSidebar() {
                      </p>
                   </div>
                </div>
-               <ModeToggle />
+               <div className='group-data-[collapsible=icon]:hidden'>
+                  <ModeToggle />
+               </div>
             </div>
          </SidebarFooter>
 
