@@ -36,9 +36,15 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
+<<<<<<< HEAD
 			"x": 751.0137767321878,
 			"y": 2130.082840371392,
 			"lastActivityTimestamp": 1752121404091,
+=======
+			"x": -902.6984602736804,
+			"y": 2052.122411225852,
+			"lastActivityTimestamp": 1752428836967,
+>>>>>>> main
 			"meta": {}
 		},
 		{
@@ -157,6 +163,45 @@
 			"typeName": "shape"
 		},
 		{
+			"x": -1041.9067069870075,
+			"y": 2033.7096315161166,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:VJePOvsU6NLnO26u3umOD",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 297.984375,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": true,
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "create onboarding-flow"
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aL71V",
+			"typeName": "shape"
+		},
+		{
 			"x": 248,
 			"y": 316,
 			"rotation": 0,
@@ -251,9 +296,15 @@
 			"typeName": "binding"
 		},
 		{
+<<<<<<< HEAD
 			"x": 179.08249538307192,
 			"y": -1742.253517950197,
 			"z": 1.1525688599546986,
+=======
+			"x": 1209.8404649268941,
+			"y": -1688.6342114743868,
+			"z": 0.9051187912701256,
+>>>>>>> main
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -449,12 +500,21 @@
 			"typeName": "shape"
 		},
 		{
+<<<<<<< HEAD
 			"editingShapeId": "shape:cpCXH1KKAVMgARNTPwB-k",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
 				"shape:cpCXH1KKAVMgARNTPwB-k"
 			],
 			"hoveredShapeId": "shape:cpCXH1KKAVMgARNTPwB-k",
+=======
+			"editingShapeId": null,
+			"croppingShapeId": null,
+			"selectedShapeIds": [
+				"shape:VJePOvsU6NLnO26u3umOD"
+			],
+			"hoveredShapeId": "shape:VJePOvsU6NLnO26u3umOD",
+>>>>>>> main
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -509,6 +569,11 @@
 											"content": [
 												{
 													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
 													"text": "remove all bs stats anywhere in the app"
 												}
 											]
@@ -1226,6 +1291,11 @@
 											"content": [
 												{
 													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
 													"text": "cursor-pointer on buttons"
 												}
 											]

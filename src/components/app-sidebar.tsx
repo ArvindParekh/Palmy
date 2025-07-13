@@ -12,12 +12,12 @@ import {
    SidebarRail,
 } from "@/components/ui/sidebar";
 import {
-   LayoutDashboard,
-   FileText,
-   Users,
-   FlaskConical,
-   Trophy,
-   Settings,
+   Home,
+   BookOpen,
+   Globe,
+   Zap,
+   Crown,
+   Sliders,
    Sparkles,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
