@@ -4,32 +4,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { GitBranch, ArrowBigUp } from "lucide-react";
-import { cn } from "@/lib/utils";
-import React, { useState } from "react";
+import React, { useOptimistic, useState, useTransition } from "react";
 import { Prisma } from "@/generated/prisma/client";
 import { ContentPreviewDialog } from "./content-preview-dialog";
 import { ForkTemplateDialog } from "./fork-template-dialog";
 import { formatDistanceToNow } from "date-fns";
 import { upvotePost } from "@/actions/community";
 import { toast } from "sonner";
-
-// export interface CommunityTemplatePostProps {
-//   id: string;
-//   author: {
-//     name: string;
-//     username: string;
-//     avatarUrl: string;
-//   };
-//   timestamp: string;
-//   title: string;
-//   contentSnippet: string;
-//   tags: string[];
-//   stats: {
-//     likes: number;
-//     forks: number;
-//     comments: number;
-//   };
-// }
 
 export function CommunityTemplatePost({ post, userFolders }: { 
   post: Prisma.SharedPalmletGetPayload<{
@@ -53,20 +34,25 @@ export function CommunityTemplatePost({ post, userFolders }: {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isForkDialogOpen, setIsForkDialogOpen] = useState(false);
   const [upvoteCount, setUpvoteCount] = useState(post.upvotes);
+  const [optimisticUpvoteCount, setOptimisticUpvoteCount] = useOptimistic(upvoteCount, (state, newUpvoteCount: number) => newUpvoteCount);
+  const [isPending, startTransition] = useTransition();
   const [isUpvoting, setIsUpvoting] = useState(false);
 
   const handleUpvote = async () => {
     if (isUpvoting) return;
     
     setIsUpvoting(true);
-    const result = await upvotePost(post.id);
-    
-    if (result.success && result.data) {
-      setUpvoteCount(result.data.upvotes);
+    startTransition(async () => {
+      setOptimisticUpvoteCount(optimisticUpvoteCount + 1);
+      const result = await upvotePost(post.id);
+      
+      if (result.success && result.data) {
+        setUpvoteCount(result.data.upvotes);
       // toast.success("Post upvoted!");
-    } else {
-      toast.error(result.message || "Failed to upvote post");
-    }
+      } else {
+        toast.error(result.message || "Failed to upvote post");
+      }
+    });
     
     setIsUpvoting(false);
   };
@@ -128,7 +114,7 @@ export function CommunityTemplatePost({ post, userFolders }: {
             disabled={isUpvoting}
           >
             <ArrowBigUp className="w-4 h-4" />
-            <span className="text-sm font-medium">{upvoteCount}</span>
+            <span className="text-sm font-medium">{optimisticUpvoteCount}</span>
             <span className="sr-only">Upvote</span>
           </Button>
           <Button 
