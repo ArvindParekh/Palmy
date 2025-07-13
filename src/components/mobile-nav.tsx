@@ -10,19 +10,19 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { FileText, FlaskConical, LayoutDashboard, Settings, Trophy, Users } from "lucide-react"
+import { BookOpen, Zap, Home, Sliders, Crown, Globe } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 const menuItems = [
-  { title: "Dashboard", icon: LayoutDashboard, id: "dashboard", href: "/dashboard" },
-  { title: "Templates", icon: FileText, id: "templates", href: "/palmlets", badge: "24" },
-  { title: "Community", icon: Users, id: "community", href: "/community" },
-  { title: "Lab", icon: FlaskConical, id: "lab", href: "/lab", badge: "3" },
-  { title: "Leaderboard", icon: Trophy, id: "leaderboard", href: "/leaderboard" },
-  { title: "Settings", icon: Settings, id: "settings", href: "/settings" },
+  { title: "Dashboard", icon: Home, id: "dashboard", href: "/dashboard" },
+  { title: "Templates", icon: BookOpen, id: "templates", href: "/palmlets", badge: "24" },
+  { title: "Community", icon: Globe, id: "community", href: "/community" },
+  { title: "Lab", icon: Zap, id: "lab", href: "/lab", badge: "3" },
+  { title: "Leaderboard", icon: Crown, id: "leaderboard", href: "/leaderboard" },
+  { title: "Settings", icon: Sliders, id: "settings", href: "/settings" },
 ]
 
 export function MobileNav() {

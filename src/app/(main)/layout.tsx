@@ -26,11 +26,11 @@ export default async function MainLayout({
 
    return (
       <SidebarProvider defaultOpen={true}>
-         <div className='flex min-h-screen min-w-screen bg-background'>
+         <div className='flex min-h-screen w-full bg-background'>
             <div className="hidden md:block">
                <AppSidebar />
             </div>
-            <SidebarInset className='flex-1'>
+            <SidebarInset className='flex-1 min-w-0'>
                {/* Mobile Header */}
                <header className="md:hidden flex items-center justify-between p-4 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                   <div className="flex items-center gap-3">
