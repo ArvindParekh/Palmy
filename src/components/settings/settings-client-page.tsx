@@ -78,8 +78,8 @@ const settingsTabs = [
    { id: "profile", title: "Public Profile", icon: User },
    { id: "account", title: "Account", icon: Shield },
    { id: "appearance", title: "Appearance", icon: Palette },
-   { id: "notifications", title: "Notifications", icon: Bell },
-   { id: "billing", title: "Subscription", icon: CreditCard },
+   // { id: "notifications", title: "Notifications", icon: Bell },
+   // { id: "billing", title: "Subscription", icon: CreditCard },
 ];
 
 export default function SettingsClientPage({
@@ -107,10 +107,10 @@ export default function SettingsClientPage({
             return <AccountSettings user={user} />;
          case "appearance":
             return <AppearanceSettings />;
-         case "notifications":
-            return <NotificationSettings />;
-         case "billing":
-            return <BillingSettings />;
+         // case "notifications":
+         //    return <NotificationSettings />;
+         // case "billing":
+         //    return <BillingSettings />;
          default:
             return <ProfileSettings user={user} />;
       }
@@ -443,92 +443,94 @@ function ThemeButton({
    );
 }
 
-function NotificationSettings() {
-   const [notifications, setNotifications] = useState({
-      community: true,
-      product: true,
-      weekly: false,
-      mentions: true,
-   });
+//TODO: Add Later when we want notifications and introduce billing
 
-   const toggleNotification = (key: keyof typeof notifications) => {
-      setNotifications((prev) => ({ ...prev, [key]: !prev[key] }));
-   };
+// function NotificationSettings() {
+//    const [notifications, setNotifications] = useState({
+//       community: true,
+//       product: true,
+//       weekly: false,
+//       mentions: true,
+//    });
 
-   return (
-      <Card>
-         <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>
-               Choose how you want to be notified.
-            </CardDescription>
-         </CardHeader>
-         <CardContent className='divide-y divide-muted'>
-            <NotificationItem
-               title='Community Activity'
-               description='Get notified about forks, ratings, and comments.'
-               checked={notifications.community}
-               onToggle={() => toggleNotification("community")}
-            />
-            <NotificationItem
-               title='Product Updates'
-               description='Receive updates about new features and improvements.'
-               checked={notifications.product}
-               onToggle={() => toggleNotification("product")}
-            />
-            <NotificationItem
-               title='Weekly Digest'
-               description='A summary of your template performance.'
-               checked={notifications.weekly}
-               onToggle={() => toggleNotification("weekly")}
-            />
-            <NotificationItem
-               title='Mentions'
-               description='Get notified when someone mentions you in a comment.'
-               checked={notifications.mentions}
-               onToggle={() => toggleNotification("mentions")}
-            />
-         </CardContent>
-      </Card>
-   );
-}
+//    const toggleNotification = (key: keyof typeof notifications) => {
+//       setNotifications((prev) => ({ ...prev, [key]: !prev[key] }));
+//    };
 
-function NotificationItem({ title, description, checked, onToggle }: any) {
-   return (
-      <div className='py-4 flex items-center justify-between'>
-         <div className='max-w-prose'>
-            <h4 className='font-medium text-foreground'>{title}</h4>
-            <p className='text-sm text-muted-foreground'>{description}</p>
-         </div>
-         <Switch checked={checked} onCheckedChange={onToggle} />
-      </div>
-   );
-}
+//    return (
+//       <Card>
+//          <CardHeader>
+//             <CardTitle>Notifications</CardTitle>
+//             <CardDescription>
+//                Choose how you want to be notified.
+//             </CardDescription>
+//          </CardHeader>
+//          <CardContent className='divide-y divide-muted'>
+//             <NotificationItem
+//                title='Community Activity'
+//                description='Get notified about forks, ratings, and comments.'
+//                checked={notifications.community}
+//                onToggle={() => toggleNotification("community")}
+//             />
+//             <NotificationItem
+//                title='Product Updates'
+//                description='Receive updates about new features and improvements.'
+//                checked={notifications.product}
+//                onToggle={() => toggleNotification("product")}
+//             />
+//             <NotificationItem
+//                title='Weekly Digest'
+//                description='A summary of your template performance.'
+//                checked={notifications.weekly}
+//                onToggle={() => toggleNotification("weekly")}
+//             />
+//             <NotificationItem
+//                title='Mentions'
+//                description='Get notified when someone mentions you in a comment.'
+//                checked={notifications.mentions}
+//                onToggle={() => toggleNotification("mentions")}
+//             />
+//          </CardContent>
+//       </Card>
+//    );
+// }
 
-function BillingSettings() {
-   return (
-      <Card>
-         <CardHeader>
-            <CardTitle>Subscription</CardTitle>
-            <CardDescription>
-               You are currently on the{" "}
-               <span className='font-semibold text-primary'>Pro</span> plan.
-            </CardDescription>
-         </CardHeader>
-         <CardContent className='space-y-4'>
-            <Button>Manage Subscription</Button>
-            <Separator />
-            <div className='space-y-2'>
-               <h4 className='font-medium'>Billing History</h4>
-               <p className='text-sm text-muted-foreground'>No invoices yet.</p>
-            </div>
-         </CardContent>
-         <CardFooter className='border-t pt-6 flex justify-between items-center'>
-            <p className='text-sm text-muted-foreground'>
-               Next invoice on July 1, 2024
-            </p>
-            <Button variant='outline'>Update Payment Method</Button>
-         </CardFooter>
-      </Card>
-   );
-}
+// function NotificationItem({ title, description, checked, onToggle }: any) {
+//    return (
+//       <div className='py-4 flex items-center justify-between'>
+//          <div className='max-w-prose'>
+//             <h4 className='font-medium text-foreground'>{title}</h4>
+//             <p className='text-sm text-muted-foreground'>{description}</p>
+//          </div>
+//          <Switch checked={checked} onCheckedChange={onToggle} />
+//       </div>
+//    );
+// }
+
+// function BillingSettings() {
+//    return (
+//       <Card>
+//          <CardHeader>
+//             <CardTitle>Subscription</CardTitle>
+//             <CardDescription>
+//                You are currently on the{" "}
+//                <span className='font-semibold text-primary'>Pro</span> plan.
+//             </CardDescription>
+//          </CardHeader>
+//          <CardContent className='space-y-4'>
+//             <Button>Manage Subscription</Button>
+//             <Separator />
+//             <div className='space-y-2'>
+//                <h4 className='font-medium'>Billing History</h4>
+//                <p className='text-sm text-muted-foreground'>No invoices yet.</p>
+//             </div>
+//          </CardContent>
+//          <CardFooter className='border-t pt-6 flex justify-between items-center'>
+//             <p className='text-sm text-muted-foreground'>
+//                Next invoice on July 1, 2024
+//             </p>
+//             <Button variant='outline'>Update Payment Method</Button>
+//          </CardFooter>
+//       </Card>
+//    );
+// }
