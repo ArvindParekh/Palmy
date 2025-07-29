@@ -29,7 +29,7 @@ export default async function PalmletPage() {
          <div className='space-y-6 md:space-y-8'>
             {/* Header */}
             <div className='space-y-4'>
-               <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-300'>Palmlets</h1>
+               <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-foreground'>Palmlets</h1>
                <p className='text-sm md:text-base text-muted-foreground font-medium'>
                   Organize your palmlets into folders and manage them here.
                </p>
