@@ -26,7 +26,7 @@ export default function AppSidebarContent() {
                <SidebarGroupContent>
                   <SidebarMenu className='space-y-1'>
                      {menuItems.map((item) => (
-                        <SidebarMenuItem key={item.id}>
+                        <SidebarMenuItem key={item.id} data-tour={`quick-start-${item.id}`}>
                            <SidebarMenuButton asChild isActive={activePath === item.href || activePath.startsWith(item.href)}>
                               <Link href={item.href}>
                                  <item.icon className='w-4 h-4' />

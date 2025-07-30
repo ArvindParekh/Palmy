@@ -9,6 +9,8 @@ import { Analytics } from "@vercel/analytics/next"
 // import { ModeToggle } from "@/components/theme/mode-toggle"
 
 import { authClient } from "@/lib/auth-client"
+import { TourProvider } from '@reactour/tour'
+import { steps, tourStyles } from "@/lib/onboarding-steps"
 
 export function Providers({ children }: { children: ReactNode }) {
     const router = useRouter()
@@ -33,7 +35,16 @@ export function Providers({ children }: { children: ReactNode }) {
                 enableSystem
                 disableTransitionOnChange
             >
-                {children}
+                <TourProvider
+                    steps={steps}
+                    showBadge={true}
+                    showCloseButton={true}
+                    showNavigation={true}
+                    className="rounded-lg"
+                    styles={tourStyles}
+                >
+                    {children}
+                </TourProvider>
                 {/* <ModeToggle /> */}
             </ThemeProvider>
             <Analytics />

@@ -1,8 +1,9 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Book, Bot, FilePlus } from "lucide-react"
+import { ArrowRight, Book, Bot, FilePlus, Play } from "lucide-react"
 import Link from "next/link"
+import { useOnboardingTour } from "@/hooks/use-tour"
 
 const actions = [
   {
@@ -29,11 +30,30 @@ const actions = [
 ]
 
 export function QuickStart() {
+  const { startTour } = useOnboardingTour()
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {actions.map((action) => (
+    <div className="space-y-6">
+      {/* Tour Trigger Button */}
+      <div className="flex justify-end">
+        <Button 
+          onClick={startTour}
+          variant="outline" 
+          size="sm"
+          className="gap-2"
+        >
+          <Play className="w-4 h-4" />
+          Take Tour
+        </Button>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {actions.map((action, index) => (
         <Link href={action.href} key={action.title}>
-          <div className="group relative h-full bg-card border border-border rounded-xl p-6 transition-all hover:border-primary/50 hover:shadow-lg">
+          <div 
+            className="group relative h-full bg-card border border-border rounded-xl p-6 transition-all hover:border-primary/50 hover:shadow-lg"
+            data-tour={`quick-start-${index}`}
+          >
             <div className="flex items-center gap-4 mb-4">
               <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center">
                 <action.icon className="w-5 h-5 text-neutral-500" />
@@ -47,7 +67,8 @@ export function QuickStart() {
             </div>
           </div>
         </Link>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }
