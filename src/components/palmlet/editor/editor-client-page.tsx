@@ -205,10 +205,10 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
               <Input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="text-base sm:text-lg font-semibold border-none focus-visible:ring-0 p-0 h-auto bg-transparent"
+                className="text-base sm:text-lg font-semibold border-none focus-visible:ring-0 px-2 h-10 bg-transparent max-w-md"
                 placeholder="My Awesome Template"
               />
-              <p className="text-xs sm:text-sm text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground px-2">
                 Last saved {formatDistanceToNow(templateData.updatedAt)} ago
               </p>
             </div>
@@ -241,7 +241,7 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
                 onChange={(e) => handleContentChange(e.target.value)}
                 onMouseUp={handleMouseUp}
                 onKeyUp={handleMouseUp}
-                className="absolute inset-0 w-full h-full text-sm md:text-base lg:text-lg bg-transparent border-0 resize-none focus-visible:ring-0 p-0 font-mono leading-relaxed tracking-wide"
+                className="absolute inset-0 w-full h-full text-sm md:text-base lg:text-base font-mono text-foreground/90 font-medium bg-transparent border-0 resize-none focus-visible:ring-0 p-0 leading-relaxed tracking-wide"
                 placeholder="Start typing your template here... use {{variables}} for personalization."
               />
             </div>
