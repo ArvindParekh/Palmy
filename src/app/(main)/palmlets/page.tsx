@@ -45,8 +45,8 @@ export default async function PalmletPage() {
                <NewFolderDialog />
             </div>
 
-            {/* Search */}
-            <div className='relative max-w-md'>
+            {/* Search - I guess not really needed */}
+            {/* <div className='relative max-w-md'>
                <Search className='absolute left-3 top-1/2 w-4 h-4 -translate-y-1/2 text-muted-foreground' />
                <Input
                   placeholder='Search folders and templates...'
@@ -54,7 +54,7 @@ export default async function PalmletPage() {
                   // onChange={(e) => setSearchQuery(e.target.value)}
                   className='pl-10 border-muted'
                />
-            </div>
+            </div> */}
 
             {/* Grid */}
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6'>

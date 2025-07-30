@@ -155,7 +155,7 @@ export function TemplateList({ palmlets, filters, folderId }: TemplateListProps)
           "grid gap-6",
           filters.viewMode === 'grid' 
             ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" 
-            : "grid-cols-1 max-w-4xl"
+            : "grid-cols-1 max-w-full"
         )}
       >
         {filteredAndSortedTemplates.map((template, index) => (
