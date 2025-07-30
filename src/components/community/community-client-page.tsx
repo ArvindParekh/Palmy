@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
 import { loadMorePalmlets } from "@/actions/community";
+import { useOnboardingTour } from "@/hooks/use-tour";
 
 export default function CommunityPage({
    popularPalmlets,
@@ -62,6 +63,8 @@ export default function CommunityPage({
    const [isLoading, setIsLoading] = useState(false);
    const [hasMore, setHasMore] = useState(true);
    const [page, setPage] = useState(1);
+   
+   useOnboardingTour();
    const allTags = useMemo(
       () => [...new Set(communityPosts.flatMap((p) => p.tags))],
       [communityPosts]
@@ -152,7 +155,7 @@ export default function CommunityPage({
    return (
       <div className='relative w-full min-h-screen'>
          <div className='relative w-full max-w-4xl mx-auto min-h-screen p-4 md:p-6'>
-            <header className='mb-6'>
+            <header className='mb-6' data-tour="community-header">
                <h1 className='text-2xl md:text-3xl font-bold tracking-tighter text-foreground'>
                   Community Feed
                </h1>
@@ -162,25 +165,29 @@ export default function CommunityPage({
             </header>
 
             <main className='space-y-6'>
-               <ShareTemplatePrompt
-                  onTemplateShare={handleShareTemplate}
-                  userTemplates={userTemplates?.folders.flatMap(
-                     (f) => f.palmlets
-                  )}
-                  user={{
-                     name: userTemplates?.name as string,
-                     image: userTemplates?.image as string,
-                  }}
-               />
-               <CommunityFilters
-                  searchQuery={searchQuery}
-                  setSearchQuery={setSearchQuery}
-                  activeSort={activeSort}
-                  setActiveSort={setActiveSort}
-                  activeTags={activeTags}
-                  setActiveTags={setActiveTags}
-                  allTags={allTags}
-               />
+               <div data-tour="community-share-prompt">
+                  <ShareTemplatePrompt
+                     onTemplateShare={handleShareTemplate}
+                     userTemplates={userTemplates?.folders.flatMap(
+                        (f) => f.palmlets
+                     )}
+                     user={{
+                        name: userTemplates?.name as string,
+                        image: userTemplates?.image as string,
+                     }}
+                  />
+               </div>
+               <div data-tour="community-filters">
+                  <CommunityFilters
+                     searchQuery={searchQuery}
+                     setSearchQuery={setSearchQuery}
+                     activeSort={activeSort}
+                     setActiveSort={setActiveSort}
+                     activeTags={activeTags}
+                     setActiveTags={setActiveTags}
+                     allTags={allTags}
+                  />
+               </div>
                <div className='space-y-6'>
                   {filteredPosts.length > 0 ? (
                      filteredPosts.map((post) => (

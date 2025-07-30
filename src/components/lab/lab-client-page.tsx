@@ -15,6 +15,7 @@ import { createPalmletFolder } from '@/actions/palmlet-folder'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { Prisma } from '@/generated/prisma/client'
+import { useOnboardingTour } from '@/hooks/use-tour'
 
 interface TemplateData {
   content: string
@@ -48,6 +49,9 @@ export default function LabClientPage({ folders, userId }: LabClientPageProps) {
   const [saveFolder, setSaveFolder] = useState('')
   const [newFolderName, setNewFolderName] = useState('')
   const [isCreatingNewFolder, setIsCreatingNewFolder] = useState(false)
+  
+  // initialize tour for this page
+  useOnboardingTour()
   const [copied, setCopied] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
 
@@ -198,7 +202,7 @@ export default function LabClientPage({ folders, userId }: LabClientPageProps) {
       <Toaster />
       <div className="max-w-4xl mx-auto px-4 py-6 md:py-8 lg:py-16">
         {/* Header */}
-        <div className="text-center mb-8 md:mb-12">
+        <div className="text-center mb-8 md:mb-12" data-tour="lab-header">
           <h1 className="text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-4">
             Prompts to templates in{' '}
             <span className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 bg-clip-text text-transparent">
@@ -211,7 +215,7 @@ export default function LabClientPage({ folders, userId }: LabClientPageProps) {
         </div>
 
         {/* Main Input */}
-        <div className="mb-8 md:mb-12">
+        <div className="mb-8 md:mb-12" data-tour="lab-input">
           <div className="relative">
             <Input
               value={prompt}
@@ -220,11 +224,13 @@ export default function LabClientPage({ folders, userId }: LabClientPageProps) {
               placeholder="Describe the template you want to create..."
               className="text-sm md:text-base lg:text-lg h-12 md:h-14 pr-24 md:pr-32 rounded-2xl bg-accent/50 border py-3 md:py-7"
               disabled={isGenerating}
+              data-tour="lab-prompt-input"
             />
             <Button
               onClick={handleGenerate}
               disabled={!prompt.trim() || isGenerating}
               className="absolute right-2 top-2 h-8 md:h-10 px-3 md:px-6 rounded-xl text-sm"
+              data-tour="lab-generate-button"
             >
               {isGenerating ? (
                 <>

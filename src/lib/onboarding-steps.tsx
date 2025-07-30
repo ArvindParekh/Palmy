@@ -4,6 +4,7 @@ import { updateUserOnboardingStatus } from "@/actions/onboarding";
 import { authClient } from "@/lib/auth-client";
 
 export const steps: StepType[] = [
+   // === DASHBOARD SECTION ===
    {
       selector: '[data-tour="quick-start-0"]',
       content: (
@@ -132,8 +133,331 @@ export const steps: StepType[] = [
             rx: 12,
          }),
       },
+   },
+   // === NAVIGATION TO TEMPLATES ===
+   {
+      selector: '[data-tour="quick-start-templates"]',
+      content: (
+         <div className='space-y-3'>
+            <h3 className='text-lg font-semibold text-foreground'>
+               📁 Your Template Library
+            </h3>
+            <p className='text-sm text-muted-foreground'>
+               Now let's explore your template library where you can organize 
+               your templates into folders. Click Next to continue!
+            </p>
+         </div>
+      ),
+      position: "right",
+      padding: 8,
+      styles: {
+         maskArea: (base) => ({
+            ...base,
+            rx: 12,
+         }),
+      },
+      action: () => {
+         // Navigate to templates page
+         window.location.href = '/palmlets?tour=templates';
+      },
+   },
+   
+   // === TEMPLATES PAGE SECTION ===
+   {
+      selector: '[data-tour="templates-header"]',
+      content: (
+         <div className='space-y-3'>
+            <h3 className='text-lg font-semibold text-foreground'>
+               📚 Welcome to Your Templates
+            </h3>
+            <p className='text-sm text-muted-foreground'>
+               This is where you organize all your palmlet templates into folders.
+               Think of folders as categories like "Cover Letters", "LinkedIn Messages", etc.
+            </p>
+         </div>
+      ),
+      position: "bottom",
+      padding: 8,
+      styles: {
+         maskArea: (base) => ({
+            ...base,
+            rx: 12,
+         }),
+      },
+   },
+   {
+      selector: '[data-tour="templates-new-folder"]',
+      content: (
+         <div className='space-y-3'>
+            <h3 className='text-lg font-semibold text-foreground'>
+               ➕ Create New Folders
+            </h3>
+            <p className='text-sm text-muted-foreground'>
+               Click here to create new folders to organize your templates.
+               You can create folders for different types of templates!
+            </p>
+         </div>
+      ),
+      position: "left",
+      padding: 8,
+      styles: {
+         maskArea: (base) => ({
+            ...base,
+            rx: 12,
+         }),
+      },
+   },
+   {
+      selector: '[data-tour="templates-grid"]',
+      content: (
+         <div className='space-y-3'>
+            <h3 className='text-lg font-semibold text-foreground'>
+               🗂️ Your Folder Grid
+            </h3>
+            <p className='text-sm text-muted-foreground'>
+               Your folders appear here as cards. Each folder shows how many 
+               templates it contains. Click on any folder to view its templates!
+            </p>
+         </div>
+      ),
+      position: "top",
+      padding: 8,
+      styles: {
+         maskArea: (base) => ({
+            ...base,
+            rx: 12,
+         }),
+      },
+   },
+
+   // === NAVIGATION TO LAB ===
+   {
+      selector: '[data-tour="quick-start-lab"]',
+      content: (
+         <div className='space-y-3'>
+            <h3 className='text-lg font-semibold text-foreground'>
+               🧪 AI-Powered Lab
+            </h3>
+            <p className='text-sm text-muted-foreground'>
+               Next, let's check out the Lab where you can generate templates 
+               using AI. This is where the magic happens!
+            </p>
+         </div>
+      ),
+      position: "right",
+      padding: 8,
+      styles: {
+         maskArea: (base) => ({
+            ...base,
+            rx: 12,
+         }),
+      },
+      action: () => {
+         // Navigate to lab page
+         window.location.href = '/lab?tour=lab';
+      },
+   },
+
+   // === LAB PAGE SECTION ===
+   {
+      selector: '[data-tour="lab-header"]',
+      content: (
+         <div className='space-y-3'>
+            <h3 className='text-lg font-semibold text-foreground'>
+               🚀 AI Template Generation
+            </h3>
+            <p className='text-sm text-muted-foreground'>
+               Welcome to the Lab! Here you can describe what kind of template 
+               you need and our AI will generate it for you in seconds.
+            </p>
+         </div>
+      ),
+      position: "bottom",
+      padding: 8,
+      styles: {
+         maskArea: (base) => ({
+            ...base,
+            rx: 12,
+         }),
+      },
+   },
+   {
+      selector: '[data-tour="lab-prompt-input"]',
+      content: (
+         <div className='space-y-3'>
+            <h3 className='text-lg font-semibold text-foreground'>
+               ✍️ Describe Your Template
+            </h3>
+            <p className='text-sm text-muted-foreground'>
+               Type a description of what template you need. For example: 
+               "Create a cold email template for reaching out to startups"
+            </p>
+         </div>
+      ),
+      position: "bottom",
+      padding: 8,
+      styles: {
+         maskArea: (base) => ({
+            ...base,
+            rx: 12,
+         }),
+      },
+   },
+   {
+      selector: '[data-tour="lab-generate-button"]',
+      content: (
+         <div className='space-y-3'>
+            <h3 className='text-lg font-semibold text-foreground'>
+               ⚡ Generate with AI
+            </h3>
+            <p className='text-sm text-muted-foreground'>
+               Click this button to generate your template! The AI will create 
+               a personalized template based on your description.
+            </p>
+         </div>
+      ),
+      position: "left",
+      padding: 8,
+      styles: {
+         maskArea: (base) => ({
+            ...base,
+            rx: 12,
+         }),
+      },
+   },
+
+   // === NAVIGATION TO COMMUNITY ===
+   {
+      selector: '[data-tour="quick-start-community"]',
+      content: (
+         <div className='space-y-3'>
+            <h3 className='text-lg font-semibold text-foreground'>
+               🌍 Join the Community
+            </h3>
+            <p className='text-sm text-muted-foreground'>
+               Finally, let's explore the Community where you can discover 
+               templates shared by other users and share your own!
+            </p>
+         </div>
+      ),
+      position: "right",
+      padding: 8,
+      styles: {
+         maskArea: (base) => ({
+            ...base,
+            rx: 12,
+         }),
+      },
+      action: () => {
+         // Navigate to community page
+         window.location.href = '/community?tour=community';
+      },
+   },
+
+   // === COMMUNITY PAGE SECTION ===
+   {
+      selector: '[data-tour="community-header"]',
+      content: (
+         <div className='space-y-3'>
+            <h3 className='text-lg font-semibold text-foreground'>
+               🎉 Welcome to the Community
+            </h3>
+            <p className='text-sm text-muted-foreground'>
+               This is where you can discover amazing templates created by other users,
+               get inspired, and share your own templates with the community!
+            </p>
+         </div>
+      ),
+      position: "bottom",
+      padding: 8,
+      styles: {
+         maskArea: (base) => ({
+            ...base,
+            rx: 12,
+         }),
+      },
+   },
+   {
+      selector: '[data-tour="community-share-prompt"]',
+      content: (
+         <div className='space-y-3'>
+            <h3 className='text-lg font-semibold text-foreground'>
+               📤 Share Your Templates
+            </h3>
+            <p className='text-sm text-muted-foreground'>
+               Use this section to share your own templates with the community.
+               Help others by sharing your best templates!
+            </p>
+         </div>
+      ),
+      position: "bottom",
+      padding: 8,
+      styles: {
+         maskArea: (base) => ({
+            ...base,
+            rx: 12,
+         }),
+      },
+   },
+   {
+      selector: '[data-tour="community-filters"]',
+      content: (
+         <div className='space-y-3'>
+            <h3 className='text-lg font-semibold text-foreground'>
+               🔍 Find What You Need
+            </h3>
+            <p className='text-sm text-muted-foreground'>
+               Use these filters to search and sort templates by category, 
+               popularity, or specific keywords to find exactly what you need.
+            </p>
+         </div>
+      ),
+      position: "bottom",
+      padding: 8,
+      styles: {
+         maskArea: (base) => ({
+            ...base,
+            rx: 12,
+         }),
+      },
+   },
+
+   // === TOUR COMPLETION ===
+   {
+      selector: 'body',
+      content: ({ setIsOpen }: { setIsOpen: (open: boolean) => void }) => (
+         <div className='space-y-4 text-center'>
+            <h3 className='text-lg font-semibold text-foreground'>
+               🎉 Tour Complete!
+            </h3>
+            <p className='text-sm text-muted-foreground'>
+               You've successfully completed the Palmly tour!
+            </p>
+            {/* <ul className='text-xs text-muted-foreground text-left space-y-1'>
+               <li>• Organize templates in folders</li>
+               <li>• Generate templates with AI</li>
+               <li>• Discover community templates</li>
+               <li>• Share your own templates</li>
+            </ul> */}
+            <p className='text-sm font-medium text-foreground'>
+               Ready to start creating amazing templates? 🚀
+            </p>
+            <Button onClick={() =>{
+               setIsOpen(false);
+               window.location.href = '/dashboard';
+            }}>Get Started!</Button>
+         </div>
+      ),
+      position: "center",
+      padding: 8,
+      styles: {
+         maskArea: (base) => ({
+            ...base,
+            rx: 12,
+         }),
+      },
       actionAfter: async () => {
-         // onboarding completed
+         // Mark onboarding as completed
          try {
             const session = await authClient.getSession();
             if (session?.data?.user?.id) {
@@ -142,6 +466,8 @@ export const steps: StepType[] = [
          } catch (error) {
             console.error('Failed to update onboarding status:', error);
          }
+         // Navigate back to dashboard
+         // window.location.href = '/dashboard';
       }
    },
   //  {

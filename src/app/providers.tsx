@@ -42,6 +42,7 @@ export function Providers({ children }: { children: ReactNode }) {
                     showNavigation={true}
                     className="rounded-lg"
                     styles={tourStyles}
+                    onClickMask={({ setIsOpen }) => setIsOpen(false)}
                 >
                     {children}
                 </TourProvider>

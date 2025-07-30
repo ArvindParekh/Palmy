@@ -8,6 +8,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { FolderCardWrapper } from "@/components/palmlet/folder-card-wrapper";
 import { Toaster } from "@/components/ui/sonner";
+import { TemplatesClientWrapper } from "@/components/palmlet/templates-client-wrapper";
 
 export default async function PalmletPage() {
    const session = await auth.api.getSession({
@@ -24,11 +25,12 @@ export default async function PalmletPage() {
    const colorThemes = ['sage', 'lavender', 'cream', 'pearl', 'stone', 'mist'] as const;
 
    return (
-      <div className='w-full h-full p-4 md:p-8 lg:p-12'>
-         <Toaster />
-         <div className='space-y-6 md:space-y-8'>
+      <TemplatesClientWrapper>
+         <div className='w-full h-full p-4 md:p-8 lg:p-12'>
+            <Toaster />
+            <div className='space-y-6 md:space-y-8'>
             {/* Header */}
-            <div className='space-y-4'>
+            <div className='space-y-4' data-tour="templates-header">
                <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-foreground'>Palmlets</h1>
                <p className='text-sm md:text-base text-muted-foreground font-medium'>
                   Organize your palmlets into folders and manage them here.
@@ -42,7 +44,9 @@ export default async function PalmletPage() {
                      {folders?.length || 0} folders • {folders?.reduce((sum, f) => sum + (f.palmlets?.length || 0), 0) || 0} templates
                   </p>
                </div>
-               <NewFolderDialog />
+               <div data-tour="templates-new-folder">
+                  <NewFolderDialog />
+               </div>
             </div>
 
             {/* Search - I guess not really needed */}
@@ -57,7 +61,7 @@ export default async function PalmletPage() {
             </div> */}
 
             {/* Grid */}
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6' data-tour="templates-grid">
                {folders && folders.length > 0 ? (
                   folders.map((folder, index) => (
                      <FolderCardWrapper
@@ -79,5 +83,6 @@ export default async function PalmletPage() {
             </div>
          </div>
       </div>
+      </TemplatesClientWrapper>
    );
 }
