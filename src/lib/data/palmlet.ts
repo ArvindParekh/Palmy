@@ -124,3 +124,59 @@ export const getUserPalmlets = async (userId: string) => {
         }
     }
 }
+
+export async function getRecentlyEditedPalmlets(userId: string) {
+    try {
+       const recentlyEditedPalmlets = await prisma.palmlet.findMany({
+          where: {
+             folder: {
+                userId,
+             },
+          },
+          orderBy: {
+             updatedAt: "desc",
+          },
+          take: 3,
+          include: {
+             tags: true,
+             variables: true,
+          },
+       });
+ 
+       return {
+          message: "Recently edited palmlets fetched successfully",
+          success: true,
+          data: recentlyEditedPalmlets,
+       };
+    } catch (error) {
+       return {
+          message: "Failed to fetch recently edited palmlets",
+          success: false,
+       };
+    }
+ }
+
+ export async function getUserOnBoardingStatus(userId: string) {
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                id: userId,
+            },
+            select: {
+                onboardingCompleted: true,
+            }
+        })
+
+        return {
+            message: "User onboarding status fetched successfully",
+            success: true,
+            data: user?.onboardingCompleted,
+        }
+    } catch (error) {
+        return {
+            message: "Failed to fetch user onboarding status",
+            success: false,
+            data: false,
+        }
+    }
+ }

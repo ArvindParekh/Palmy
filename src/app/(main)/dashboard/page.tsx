@@ -1,10 +1,11 @@
 import { FilePlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-   TemplateCard,
-} from "@/components/palmlet/template-card";
+import { TemplateCard } from "@/components/palmlet/template-card";
 import { Separator } from "@/components/ui/separator";
-import { getRecentlyEditedPalmlets } from "@/actions/palmlet";
+import {
+   getRecentlyEditedPalmlets,
+   getUserOnBoardingStatus,
+} from "@/lib/data/palmlet";
 import { QuickStart } from "@/components/dashboard/quick-start";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
@@ -16,6 +17,10 @@ export default async function DashboardPage() {
    });
 
    const { data: recentTemplates } = await getRecentlyEditedPalmlets(
+      session?.user?.id as string
+   );
+
+   const { data: onboardingStatus } = await getUserOnBoardingStatus(
       session?.user?.id as string
    );
 
@@ -36,7 +41,7 @@ export default async function DashboardPage() {
          <main className='space-y-8 md:space-y-12'>
             {/* Quick Start Section */}
             <section>
-               <QuickStart />
+               <QuickStart onboardingStatus={onboardingStatus ?? false} />
             </section>
 
             {/* Recent Templates Section */}
@@ -50,13 +55,28 @@ export default async function DashboardPage() {
                            Recently Edited
                         </h2>
                         <Link href='/palmlets'>
-                           <Button variant='outline' size='sm' className='cursor-pointer'>View all</Button>
+                           <Button
+                              variant='outline'
+                              size='sm'
+                              className='cursor-pointer'
+                           >
+                              View all
+                           </Button>
                         </Link>
                      </div>
                      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6'>
-                        {recentTemplates.map((template) => (
-                           <TemplateCard {...template} key={template.id} tags={template.tags} variables={template.variables} folderId={template.folderId} />
-                        ))}
+                        {recentTemplates.map((template) => {
+                           if (!template) return null;
+                           return (
+                              <TemplateCard
+                                 {...template}
+                                 key={template.id}
+                                 tags={template.tags}
+                                 variables={template.variables}
+                                 folderId={template.folderId}
+                              />
+                           );
+                        })}
                      </div>
                   </section>
                </>

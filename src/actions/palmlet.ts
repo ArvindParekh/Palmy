@@ -93,37 +93,6 @@ export async function updatePalmlet(id: string, title: string, content: string, 
    }
 }
 
-export async function getRecentlyEditedPalmlets(userId: string) {
-   try {
-      const recentlyEditedPalmlets = await prisma.palmlet.findMany({
-         where: {
-            folder: {
-               userId,
-            },
-         },
-         orderBy: {
-            updatedAt: "desc",
-         },
-         take: 3,
-         include: {
-            tags: true,
-            variables: true,
-         },
-      });
-
-      return {
-         message: "Recently edited palmlets fetched successfully",
-         success: true,
-         data: recentlyEditedPalmlets,
-      };
-   } catch (error) {
-      return {
-         message: "Failed to fetch recently edited palmlets",
-         success: false,
-      };
-   }
-}
-
 export async function addTagsToPalmlet(id: string, newTags: string[], folderNumber: string) {
    try {
       // const currentPalmlet = await prisma.palmlet.findUnique({
