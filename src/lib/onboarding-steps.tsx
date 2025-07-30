@@ -1,5 +1,7 @@
 import type { StepType } from "@reactour/tour";
 import { Button } from "@/components/ui/button";
+import { updateUserOnboardingStatus } from "@/actions/onboarding";
+import { authClient } from "@/lib/auth-client";
 
 export const steps: StepType[] = [
    {
@@ -130,6 +132,17 @@ export const steps: StepType[] = [
             rx: 12,
          }),
       },
+      actionAfter: async () => {
+         // onboarding completed
+         try {
+            const session = await authClient.getSession();
+            if (session?.data?.user?.id) {
+               await updateUserOnboardingStatus(true, session.data.user.id);
+            }
+         } catch (error) {
+            console.error('Failed to update onboarding status:', error);
+         }
+      }
    },
   //  {
   //     selector: "",
@@ -169,5 +182,56 @@ export const tourStyles = {
    maskArea: (base: any) => ({
       ...base,
       rx: 12,
+   }),
+   // Fix button styles for dark mode
+   button: (base: any, state: any) => {
+      const disabled = state?.disabled || false;
+      return {
+         ...base,
+         backgroundColor: disabled 
+            ? "var(--muted)" 
+            : "var(--primary)",
+         color: disabled 
+            ? "var(--muted-foreground)" 
+            : "var(--primary-foreground)",
+         border: "1px solid var(--border)",
+         borderRadius: "0.375rem",
+         padding: "0.5rem 1rem",
+         fontSize: "0.875rem",
+         fontWeight: "500",
+         cursor: disabled ? "not-allowed" : "pointer",
+         opacity: disabled ? 0.6 : 1,
+         transition: "all 0.2s ease-in-out",
+         '&:hover': {
+            backgroundColor: disabled 
+               ? "var(--muted)" 
+               : "var(--primary/90)",
+         },
+      };
+   },
+   // Style navigation controls
+   controls: (base: any) => ({
+      ...base,
+      marginTop: "1rem",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+   }),
+   // Style close button
+   close: (base: any) => ({
+      ...base,
+      position: "absolute",
+      top: "0.5rem",
+      right: "0.5rem",
+      backgroundColor: "transparent",
+      border: "none",
+      color: "var(--muted-foreground)",
+      cursor: "pointer",
+      borderRadius: "0.25rem",
+      padding: "0.25rem",
+      '&:hover': {
+         backgroundColor: "var(--muted)",
+         color: "var(--foreground)",
+      },
    }),
 };
