@@ -1,8 +1,9 @@
 "use server";
 
-import { generateText } from "ai";
+import { generateObject, generateText } from "ai";
 import { google } from "@ai-sdk/google";
-import { systemPrompt } from "@/lib/system-prompt";
+import { analysisPrompt, systemPrompt } from "@/lib/system-prompt";
+import { z } from "zod";
 
 export type ActionType =
    | "improve"
@@ -59,7 +60,7 @@ export async function improvePalmletText(
       casual: `Rewrite this text in a casual tone while keeping {{variables}}:\n\n${text}`,
    };
 
-     const systemPrompt = `
+   const systemPrompt = `
   You are a helpful assistant that improves text.
   You are given a selected text, a command, and optional context.
   
@@ -71,7 +72,7 @@ export async function improvePalmletText(
   - The context is provided only for understanding - do not modify or include it in your response
   
   Your response should contain ONLY the improved selected text, nothing else.
-  `
+  `;
 
    try {
       const result = await generateText({
@@ -80,7 +81,9 @@ export async function improvePalmletText(
          messages: [
             {
                role: "user",
-               content: prompts[action] + (context ? `\n\nAdditional context: ${context}` : ""),
+               content:
+                  prompts[action] +
+                  (context ? `\n\nAdditional context: ${context}` : ""),
             },
          ],
          temperature: 0.1,
@@ -99,19 +102,51 @@ export async function improvePalmletText(
    }
 }
 
+export async function performAnalysis(text: string) {
+   try {
+      const result = await generateObject({
+         model: google("gemini-2.0-flash"),
+         schema: z.object({
+            toneAnalysis: z
+               .enum(["positive", "negative", "neutral"])
+               .describe("The tone of the text"),
+            messageLength: z
+               .enum(["short", "medium", "long"])
+               .describe("The length of the text"),
+            proTip: z
+               .string()
+               .describe("A pro tip for the user to improve the text"),
+         }),
+         system: analysisPrompt,
+         prompt: `Analyze this professional template: ${text}`,
+      });
+
+      return {
+         success: true,
+         data: result.object,
+      };
+   } catch (error) {
+      console.error("Error performing analysis:", error);
+      return {
+         success: false,
+         error: error instanceof Error ? error.message : "Failed to perform analysis",
+      };
+   }
+}
+
 export async function detectVariables(text: string, cursorPosition?: number) {
    // returns suggested {{variables}} for existing text
    const variableRegex = /\{\{([^}]+)\}\}/g;
    const matches = [];
    let match;
-   
+
    while ((match = variableRegex.exec(text)) !== null) {
       matches.push(match[1]);
    }
-   
+
    return {
       success: true,
-      variables: [...new Set(matches)], 
+      variables: [...new Set(matches)],
    };
 }
 
