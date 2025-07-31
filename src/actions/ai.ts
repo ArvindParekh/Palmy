@@ -3,7 +3,7 @@
 import { generateObject, generateText } from "ai";
 import { google } from "@ai-sdk/google";
 import { analysisPrompt, systemPrompt } from "@/lib/system-prompt";
-import { z } from "zod";
+import { aiAnalysisSchema } from "@/zod/ai";
 
 export type ActionType =
    | "improve"
@@ -106,17 +106,7 @@ export async function performAnalysis(text: string) {
    try {
       const result = await generateObject({
          model: google("gemini-2.0-flash"),
-         schema: z.object({
-            toneAnalysis: z
-               .enum(["positive", "negative", "neutral"])
-               .describe("The tone of the text"),
-            messageLength: z
-               .enum(["short", "medium", "long"])
-               .describe("The length of the text"),
-            proTip: z
-               .string()
-               .describe("A pro tip for the user to improve the text"),
-         }),
+         schema: aiAnalysisSchema,
          system: analysisPrompt,
          prompt: `Analyze this professional template: ${text}`,
       });

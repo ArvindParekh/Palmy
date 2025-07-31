@@ -2,16 +2,18 @@
 
 import { useState, useRef, useCallback } from "react";
 import {
-   ArrowLeft,
-   Sparkles,
-   Wand2,
-   Eye,
-   Bot,
-   FileText,
-   BrainCircuit,
-   Sidebar,
-   X,
-   RefreshCcw,
+  ArrowLeft,
+  Sparkles,
+  Wand2,
+  Eye,
+  Bot,
+  FileText,
+  BrainCircuit,
+  Sidebar,
+  X,
+  RefreshCcw,
+  TrendingUp,
+  Loader2,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -40,6 +42,8 @@ import {
    improvePalmletText,
    performAnalysis,
 } from "@/actions/ai";
+import { aiAnalysisSchema } from "@/zod/ai";
+import { z } from "zod";
 
 // This will be the main editor page.
 export default function EditorPage({
@@ -72,11 +76,8 @@ export default function EditorPage({
       end: number;
    } | null>(null);
    const [toolbarPosition, setToolbarPosition] = useState({ top: 0, left: 0 });
-   const [aiAnalysis, setAiAnalysis] = useState<{
-      toneAnalysis: string;
-      messageLength: string;
-      proTip: string;
-   } | null>(null);
+   const [aiAnalysis, setAiAnalysis] = useState<z.infer<typeof aiAnalysisSchema> | null>(null);
+   const [isAnalyzing, setIsAnalyzing] = useState(false);
    const editorRef = useRef<HTMLTextAreaElement>(null);
 
    // do not concat the current variables with the template variables
@@ -255,12 +256,21 @@ export default function EditorPage({
          toast.error("No content to analyze");
          return;
       }
-      const result = await performAnalysis(content);
-      if (result.success) {
-         setAiAnalysis(result.data || null);
-         toast.success("Analysis completed");
-      } else {
-         toast.error(result.error || "Failed to perform analysis");
+      
+      setIsAnalyzing(true);
+      try {
+         const result = await performAnalysis(content);
+         if (result.success) {
+            setAiAnalysis(result.data || null);
+            toast.success("Analysis completed");
+         } else {
+            toast.error(result.error || "Failed to perform analysis");
+         }
+      } catch (error) {
+         toast.error("Failed to perform analysis");
+         console.error("Analysis error:", error);
+      } finally {
+         setIsAnalyzing(false);
       }
    };
 
@@ -465,7 +475,7 @@ export default function EditorPage({
                            <div className='flex flex-col gap-2'>
                               <div className='flex flex-col gap-2'>
                                  <div className='flex items-center gap-2'>
-                                    <Sparkles className='w-4 h-4 text-yellow-500' />
+                                    <TrendingUp className='w-4 h-4 text-emerald-500' />
                                     <h1 className='text-lg font-semibold text-foreground'>
                                        AI Performance Score
                                     </h1>
@@ -474,33 +484,63 @@ export default function EditorPage({
                                        size='sm'
                                        className='border-border hover:bg-accent hover:text-accent-foreground'
                                        onClick={() => handleAnalysis()}
+                                       disabled={isAnalyzing}
                                     >
-                                       <RefreshCcw className='w-4 h-4' />
+                                       {isAnalyzing ? (
+                                          <Loader2 className='w-4 h-4 animate-spin' />
+                                       ) : (
+                                          <RefreshCcw className='w-4 h-4' />
+                                       )}
                                     </Button>
                                  </div>
                                  {aiAnalysis && (
-                                    <>
-                                       {/* tone analysis */}
-                                       <div className='flex flex-col gap-2'>
-                                          <p className='text-sm text-muted-foreground'>
-                                             Tone Analysis:{" "}
-                                             {aiAnalysis.toneAnalysis}
-                                          </p>
+                                    <div className='space-y-4'>
+                                       {/* Analysis Tags */}
+                                       <div className='flex flex-wrap gap-2'>
+                                          <Badge 
+                                             variant="secondary" 
+                                             className={`
+                                                px-3 py-1.5 text-xs font-medium rounded-full border-0
+                                                ${aiAnalysis.toneAnalysis === "positive" 
+                                                   ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-300" 
+                                                   : aiAnalysis.toneAnalysis === "negative" 
+                                                   ? "bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-300" 
+                                                   : "bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-300"
+                                                }
+                                             `}
+                                          >
+                                             {aiAnalysis.toneAnalysis === "positive" ? "✨ " : aiAnalysis.toneAnalysis === "negative" ? "⚠️ " : "😐 "}
+                                             {aiAnalysis.toneAnalysis.charAt(0).toUpperCase() + aiAnalysis.toneAnalysis.slice(1)} tone
+                                          </Badge>
+                                          
+                                          <Badge 
+                                             variant="secondary" 
+                                             className="px-3 py-1.5 text-xs font-medium rounded-full border-0 bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300"
+                                          >
+                                             {aiAnalysis.messageLength === "short" ? "⚡ " : aiAnalysis.messageLength === "medium" ? "📝 " : "📄 "}
+                                             {aiAnalysis.messageLength.charAt(0).toUpperCase() + aiAnalysis.messageLength.slice(1)} length
+                                          </Badge>
                                        </div>
-                                       {/* message length */}
-                                       <div className='flex flex-col gap-2'>
-                                          <p className='text-sm text-muted-foreground'>
-                                             Message Length:{" "}
-                                             {aiAnalysis.messageLength}
-                                          </p>
+                                       
+                                       {/* Pro Tip Card */}
+                                       <div className='bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/10 dark:to-indigo-900/10 p-4 rounded-xl border border-purple-100 dark:border-purple-800/30'>
+                                          <div className='flex items-start gap-3'>
+                                             <div className='flex-shrink-0 mt-0.5'>
+                                                <div className='w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-800/50 flex items-center justify-center'>
+                                                   <span className='text-xs'>💡</span>
+                                                </div>
+                                             </div>
+                                             <div className='flex-1 min-w-0'>
+                                                <p className='text-sm font-medium text-purple-900 dark:text-purple-100 mb-1'>
+                                                   Pro tip
+                                                </p>
+                                                <p className='text-sm text-purple-700 dark:text-purple-200 leading-relaxed'>
+                                                   {aiAnalysis.proTip}
+                                                </p>
+                                             </div>
+                                          </div>
                                        </div>
-                                       {/* pro tip */}
-                                       <div className='flex flex-col gap-2'>
-                                          <p className='text-sm text-muted-foreground'>
-                                             Pro Tip: {aiAnalysis.proTip}
-                                          </p>
-                                       </div>
-                                    </>
+                                    </div>
                                  )}
                               </div>
                            </div>
@@ -650,6 +690,82 @@ export default function EditorPage({
                                     Select text in the editor to get contextual
                                     AI actions.
                                  </p>
+
+                                 <hr className='my-4 mx-2 border-border' />
+
+                                 {/* AI performance score - Mobile */}
+                                 <div className='flex flex-col gap-2'>
+                                    <div className='flex flex-col gap-2'>
+                                       <div className='flex items-center gap-2'>
+                                          <TrendingUp className='w-4 h-4 text-emerald-500' />
+                                          <h1 className='text-base font-semibold text-foreground'>
+                                             AI Performance Score
+                                          </h1>
+                                          <Button
+                                             variant='outline'
+                                             size='sm'
+                                             className='border-border hover:bg-accent hover:text-accent-foreground'
+                                             onClick={() => handleAnalysis()}
+                                             disabled={isAnalyzing}
+                                          >
+                                             {isAnalyzing ? (
+                                                <Loader2 className='w-4 h-4 animate-spin' />
+                                             ) : (
+                                                <RefreshCcw className='w-4 h-4' />
+                                             )}
+                                          </Button>
+                                       </div>
+                                       {aiAnalysis && (
+                                          <div className='space-y-4'>
+                                             {/* Analysis Tags */}
+                                             <div className='flex flex-wrap gap-2'>
+                                                <Badge 
+                                                   variant="secondary" 
+                                                   className={`
+                                                      px-3 py-1.5 text-xs font-medium rounded-full border-0
+                                                      ${aiAnalysis.toneAnalysis === "positive" 
+                                                         ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-300" 
+                                                         : aiAnalysis.toneAnalysis === "negative" 
+                                                         ? "bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-300" 
+                                                         : "bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-300"
+                                                      }
+                                                   `}
+                                                >
+                                                   {aiAnalysis.toneAnalysis === "positive" ? "✨ " : aiAnalysis.toneAnalysis === "negative" ? "⚠️ " : "😐 "}
+                                                   {aiAnalysis.toneAnalysis.charAt(0).toUpperCase() + aiAnalysis.toneAnalysis.slice(1)} tone
+                                                </Badge>
+                                                
+                                                <Badge 
+                                                   variant="secondary" 
+                                                   className="px-3 py-1.5 text-xs font-medium rounded-full border-0 bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300"
+                                                >
+                                                   {aiAnalysis.messageLength === "short" ? "⚡ " : aiAnalysis.messageLength === "medium" ? "📝 " : "📄 "}
+                                                   {aiAnalysis.messageLength.charAt(0).toUpperCase() + aiAnalysis.messageLength.slice(1)} length
+                                                </Badge>
+                                             </div>
+                                             
+                                             {/* Pro Tip Card */}
+                                             <div className='bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/10 dark:to-indigo-900/10 p-4 rounded-xl border border-purple-100 dark:border-purple-800/30'>
+                                                <div className='flex items-start gap-3'>
+                                                   <div className='flex-shrink-0 mt-0.5'>
+                                                      <div className='w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-800/50 flex items-center justify-center'>
+                                                         <span className='text-xs'>💡</span>
+                                                      </div>
+                                                   </div>
+                                                   <div className='flex-1 min-w-0'>
+                                                      <p className='text-sm font-medium text-purple-900 dark:text-purple-100 mb-1'>
+                                                         Pro tip
+                                                      </p>
+                                                      <p className='text-sm text-purple-700 dark:text-purple-200 leading-relaxed'>
+                                                         {aiAnalysis.proTip}
+                                                      </p>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       )}
+                                    </div>
+                                 </div>
                               </div>
                            </TabsContent>
                         </Tabs>
