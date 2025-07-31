@@ -245,6 +245,9 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
                 placeholder="Start typing your template here... use {{variables}} for personalization."
               />
             </div>
+            <div className="absolute bottom-4 right-1/3 bg-background/80 backdrop-blur-sm text-muted-foreground text-xs px-2 py-1 rounded border border-border pointer-events-none select-none">
+              {(content ?? "").length} characters, {content?.split(/\s+/).filter(word => word.length > 0).length} words
+            </div>
           </div>
 
           {/* Desktop Sidebar */}
