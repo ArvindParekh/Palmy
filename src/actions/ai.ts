@@ -4,7 +4,7 @@ import { generateText } from "ai";
 import { google } from "@ai-sdk/google";
 import { systemPrompt } from "@/lib/system-prompt";
 
-type ActionType =
+export type ActionType =
    | "improve"
    | "rephrase"
    | "shorten"
@@ -59,6 +59,20 @@ export async function improvePalmletText(
       casual: `Rewrite this text in a casual tone while keeping {{variables}}:\n\n${text}`,
    };
 
+     const systemPrompt = `
+  You are a helpful assistant that improves text.
+  You are given a selected text, a command, and optional context.
+  
+  CRITICAL INSTRUCTIONS:
+  - You MUST return ONLY the improved version of the selected text
+  - Do NOT include any surrounding context or additional text
+  - Do NOT include explanations, headers, or commentary
+  - Preserve all {{variables}} exactly as they appear
+  - The context is provided only for understanding - do not modify or include it in your response
+  
+  Your response should contain ONLY the improved selected text, nothing else.
+  `
+
    try {
       const result = await generateText({
          model: google("gemini-2.0-flash"),
@@ -69,6 +83,7 @@ export async function improvePalmletText(
                content: prompts[action] + (context ? `\n\nAdditional context: ${context}` : ""),
             },
          ],
+         temperature: 0.1,
       });
 
       return {

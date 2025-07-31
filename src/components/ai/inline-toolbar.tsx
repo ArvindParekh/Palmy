@@ -3,22 +3,31 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Sparkles, Languages, ChevronsRightLeft, ArrowRightLeft, Drama, Mic, PencilRuler, WholeWord, ThumbsUp, ThumbsDown } from "lucide-react";
+import { Sparkles, Languages, ChevronsRightLeft, ArrowRightLeft, Drama, Mic, PencilRuler, WholeWord, ThumbsUp, ThumbsDown, LucideIcon } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { ActionType } from "@/actions/ai";
 
 interface InlineAIToolbarProps {
   position: { top: number; left: number };
-  onCommand: (command: string) => void;
+  onCommand: (command: ActionType) => void;
 }
 
 export function InlineAIToolbar({ position, onCommand }: InlineAIToolbarProps) {
-  const actions = [
+  const actions : {
+    id: ActionType,
+    icon: LucideIcon,
+    label: string
+  }[] = [
     { id: "rephrase", icon: Languages, label: "Rephrase" },
     { id: "shorten", icon: ChevronsRightLeft, label: "Shorten" },
     { id: "expand", icon: ArrowRightLeft, label: "Expand" },
   ];
   
-  const tones = [
+  const tones : {
+    id: ActionType,
+    icon: LucideIcon,
+    label: string
+  }[] = [
     { id: "formal", icon: Drama, label: "Formal" },
     { id: "casual", icon: Mic, label: "Casual" },
   ];

@@ -33,7 +33,7 @@ import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { formatDistanceToNow } from "date-fns";
 import { useRouter } from "next/navigation";
-import { generatePalmletText } from "@/actions/ai";
+import { ActionType, generatePalmletText, improvePalmletText } from "@/actions/ai";
 
 // This will be the main editor page.
 export default function EditorPage({ id, folderNumber, templateData }: { id: string, folderNumber: string, templateData: Prisma.PalmletGetPayload<{
@@ -139,10 +139,19 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
     }
   }, [content]);
 
-  const handleAICommand = (command: string) => {
+  const handleAICommand = async (command: ActionType) => {
     if (!selection) return;
     console.log(`AI Command: ${command} on text: "${selection.text}"`);
-    setSelection(null);
+
+    const result = await improvePalmletText(selection.text, command, content);
+    if (result.success) {
+      handleContentChange(result.text as string);
+      toast.success("Content improved successfully");
+    }
+    else {
+      toast.error(result.error || "Failed to improve content");
+    }
+    // setSelection(null);
   };
 
   const handleSave = async () => {
@@ -172,8 +181,24 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
   };
 
   const handleContentChange = (value: string) => {
-    setContent(value);
-    setPreviewContent(value);
+    if (!selection) {
+      setContent(value);
+      setPreviewContent(value);
+    } else {
+      const trimmedValue = value.trim();
+      const beforeText = content.substring(0, selection.start);
+      const afterText = content.substring(selection.end);
+      
+      const needsSpaceBefore = beforeText.length > 0 && !beforeText.endsWith(' ') && !beforeText.endsWith('\n');
+      const needsSpaceAfter = afterText.length > 0 && !afterText.startsWith(' ') && !afterText.startsWith('\n');
+      
+      const finalValue = (needsSpaceBefore ? ' ' : '') + trimmedValue + (needsSpaceAfter ? ' ' : '');
+      const newContent = beforeText + finalValue + afterText;
+      
+      console.log("Selection:", selection, "New content:", newContent);
+      setContent(newContent);
+      setPreviewContent(newContent);
+    }
   };
 
 
@@ -243,6 +268,7 @@ export default function EditorPage({ id, folderNumber, templateData }: { id: str
                 onKeyUp={handleMouseUp}
                 className="absolute inset-0 w-full h-full text-sm md:text-base lg:text-base font-mono text-foreground/90 font-medium bg-transparent border-0 resize-none focus-visible:ring-0 p-0 leading-relaxed tracking-wide"
                 placeholder="Start typing your template here... use {{variables}} for personalization."
+                spellCheck={false}
               />
             </div>
             <div className="absolute bottom-4 right-1/3 bg-background/80 backdrop-blur-sm text-muted-foreground text-xs px-2 py-1 rounded border border-border pointer-events-none select-none">
