@@ -6,6 +6,7 @@ export const auth = betterAuth({
     database: prismaAdapter(prisma, {
         provider: "postgresql",
     }),
+    trustedOrigins: ["http://localhost:3000", "https://palmy.pro", "https://www.palmy.pro"],
     emailAndPassword: {
         enabled: true,
         autoSignIn: true,
