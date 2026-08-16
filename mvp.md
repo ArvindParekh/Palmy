@@ -1,5 +1,9 @@
 # Job Application Template Manager - v0.dev Implementation Prompt
 
+> Historical design prompt used to bootstrap the UI. For current behavior, setup, and architecture, see [README.md](README.md) and [docs/](docs/).
+
+## App Overview
+
 ## App Overview
 Create a modern, luxurious job application template manager that helps users create, organize, and personalize cover letters, outreach messages, LinkedIn messages, and other job-related communications. This should be a uniquely beautiful, minimalist web app with subtle gamification elements.
 
