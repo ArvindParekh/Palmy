@@ -16,12 +16,13 @@ Palmy turns repetitive text into reusable templates with `{{variables}}` that ad
 
 | Doc | What it covers |
 | --- | --- |
-| [Architecture](docs/architecture.md) | Routes, data model, server actions, auth, nav |
+| [Architecture](docs/architecture.md) | Routes, data model, auth, nav |
+| [Server actions](docs/server-actions.md) | Public mutations, HTTP auth handler, read helpers |
 | [Workflows](docs/workflows.md) | Create/use templates, Lab save, settings, profile |
 | [Editor AI](docs/editor-ai.md) | Generation, selection rewrite, performance analysis |
 | [Onboarding](docs/onboarding.md) | Multi-page tour, DB flag, URL continuation |
 | [Community](docs/community.md) | Share, upvote, fork stub, feed filters, leaderboard |
-| [Troubleshooting](docs/troubleshooting.md) | Setup, env, and common pitfalls |
+| [Troubleshooting](docs/troubleshooting.md) | Setup, env, ops runbooks, and pitfalls |
 
 `mvp.md` is a historical v0.dev design prompt, not a description of the current app.
 
@@ -73,6 +74,7 @@ Open [http://localhost:3000](http://localhost:3000). `/` always renders the land
 ## Project layout
 
 ```
+docs/               Engineering docs (architecture, actions, workflows, …)
 src/app/(main)/     Authenticated app (dashboard, palmlets, lab, community, …)
 src/app/auth/       better-auth UI routes (`/auth/[pathname]`)
 src/app/api/auth/   better-auth HTTP handler

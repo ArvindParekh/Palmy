@@ -68,8 +68,13 @@ Deleting a folder runs a transaction: delete its palmlets, then the folder (`src
 
 | Layer | Location | Writes? |
 | --- | --- | --- |
-| Server actions | `src/actions/*.ts` (`"use server"`) | Yes (create/update/delete, AI calls, onboarding flag) |
+| HTTP | `src/app/api/auth/[...all]/route.ts` | Auth only (session, OAuth, delete user) |
+| Server actions | `src/actions/*.ts` (`"use server"`) | Yes (create/update/delete, AI calls, onboarding flag). Catalog: [server-actions.md](server-actions.md). |
 | Data helpers | `src/lib/data/*.ts` | No. Used by server components |
+
+`getPalmletFolders` lives in `src/actions/palmlet-folder.ts` even though it is a read (`/palmlets` and `/lab` call it). New reads should go in `src/lib/data/`.
+
+Most actions do **not** re-check session or row ownership; they trust ids from the client. The `(main)` layout only requires that *some* session exists.
 
 Palmlet create/update validate with Zod (`src/zod/palmlet.ts`). Community share validates with `createCommunityTemplateSchema` (title ≤ 100, content ≤ 5000, ≤ 5 enum tags).
 
@@ -93,4 +98,5 @@ Root metadata title is `palmy.io` (`src/app/layout.tsx`). The in-app sidebar bra
 
 - `src/components/personalization-modal.tsx` is not imported. Live fill-and-copy is `UseTemplateDialog`.
 - Folder library search input is commented out on `/palmlets`.
+- `NewFolderDialog` shows an emoji icon picker; the value is never sent and Prisma has no icon column.
 - Landing feature copy still mentions “A/B Testing Lab”; Lab is generate-then-save, not A/B testing.

@@ -39,7 +39,9 @@ Lab, editor generate, selection rewrite, and performance analysis all need `GOOG
 
 Folder delete is a transaction that first deletes palmlets, then the folder. Account delete uses better-auth `deleteUser` and Prisma `onDelete: Cascade`.
 
-`addTagsToPalmlet` and `updatePalmlet` replace the entire tag (and, for update, variable) set. Passing only the new names would wipe existing ones; the dialogs send the full list.
+`addTagsToPalmlet` and `updatePalmlet` replace the entire tag (and, for update, variable) set. Passing only the new names would wipe existing ones; the dialogs send the full list. `AddTagsDialog` lowercases names and stops at 10 tags.
+
+Folder emoji in **New Folder** is not stored (`Palmlet_Folder` has no icon field). Do not debug “missing icons” as a Prisma issue.
 
 ## Community behavior
 
@@ -69,6 +71,32 @@ Prefer `params: Promise<…>` + `await params` on every dynamic route.
 - Profile achievements, forks, and ratings are not live data. Edit Profile has no handler.
 - `next.config.ts` sets `typescript.ignoreBuildErrors` and `eslint.ignoreDuringBuilds`, so `pnpm build` can succeed with type/lint errors. Use `pnpm lint` separately.
 - Onboarding `updateUserOnboardingStatus` does not verify the caller owns `userId`.
+- Most other mutations (`createNewPalmlet`, folder CRUD, `upvotePost`, `createCommunityTemplate`, `updateUserPassword`) also skip ownership checks. See [server-actions.md](server-actions.md).
+
+## Local runbooks
+
+**Replay the onboarding tour**
+
+There is no in-app reset. In Prisma Studio (`pnpm exec prisma studio`) or SQL:
+
+```sql
+UPDATE "user" SET "onboardingCompleted" = false WHERE email = 'you@example.com';
+```
+
+Then reload `/dashboard`. **Take Tour** only renders when the flag is `false`. Closing the tour via the mask does not write the flag; finishing the last step does.
+
+**Inspect unique-constraint failures**
+
+Lab default titles (`"Custom Template"`, `"Cold Email Template"`, …) collide on `(folderId, title)`. Folder names collide on `(userId, folderName)`. Prisma returns the raw unique-violation string to the toast for folder create; palmlet create maps it to `"Failed to create palmlet"`.
+
+**Confirm generated Prisma client**
+
+```bash
+pnpm exec prisma generate
+ls src/generated/prisma
+```
+
+If `ls` fails, server imports of `@/generated/prisma` will fail at runtime.
 
 ## Auth runbook (production)
 

@@ -4,13 +4,15 @@ These are the live product paths, verified against current source. Do not treat 
 
 ## Create a folder and template
 
-1. `/palmlets` → **New Folder** → `createPalmletFolder({ userId, folderName, folderDescription })`.
+1. `/palmlets` → **New Folder** → `createPalmletFolder({ userId, folderName, folderDescription })`. The emoji icon picker is local UI only (not persisted).
 2. Open `/palmlets/[folderId]` (the `[folderNumber]` param is the folder UUID).
 3. Create template → `/palmlets/[folderId]/editor/new`. The page passes `id === ""` and empty content into `EditorClientPage`.
-4. Save → `createNewPalmlet(folderId, title, content, tags, variables)` then `router.push` to `/editor/[newId]`.
+4. Save → `createNewPalmlet(folderId, title, content, tags, variables)` then `router.push` to `/editor/[newId]`. Editor save re-sends tags from page load; tag edits happen on the folder list (`AddTagsDialog` → `addTagsToPalmlet`).
 5. Later edits → `updatePalmlet`. Save is a no-op toast (`"No changes to save"`) if title and content are unchanged.
 
 Folder names are unique per user (`@@unique([userId, folderName])`). Template titles are unique per folder (`@@unique([folderId, title])`).
+
+Personal tags from `AddTagsDialog` are lowercased, capped at 10, and stored in the global `Palmlet_Tag` catalog. Community share tags are a separate Prisma enum (max 5) and are not lowercased.
 
 The folder page shows four stats: template count, unique tag names, total variable rows (not unique names), and **completion rate** (`%` of palmlets whose `content` is non-empty).
 

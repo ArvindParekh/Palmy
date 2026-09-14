@@ -6,7 +6,7 @@ Community posts are `SharedPalmlet` rows, separate from personal `Palmlet`s. Sha
 
 UI: `/community` → `ShareTemplatePrompt` → `ShareTemplateDialog`.
 
-The dialog can prefill from the user’s personal palmlets (`getUserWithPalmlets` → flatten `folders.palmlets`). Tags are **not** copied from the personal template; the user must pick up to 5 of the enum values. Variables come from the selected palmlet’s `Palmlet_Variable` rows.
+The dialog can prefill from the user’s personal palmlets (`getUserWithPalmlets` → flatten `folders.palmlets`). Tags are **not** copied from the personal template (those are free-form, lowercased `Palmlet_Tag` rows); the user must pick up to 5 of the `SharedPalmletTags` enum values. Variables come from the selected palmlet’s `Palmlet_Variable` rows.
 
 **Codepath:** `createCommunityTemplate` → Zod `createCommunityTemplateSchema` → `prisma.sharedPalmlet.create`.
 
