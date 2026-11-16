@@ -1,3 +1,7 @@
+# Historical v0.dev prompt
+
+This file is the original design prompt used to scaffold Palmy. It is **not** a description of the current app. For live architecture, workflows, and runbooks, start at [README.md](README.md) and the files under [docs/](docs/).
+
 # Job Application Template Manager - v0.dev Implementation Prompt
 
 ## App Overview
